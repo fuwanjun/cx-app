@@ -1,0 +1,171 @@
+p {
+  margin: 0;
+}
+.ok {
+  line-height: 0.45rem;
+}
+.del {
+  height: auto;
+  display: none;
+  padding: 0.1rem 0.15rem;
+  background: #fff;
+  box-shadow: 5px 5px 8px #ecf0f7;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  z-index: 997;
+}
+.del .del-btn {
+  padding: 0.02rem 0.15rem;
+  border: 1px solid #ff0000;
+  border-radius: 0.15rem;
+  color: #ff0000;
+}
+.del-btn:active {
+  background: #ff0000;
+  color: #fff;
+}
+.clothes {
+  padding: 0.2rem 0.1rem;
+  margin: 0;
+  position: relative;
+}
+.clothes li {
+  background: #fff;
+  display: flex;
+  padding: 0.15rem 0.15rem 0.05rem 0.15rem;
+  margin-bottom: 0.1rem;
+  border-radius: 0.05rem;
+  position: relative;
+}
+.clothes li .mui-checkbox {
+  width: 0.3rem;
+}
+.clothes li .mui-checkbox input {
+  margin-top: 0.15rem;
+}
+.clothes li .clothes-name {
+  font-size: 0.14rem;
+}
+.clothes li .clothes-name p:first-child {
+  font-size: 0.16rem;
+  color: #333;
+}
+.clothes li .clothes-name p:last-child {
+  font-size: 0.16rem;
+  color: #ffc75b;
+  line-height: 0.35rem;
+}
+.clothes li .clothes-pic {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.clothes li .clothes-pic img {
+  width: 100%;
+  height: 100%;
+}
+.clothes li .mui-numbox {
+  position: absolute;
+  right: 0.15rem;
+  bottom: 0.05rem;
+  height: auto;
+  width: 100px;
+  padding: 0;
+}
+.clothes li .mui-numbox [class*=btn-numbox],
+.clothes li .mui-numbox [class*=numbox-btn] {
+  width: 30px ;
+}
+.mui-input-group {
+  background: #f4f8ff;
+}
+.mui-checkbox input[type=checkbox] {
+  left: 0;
+}
+.mui-bar-tab {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  height: auto;
+}
+.mui-bar-tab .bot-right {
+  display: flex;
+  margin-right: 0.1rem;
+}
+.mui-bar-tab .bot-right p {
+  line-height: 0.4rem;
+  margin-right: 0.15rem;
+  font-size: 0.15rem;
+}
+.mui-bar-tab .bot-right .check-out {
+  width: 0.9rem;
+  height: 0.45rem;
+  text-align: center;
+  line-height: 0.45rem;
+  color: #fff;
+  background: #08aaf5;
+  border-radius: 0.1rem;
+}
+.tail-mes {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mui-popover.mui-popover-action .mui-table-view{
+	margin: 0;
+	border-radius: 0;
+}
+.tab-close {
+    border-top: 1px solid #f3f3f3;
+    color: #666;
+}
+#pay li {
+    color: #666;
+}
+.btn-num{
+  height: 20px;
+  width:1rem;
+  padding: 0;
+  border:none;border-radius:0;
+}
+#sheet2,#sheet3,#sheet4{
+  height:100%;
+  background: #fff;
+}
+#sheet2 .sheet-con,#sheet3 .sheet-con,#sheet4 .sheet-con{
+  padding:0.2rem 0.15rem;
+}
+#sheet2 .sheet-con .msg,#sheet3 .sheet-con .msg,#sheet4 .sheet-con .msg{
+  display: flex;
+  margin:0.15rem 0;
+}
+#submit2,#submit3,submit4{
+  position: relative;
+  margin-top:0.2rem;
+}
+#sheet2 .sheet-tit,#sheet3 .sheet-tit,#sheet4 .sheet-tit{
+  height:0.44rem;
+  background: #f3f7fb;
+  box-shadow: 0 1px 6px #ccc;
+  text-align: center;
+}
+#sheet2 .sheet-tit p,#sheet3 .sheet-tit p,#sheet4 .sheet-tit p{
+  line-height: 0.44rem;
+  font-weight: 500;
+  font-size: 0.17rem;
+  color: #333;
+}
+#sheet2 .sheet-con .msg p,#sheet3 .sheet-con .msg p,#sheet4 .sheet-con .msg p{
+  font-size:0.16rem;
+}
+#sheet2 .sheet-con .msg .msg-name,#sheet3 .sheet-con .msg .msg-name,#sheet4 .sheet-con .msg .msg-name{
+  margin-right:0.1rem;
+}
+#sheet2 .sheet-con .msg .msg-value,#sheet3 .sheet-con .msg .msg-value,#sheet4 .sheet-con .msg .msg-value{
+  color: #333;
+}

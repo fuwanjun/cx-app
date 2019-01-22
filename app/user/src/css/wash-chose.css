@@ -1,0 +1,18 @@
+.vip-con .vip-item{
+	width:calc(100% / 3);
+	position: relative;
+	display:inline-block
+}
+.vip-con .vip-item .vip-item-pic{
+	height: auto;
+}
+.vip-con .vip-item .item-name{
+	margin-bottom: 0;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+}
+.vip-con .vip-item .item-price .all-price .now-price{
+	line-height: 0.24rem;
+}

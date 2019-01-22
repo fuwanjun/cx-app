@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{position: relative;}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{border-bottom-color: transparent;}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{display: block;content:"";width:20%;position: absolute;left: 40%;height: 2px;background-color:#007aff;bottom: 0;}
+			.mui-content>.mui-table-view-list:first-child{margin-top: 0;}
+			.mui-table-view-list{padding:0.075rem;}
+			.mui-table-view-list li{padding: 11px 15px;}
+			.mui-newUpdate{display: block;width: 0.06rem;height: 0.06rem;position: absolute;top: 0.07rem;left: 0.04rem;background-color: red;border-radius: 50%;line-height:0.06rem;color: #fff;text-align: center;}
+			textarea{height: 1.2rem;}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="complainMessage.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">投诉详情</p>
+		</header>	
+		<div class="mui-content">
+			<ul class="mui-table-view-list">
+				<li class="bg-white margin-bottom-r10 border-radius-r5">
+					<div class="font-size-16 margin-bottom-r10">
+						<div>
+							<span>订单号：</span>
+							<span id="orderNum">E1112***6656526</span>
+						</div>
+					</div>
+					<!--<div class="mui-flex mui-flex-halign-center color-666 font-size-14">-->
+						<!--<div>-->
+							<!--<span>用户：</span><span>张**</span>-->
+						<!--</div>-->
+						<!--<div>-->
+							<!--<span>投诉时间：</span><span>2018-05-15</span>-->
+						<!--</div>-->
+					<!--</div>-->
+					<div id="con" class="border-color-tiny-blue color-666 margin-top-r10 font-size-14" style="min-height: 1rem;" >衣服拿回来是坏的，而且配送员态度比较恶劣!</div>
+					<div class="mui-text-center font-size-16 color-999 margin-bottom-r10">平台将进一步核实</div>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var mesId=getQueryString('id');
+			mui.init();
+//			mui(".mui-table-view").on("tap",".mui-table-view-cell",function(){
+//				window.location.href="complainDetail.html";
+//			})
+			var url=globalUrl+"/takeUser/getTakerReportById";
+			var data={id:mesId};
+			enAjax(url,'get',true,data,getComplaintCon,null);
+			function getComplaintCon(data){
+			    console.log(data);
+			    $("#orderNum").html(data.data.orderNo);
+			    $("#con").html(data.data.content);
+			}
+			$.ajax({
+				url:globalUrl+"/takeUser/updateStateByTakerId",
+				type:'get',
+				data:{reportId:mesId},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+				success:function(data){
+				    console.log(data);
+				}
+
+			})
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

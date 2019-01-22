@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.mui-content form{
+				padding: 0.15rem 0.35rem;
+			}
+			.dataLi label{
+				display: block;
+				margin-bottom: 0.1rem;
+			}
+			.dataLi input,.dataLi textarea{
+				background-color: #f4f8ff;
+			}
+			.dataLi textarea{
+				height: 1.05rem;
+			}
+			.mui-checkbox.mui-left label{
+				padding-left: 0.25rem;
+				padding-right: 0;
+				margin-bottom: 0;
+			}
+			.mui-flex-wrap{
+				flex-wrap: wrap;
+			}
+			.mui-flex .checkBox{
+				width: 25%;
+				display: flex;
+				align-items: center;
+				margin-bottom: 0.1rem;
+			}
+			.mui-flex .checkBox:last-of-type{
+				width: 30%;
+			}
+			.mui-checkbox input[type=checkbox]:before{
+				font-size: .2rem;
+				color: #007aff;
+			}
+			.mui-checkbox.mui-left input[type=checkbox]{
+				left: 0;
+				top: 0;
+			}
+			.statusItem{
+				margin-bottom: 0;
+			}
+			.mui-btn-block{
+				padding: .1rem 0;
+			}
+		</style>
+	</head>
+	<body class="bg-white">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">代下订单</p>
+		</header>	
+		<div class="mui-content bg-white">
+			<form action="">
+				<div class="dataLi">
+					<label for="">用户姓名</label>
+					<input type="text" />
+				</div>
+				<div class="dataLi">
+					<label for="">电话</label>
+					<input type="text" />
+				</div>
+				<div class="dataLi">
+					<label for="">地址</label>
+					<input type="text" />
+				</div>
+				<div class="dataLi statusItem">
+					<label for="">洗衣类目</label>
+					<div class="mui-flex mui-flex-wrap">
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">普洗</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">精洗</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">干洗</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">洗鞋</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">皮具护理</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+					</div>
+				</div>
+				<div class="dataLi">
+					<label for="">洗衣件数</label>
+					<input type="text" />
+				</div>
+				<div class="dataLi statusItem">
+					<label for="">付款状态</label>
+					<div class="mui-flex mui-flex-wrap">
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">未付款</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+						<div class="checkBox mui-checkbox mui-left">
+							<label class="checkBox-text font-size-12">已付款</label>
+							<input type="checkbox" class="mui-checkbox" name="" id="" value="" />
+						</div>
+					</div>
+				</div>
+				<button class="mui-btn mui-btn-blue mui-btn-block">提交</button>
+			</form>
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

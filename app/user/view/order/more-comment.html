@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../src/css/more-comment.css" />
+		<script type="text/javascript" src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title">评价</p>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="comment-box">
+			<ul class="all-comments mui-scroll">
+				<!--<li class="comment">
+					<div class="comment-top">
+						<div class="user-mes">
+							<div class="user-head"><img src="" alt="" /></div>
+							<div class="mes-txt">
+								<p>伏万军</p>
+								<ul class="user-score">
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+						<p class="time">2018.7.11</p>
+					</div>
+					<div class="comment-con">
+						洗衣速度很快，意外的是洗后还熨烫了下，非常开心的一次洗衣
+					</div>
+					<div class="comment-bot">
+						<div class="style-num">
+							<p class="style">精洗</p>
+							<p class="num">数量*<span>2</span></p>
+						</div>
+						<div class="good">
+							<div class="good-pic"></div>
+							<p class="good-num">1</p>
+						</div>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script type="text/javascript">
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+			mui.init({
+				pullRefresh:{
+					container:'#comment-box',
+					down:{
+						
+					},
+					up:{
+						height:50,
+						auto:true,
+						contentrefresh:'正在加载...',
+						contentnomore:'没有更多评价了',
+						callback:pullupRefresh
+					}
+				}
+			});
+			
+			console.log(id);
+			var paramMap={goodsId:id,page:1};
+			
+		});
+		var id=getQueryString('id');	
+		var count=1;
+		function pullupRefresh(){
+			$.ajax({
+				contentType:"application/json;charset=UTF-8",
+				url:globalUrl+'/goods/getGoodsEvaluatePage',
+				type:'post',
+				data:JSON.stringify({goodsId:id,page:count}),
+				success:function(data){
+					console.log(data);
+					mui('#comment-box').pullRefresh().endPullupToRefresh((++count>data.navigatepageNums.length));
+					
+					for(var i=0;i<data.list.length;i++){
+						var stars="";
+						for(var j=0;j<parseInt(data.list[i].star);j++){
+							var star='<li><img src="../../../public/img/order/star2.png" alt="" /></li>';
+							stars+=star;
+						}
+//						console.log(stars);
+						var item='<li class="comment">'+
+									'<div class="comment-top">'+
+										'<div class="user-mes">'+
+											'<div class="user-head"><img src="'+data.list[i].userInfo.userPicture+'" alt="" /></div>'+
+											'<div class="mes-txt">'+
+												'<p>'+data.list[i].userInfo.userName+'</p>'+
+												'<ul class="user-score">'+stars+'</ul>'+
+											'</div>'+
+										'</div>'+
+										'<p class="time">'+timestampToTime(data.list[i].createTime)+'</p>'+
+									'</div>'+
+									'<div class="comment-con">'+data.list[i].evaluateContent+'</div>'+
+								'</li>';
+						
+						$(item).appendTo($(".all-comments"));
+					}
+				}
+			})
+		}
+		
+	</script>
+</html>

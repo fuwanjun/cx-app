@@ -1,0 +1,271 @@
+a{
+	touch-action: none;
+}
+header{
+	box-shadow: 0px 5px 10px #ebeffc;
+}
+nav{
+	box-shadow: 0px -5px 10px #ebeffc;
+}
+.mui-bar-nav{
+			background: #fff;
+		}
+		.main-btns{
+			background: #fff;
+			padding-top: 0.2rem ;
+			border-bottom-left-radius: 0.2rem;
+			border-bottom-right-radius: 0.2rem;
+			box-shadow: 0px 5px 10px #ebeffc;
+		}
+		ul{
+			list-style: none;
+		}
+		.item-pic{
+			height: 2rem;
+		}
+		.item-pic img{
+			height: 100%;
+		}
+		.pics{
+			padding: 0;
+			display: flex;
+			justify-content: space-between;
+		}	
+		.pics p{
+			padding: 0;
+			margin: 0;
+			font-size: 0.14rem;
+			color: #333;
+		}
+		.pics li .pic{
+			margin-bottom: 0.1rem;
+			background: #f9f9f9;
+		}
+		.pics2{
+			padding: 0.3rem 0;
+    		margin: 0;
+    		
+		}
+		.pics2 li .pic{
+			width: 0.45rem;
+			height: 0.45rem;
+			margin-bottom: 0.15rem;
+			
+		}
+		.pics3 li .pic-text{
+			color: #c5ccd6;
+		}
+		.pics3 li .pic{
+			width: 0.3rem;
+			height: 0.3rem;
+			border: none;
+			margin-bottom: 0.1rem;
+		}
+		.pics3 li .pic img{
+			width: 100%;
+			height: 100%;
+		}
+		.pics li{
+			width:calc(25% - 0.1rem);
+			height: 0.9rem;
+			background: #f9f9f9;
+		}
+		.pic{
+			width: 0.55rem;
+			height: 0.55rem;
+			margin: auto;
+		}
+		.pic img{
+			    width: 100%;
+			    margin-top: 10%;
+		}
+		.pic-text{
+			text-align: center;
+		}
+		.line-pic{
+			height: 0.5rem;
+			border-radius: 5px;
+   			overflow: hidden;
+		}
+		.line-pic img{
+			width: 100%;
+			height: 100%;
+		}
+		.mui-bar{
+			background:#f3f7fb;
+		}
+		.mui-bar:nth-of-type(2){
+			box-shadow: none;
+		}
+		.menu-pic{
+			width: 0.2rem;
+			height: 0.2rem;
+			margin:0.05rem auto;
+		}
+		.menu-pic img{
+			width: 100%;
+			height: 100%;
+		}
+.mui-bar-tab .mui-tab-item.mui-active{
+	color: #39a4f2;
+}
+.mui-bar-tab .mui-tab-item{
+	font-size: 0.13rem;
+}
+
+.add{
+	position: absolute;
+	padding: 0.05rem 0.1rem;
+	height: 0.25rem;
+	top: 0.1rem;
+	left: 0.1rem;
+	background: rgba(0,0,0,0.5);
+	display: flex;
+	font-size: 0.12rem;
+	border-radius: 0.15rem;
+	z-index:99;
+}
+.add .add-pic{
+	width: 0.15rem;
+	height: 0.2rem;
+	margin-right: 0.1rem;
+	margin-top: -0.025rem;
+}
+.add .add-pic img{
+	width: 100%;
+	
+}
+.add p{margin: 0;line-height: 15px;color: #fff;}
+.main-tit{
+	text-align: center;
+}
+.luxury{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.luxury-item{
+	width:calc(50% - 0.1rem);
+	border:1px solid #ccc;
+	border-radius:0.05rem;
+	padding:0.02rem;
+	margin-bottom:0.1rem;
+	display: flex;
+	justify-content: space-around;
+}
+.luxury-item a{
+	display: block;
+}
+.luxury-text p{
+	margin:0;
+	padding:0;
+}
+.luxury-text p:first-child{
+	font-size:0.14rem;
+	color: #333;
+}
+.luxury-text p:last-child{
+	font-size:0.12rem;
+	color: #333;
+}
+.luxury-pic{
+	width:0.5rem;
+	height:0.4rem;
+	margin-top:0.01rem;
+
+}
+.luxury-pic img{
+	width:100%;
+	height:100%;
+}
+.pics3{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+.pics3 .pic{
+	margin-left: 0;
+}
+
+.pics3 li{
+	width:calc(50% - 5px);
+	height: 0.4rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 0.05rem;
+	background: #fff;
+	padding:0 0.3rem;
+}
+.pics3 li .pic-text{
+	line-height: 0.4rem;
+	/*float: right;*/
+	color: #4b6181;
+}
+.pics3 li a{
+	display: flex;
+	justify-content: space-between;
+}
+
+.china{
+	color: #333;
+}
+.en{
+	color:#666;
+	font-size: 0.13rem;
+}
+.mui-icon-left-nav{
+	display: inline-block;
+	height: 0.25rem;
+	width: 0.25rem;
+	border-radius: 50%;
+	background: #08aaf5;
+	margin-top: 0.1rem;
+	position: relative;
+}
+.mui-icon-back:before, .mui-icon-left-nav:before{
+	content:'';
+	position: absolute;
+	width: 2px;
+	height: 12px;
+	background: #fff;
+	top: 2px;
+	left: 10px;
+	transform: rotate(45deg);
+}
+.mui-icon-back:before, .mui-icon-left-nav:after{
+	content:'';
+	position: absolute;
+	width: 2px;
+	height: 12px;
+	background: #fff;
+	top: 10px;
+	left: 10px;
+	transform: rotate(135deg);
+}
+.mui-bar-nav.mui-bar .mui-icon{
+	margin-left: 0;
+}
+.bot{
+	background: #fff;
+}
+#beforeLogin{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.6);
+	top: 0;
+	left: 0;
+	z-index: 999;
+	display: none;
+}
+#beforeLogin .beforeImg{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 4rem;
+	margin-top: 1rem;
+}
+
+#beforeLogin .beforeImg img{
+	width:100%;
+}

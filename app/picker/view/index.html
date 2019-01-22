@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>取件员端 首页</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../../public/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../src/css/picker.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/mui.picker.min.css"/>
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/common.js"></script>
+</head>
+<body class="bg-tiny-blue">
+<div class="mui-content">
+    <div class="bg_box">
+        <div class="mui-bar mui-bar-nav">
+            <h1 class="mui-title"></h1>
+            <div data-href="message.html" class="mui-btn mui-btn-blue mui-btn-link mui-pull-left">
+                <img class="indexNotice" src="../../public/img/picker/index-notice.png"/>
+            </div>
+            <div data-href="mine.html" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">
+                <img class="menu_logo" src="../../public/img/picker/index-menu.png" alt=""/>
+            </div>
+        </div>
+        <div class="pickerMsg">
+            <img class="headImg" src="" alt=""/>
+            <div class="name"></div>
+        </div>
+    </div>
+    <ul class="icon-box" id="iconBox">
+        <li class="index-icon" href="fetchPackage1.html">
+            <div>
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/icon-good.png" alt=""/>
+							</span>
+                    <div class="icon-name">取件</div>
+                </a>
+            </div>
+        </li>
+        <li class="index-icon" href="sendPackage1.html">
+            <div class="">
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/icon-express.png" alt=""/>
+							</span>
+                    <div class="icon-name">送件</div>
+                </a>
+            </div>
+        </li>
+        <li class="index-icon" href="message.html">
+            <div class="">
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/icon-msg.png" alt=""/>
+							</span>
+                    <div class="icon-name">消息</div>
+                </a>
+            </div>
+        </li>
+        <li class="index-icon" href="mall.html">
+            <div class="">
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/icon-order.png" alt=""/>
+							</span>
+                    <div class="icon-name">代下单</div>
+                </a>
+            </div>
+        </li>
+        <li class="index-icon getPackage">
+            <div class="">
+						<span>
+							<img src="../../public/img/picker/dai.png" alt=""/>
+						</span>
+                <div class="icon-name">领装衣袋</div>
+            </div>
+        </li>
+        <li class="index-icon" href="cancelCard.html">
+            <div class="">
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/ka.png" alt=""/>
+							</span>
+                    <div class="icon-name">线下换卡</div>
+                </a>
+            </div>
+        </li>
+        <li class="index-icon" href="back-card1.html">
+            <div class="">
+                <a href="#">
+							<span>
+								<img src="../../public/img/picker/user.png" alt=""/>
+							</span>
+                    <div class="icon-name">换卡审核</div>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+</div>
+</body>
+<script src="../../public/js/mui.min.js"></script>
+<script src="../../public/js/jquery-1.11.3.min.js"></script>
+<script src="../../public/js/jquery.cookie.js"></script>
+<script src="../../public/js/public.js"></script>
+<script type="text/javascript">
+    mui.init();
+    var packNum = "";
+    var code = getQueryString("code");
+    var userCode = $.cookie("userCode");
+    if (!userCode || userCode == "null") {
+        var loginUrl = globalUrl + "/takeUser/WechatBaseLogin";
+        enAjax2(loginUrl, 'post', false, {code: code}, function (data) {
+            console.log(data);
+        });
+    }
+    if ($.cookie("levelType") == 11) {
+        $("#iconBox li").eq(0).hide();
+        $("#iconBox li").eq(1).hide();
+        $("#iconBox li").eq(4).hide();
+        $("#iconBox li").eq(5).hide();
+    } else if ($.cookie("levelType") == 12) {
+        $("#iconBox li").eq(6).hide();
+    } else if ($.cookie("levelType") == 13) {
+        $("#iconBox li").eq(5).hide();
+        $("#iconBox li").eq(6).hide();
+    }
+
+
+    var headImg = $.cookie("userpic");
+    var username = $.cookie("username");
+    $(".headImg").attr("src", "http://" + headImg);
+    $(".name").html(username);
+    mui("#iconBox").on("tap", ".index-icon", function () {
+        var i = $(this).index();
+        if (i == 4) {
+            mui.prompt('', '输入需要的取件带', '剩余总数：' + $.cookie("surplusNum") + '', ['取消', '确认'], function (e) {
+                if (e.index == 1) {
+                    var val = $(".mui-popup-input input").val();
+                    checkStock(val);
+                }
+            })
+        } else {
+            window.top.location.href = jQuery(this).attr("href");
+        }
+
+    });
+    mui(".mui-bar-nav").on("tap", ".mui-btn", function () {
+        window.top.location.href = jQuery(this).attr("data-href");
+    });
+    var token = $.cookie("token");
+    if ($.cookie("toker")) {
+        var toker = JSON.parse($.cookie("toker"));
+        var account = toker.account;
+    }
+
+    $(function () {
+        if (!token) {
+            window.location.href = "login.html";
+            return false;
+        }
+        ajaxInit(account);
+    });
+
+    function ajaxInit(account) {
+        $.ajax({
+            type: "get",
+            url: globalUrl + "takeUser/getTakerByAccount",
+            dataType: "json",
+            data: {account: account},
+            async: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("token", token)
+            },
+            success: function (res) {
+                if (res.message) {
+                    mui.toast(res.message);
+                    setTimeout(
+                        function () {
+                            window.location.href = "login.html"
+                        }, 2000
+                    )
+                } else {
+                    if (res) {
+                        $(".name").text(res.takerName);
+                        if (res.picture) {
+                            $(".headImg").attr("src", "http://" + res.picture);
+                        }
+                    }
+                }
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    }
+
+    function checkStock(num) {
+        $.ajax({
+            type: "post",
+            url: globalUrl + "/pocket/apply",
+            data: {num: num},
+            beforeSend: function (request) {
+                request.setRequestHeader("token", token)
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    var packNum = $.cookie("surplusNum");
+                    $.cookie("surplusNum", parseInt(packNum)+parseInt(num));
+                    mui.toast('申请成功，等待审核...');
+                } else {
+                    mui.toast(data.msg);
+                }
+            }
+        })
+    }
+</script>
+</html>

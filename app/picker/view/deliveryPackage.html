@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script src="../../public/js/public.js"></script>
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.mui-content{
+				background-color: rgb(244,248,255)
+			}
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0;
+			}
+			.mui-table-view-cell{
+				margin-bottom: 0.1rem;
+			}
+			.mui-table-view-cell:after{
+				display: none;
+				
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.searchBox{
+				padding: 0 0.1rem;
+				font-size: .14rem;
+			    display: flex;
+				justify-content: space-around;
+			}
+			.mui-flex-halign-center{
+				    display: flex;
+    				justify-content: space-around;
+			}
+			.areaSelect{
+				padding: 0.1rem 0;
+				max-width: 60%;
+				width: 60%;
+			}
+			.areaSelect input{
+				border-radius: 0.3rem;
+				font-size: .14rem;
+				height: .26rem;
+				padding: 0.11rem 0.12rem;
+			}
+			.sortBox{
+				font-size: .12rem;
+			}
+			.sortBox div{
+				text-align: center;
+				opacity: 0.5;
+			}
+			.flexbox-f1 {
+			    position: relative;
+			    -webkit-box-flex: 1;
+			    flex: 1;
+			}
+			.sortBox .sort-active{
+				opacity: 1;
+			}
+			.border-radius-r5{
+				border-radius: 0.05rem;
+			}
+			.widthLimit{
+				width: 50%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+			.border-orange{
+				border:1px solid #ffa63d;
+				padding: .01rem .08rem;
+				border-radius: 0.2rem;
+				color:#ffa63d;
+			}
+			.border-blue{
+				border:1px solid #4d93f7;
+				padding: .01rem .08rem;
+				border-radius: 0.2rem;
+				color: #4d93f7;
+			}
+			.customerName{
+				padding-right: 0.05rem;
+			}
+			.customer{
+				padding: 0 .15rem;
+			}
+			.areaSelect input{
+				padding-left: 0.3rem;
+				background: #f4f8ff url(../../public/img/picker/search.png) 0.05rem center/0.2rem 0.2rem no-repeat;
+			}
+			.searchBtn{
+				padding: .025rem 0.12rem;
+				background-color: #4d93f7;
+				color: #fff;
+				border-radius: 0.15rem;
+				line-height: .2rem;
+				font-size: 0.14rem;
+			}
+			.SearchNumber{
+				/*font-size: 0.12rem;*/
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="index.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">送件</p>
+		</header>	
+		<div class="mui-content">
+			<div class="bg-white mui-flex mui-flex-halign-center border-bottom-tiny-blue searchBox">
+				<div class="SearchNumber">
+					<span>总数：</span>
+					<span id="mesNum">0</span>
+				</div>
+				<div class="areaSelect">
+					<input type="text" placeholder="请输入关键字" style="margin-bottom: 0;"/>
+				</div>
+				<div>
+					<div class="searchBtn">搜索</div>
+				</div>
+			</div>
+			<div class="bg-white" style="padding:0 10px">
+				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active chose-btn" href="#item1">待送</a>
+					<a class="mui-control-item chose-btn" href="#item2">在送</a>
+					<a class="mui-control-item chose-btn" href="#item3">已送</a>
+				</div>
+				<div class="sortBox mui-flex" style="padding: 4px 0;border-top: 1px solid #f4f8ff;">
+					<div class="mui-text-center flexbox-f1 sort-active">预约最早</div>
+					<div class="mui-text-center flexbox-f1">距离最近</div>
+					<div class="mui-text-center flexbox-f1">当天订单</div>
+				</div>
+			</div>
+			<div class="" style="margin-top: .08rem;padding:0 .075rem;">
+				<div id="item1" class="mui-control-content mui-active bg-white border-radius-r5">
+					<ul class="mui-table-view"></ul>
+				</div>
+				<div id="item2" class="mui-control-content bg-white border-radius-r5">
+					<ul class="mui-table-view"></ul>
+				</div>
+				<div id="item3" class="mui-control-content bg-white border-radius-r5">
+					<ul class="mui-table-view">
+						<!--<li class="mui-table-view-cell font-size-12 color-666">
+							<span>订单编号：</span><span>007894562513</span>
+						</li>
+						<li class="mui-table-view-cell mui-flex font-size-14">
+							<div class="widthLimit"><i class="mui-icon mui-icon-location font-size-16"></i>江苏省常州市新北区世贸广场7楼</div>
+							<div class="font-size-12">距离1.7km</div>
+						</li>
+						<li class="mui-table-view-cell font-size-12 customer color-333"><span class="customerName">老薛</span><span>15263258965</span></li>
+						<li class="mui-table-view-cell font-size-12 mui-flex mui-flex-halign-center">
+							<div class="color-666"><span>取件时间：</span><span>2018年6月15日</span></div>
+							<div class="border-orange mui-hidden">扫码封签</div>
+							<div class="border-blue">查看详情</div>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../public/js/public.js"></script>
+	<script src="../src/js/deliveryPackage.js"></script>
+</html>

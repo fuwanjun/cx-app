@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/mui.poppicker.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/my-client.css"/>
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.poppicker.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/mui.poppicker.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">发展客户</p>
+		</header>
+		<div class="mui-content mui-scroll-wrapper">
+			<div id="clients" class="mui-scroll">
+				<!--<div class="client">-->
+					<!--<div class="client-left">-->
+						<!--<div class="client-pic"><img src="../../../public/img/mine/gouzi.jpg" alt="" /></div>-->
+						<!--<div class="client-mes">-->
+							<!--<p class="client-name">大鹅和狗子</p>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="client-right">-->
+						<!--<p class="date">2018-07-23</p>-->
+					<!--</div>-->
+				<!--</div>-->
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+		var url=globalUrl+"/userInfo/getUserFans";
+		var data={};
+		enAjax(url,'get',true,data,getClient,null,false);
+		function getClient(data){
+		    console.log(data);
+		    for(var i=0;i<data.data.list.length;i++){
+		        var item='<div class="client">' +
+							'<div class="client-left">' +
+								'<div class="client-pic"><img src="'+data.data.list[i].userPicture+'" alt="" /></div>' +
+									'<div class="client-mes">' +
+										'<p class="client-name">'+data.data.list[i].userName+'</p>' +
+									'</div>' +
+								'</div>' +
+							'<div class="client-right">' +
+								'<p class="date">'+timestampToTime(data.data.list[i].createTime)+'</p>' +
+							'</div>' +
+						'</div>';
+		        $(item).appendTo($("#clients"))
+			}
+		}
+	</script>
+</html>

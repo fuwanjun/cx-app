@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>常洗</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="content-type" content="text/html; charset=utf-8">
+    <meta http-equlv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="../../public/css/mui.min.css" />
+    <link rel="stylesheet" href="../../public/css/index.css" />
+    <link rel="stylesheet" href="../../public/css/public.css">
+    <link rel="stylesheet" href="../src/css/mine.css" />
+    <script src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/common.js"></script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title"></p>
+</header>
+<div class="mui-content" style="margin: 10px;"></div>
+</body>
+<script src="../../public/js/public.js"></script>
+<script>
+    var id=getQueryString('id');
+    $(function(){
+        searchBook(id);
+    });
+
+    function searchBook(id){
+        enAjax(globalUrl+'/introduce/getIntroduceById','get',true,{id:id},function(data){
+            if(data.code==0){
+                $(".mui-title").html(data.data.title);
+                $(".mui-content").html("");
+                var item=data.data.content;
+                $(item).appendTo($(".mui-content"));
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/commodity-detail.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+
+		<link rel="stylesheet" href="../../src/css/vip.css" />
+		<link rel="stylesheet" href="../../src/css/wash-chose.css"/>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../src/js/commodity-detail.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">详情介绍</p>
+		</header>
+		<!--<nav class="mui-bar mui-bar-tab bot-nav">-->
+			<!--<div class="chose-items">-->
+				<!--&lt;!&ndash;<a href="clothes-box.html">&ndash;&gt;-->
+					<!--<div class="chose-pic" id="shop-car"><img src="../../../public/img/order/shop-car.png" alt="" /><span id="item-num" class="mui-badge mui-badge-danger">0</span></div>-->
+				<!--&lt;!&ndash;</a>&ndash;&gt;-->
+				<!--<p class="chose-price" id="all-price">￥<span>0</span></p>-->
+			<!--</div>-->
+			<!--<div class="btns">-->
+				<!--&lt;!&ndash;<a><button class="mui-btn mui-btn-primary btns-btn1" style="margin-right: -5px;" id="clothes-box">加入洗衣筐</button></a>&ndash;&gt;-->
+				<!--<a><button class="mui-btn mui-btn-primary btns-btn2" id="submit">单件下单</button></a>-->
+			<!--</div>-->
+			<!---->
+		<!--</nav>-->
+		<div class="mui-content">
+			<div class="goods-pic">
+				<div class="pic">
+					<img src="" alt="" />
+				</div>
+			</div>
+			<div class="com-mes">
+				<div class="mes1">
+					<p class="mes-name" id="goodsName">长袖衬衫</p>
+					<p class="mes-price">￥<span id="price">30.00</span></p>
+				</div>
+				<div style="display:flex; justify-content: space-between;">
+					<p class="wash-num">月洗<span id="saleNum"></span>件</p>
+					<!--<div class="wash-style">
+						<div class="num">
+							<div class="mui-numbox" data-numbox-min="0">
+								<button class="mui-btn mui-btn-numbox-minus" type="button" id="reduce">-</button>
+								<input disabled id="number" class="mui-input-numbox" type="number">
+								<button class="mui-btn mui-btn-numbox-plus" type="button" id="add">+</button>
+							</div>
+						</div>
+					</div>-->
+				</div>
+			</div>	
+			<!--<ul class="mui-table-view mui-table-view-chevron" style="background: #fff; margin-bottom: 0.05rem;" id="detail">-->
+				<!--<li class="mui-table-view-cell">-->
+				    <!--<a class="mui-navigate-right" href="#" style="display: flex;">-->
+				        <!--<p style="margin-right: 0.1rem;">规格</p>-->
+				        <!--<p>选择衣物细节</p>	-->
+				    <!--</a>-->
+				<!--</li>-->
+			<!--</ul>	-->
+			<div class="comment-box">
+				<div class="comment-top">
+					<p>洗衣评价(<span id="evaluates"></span>)</p>
+					<a><p id="more">查看更多></p></a>
+				</div>
+				<ul class="comments" id="comments">
+					<!--<li>
+						<div class="user-mes">
+							<div class="user-head"><img src="" alt="" /></div>
+							<p class="user-name">lalala</p>
+						</div>
+						<div class="comment-con">
+							洗衣速度很快，意外的是洗后还熨烫了下，非常开心的一次洗衣
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			
+			<!--洗衣详情-->
+			<div class="wash-txt">
+				<p class="txt-line"></p>
+				<div class="txt-c">
+					<p class="txt-pic"><img src="../../../public/img/order/pic.png" alt="" /></p>
+					<p>洗衣详情</p>
+				</div>
+				
+			</div>
+			<!--注意事项-->
+			<div class="bot-tips">
+				<!--<p class="tip-tit">衬衫洗涤注意事项</p>-->
+				<!--<div class="tip-pic">-->
+					<!--<img src="../../../public/img/order/pic-xi.png" alt="" />-->
+				<!--</div>-->
+			</div>
+
+			<!--<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">-->
+			    <!--<ul class="mui-table-view" style="padding: 0.2rem;">-->
+			    	<!--<li class="line1">-->
+			    		<!--<div id="thisImg"><img src="" alt="" /></div>-->
+			    		<!--<div class="line1-text">-->
+			    			<!--<p>￥ <span id="detail-price">0.00</span></p>-->
+			    			<!--<p>已选 <span>已选择的商品</span></p>-->
+			    		<!--</div>-->
+			    		<!--<div id="close"><img src="../../../public/img/x.png" alt="" /></div>-->
+			    	<!--</li>-->
+			    	<!--<li id="tips-box" class="line2"></li>-->
+			    	<!--<li class="line3">-->
+			    		<!--<p>洗衣数量</p>-->
+			    		<!--<div class="num">-->
+							<!--<div class="mui-numbox" data-numbox-min="1" style="display: flex;">-->
+								<!--<button class="mui-btn btn-num btn-reduce">-</button>-->
+								<!--<input disabled id="number" class="mui-input-numbox" type="number">-->
+								<!--<button class="mui-btn btn-num btn-add">+</button>-->
+							<!--</div>-->
+						<!--</div>-->
+			    	<!--</li>-->
+			    	<!--<li class="line4" id="remind">-->
+			    		<!--<p>备注：<span>亲,最好要根据实际情况选择哦！</span></p>-->
+			    	<!--</li>-->
+			    	<!--<li class="line5">-->
+			    		<!--<button type="button" class="mui-btn" class="clone" id="close2">取消</button>-->
+			    		<!--<button class="mui-btn mui-btn-primary" id="incar">加入购物车</button>-->
+			    	<!--</li>-->
+			    <!--</ul>-->
+			<!--</div>-->
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+</html>

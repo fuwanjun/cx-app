@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-3.3.1.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			ul{
+				margin:0;
+				padding:0;
+			}
+			.menu-box{
+				width:100%;
+			}
+			.list-active{
+				border-bottom: 2px solid #4d93f7;
+			}
+
+			.menu{
+				display:flex;
+			}
+			.menu li{
+				text-align: center;
+			}
+			.content .con{
+				display: none;
+			}
+			.content .con-active{
+				 display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="menu-box">
+			<ul class="menu"></ul>
+		</div>
+		<ul class="content"></ul>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script type="text/javascript">
+        var listWidth=$(".menu-box").width();
+		var url=globalUrl+"/headTitle/getHeadTitleAll";
+		enAjax(url,'get',true,{},function(data){
+		    console.log(data);
+		    for(var i=0;i<data.data.length;i++){
+		        var list='<li>'+data.data[i].titleName+'</li>';
+		        var listCon='<li class="con">这是第'+(i+1)+'个DIV</li>'
+		        $(list).appendTo($(".menu"));
+				$(listCon).appendTo($(".content"));
+
+			}
+			$(".menu li").css("width",listWidth/4+"px");
+			$(".menu").css("width",listWidth/4*data.data.length)
+		},null,false);
+
+		$(".menu").on("tap","li",function(){
+		    var i=$(this).index();
+            $(".menu li").removeClass("list-active");
+            $(".menu li").eq(i).addClass("list-active");
+            $(".content li").removeClass("con-active");
+            $(".content li").eq(i).addClass("con-active");
+		})
+	</script>
+</html>

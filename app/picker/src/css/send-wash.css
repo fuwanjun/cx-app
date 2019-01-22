@@ -1,0 +1,46 @@
+.wash-item{
+	height: 0.75rem;
+	background: #fff;
+	margin-bottom: 0.08rem;
+}
+.mes{
+	display: flex;
+	justify-content:space-between;
+}
+.mes p{
+	font-size:0.15rem;
+}
+.address{
+	font-size: 0.13rem;
+	margin-top: 0.1rem;
+	color: #333;
+}
+.mui-table-view:before{
+	height: 0;
+}
+.mui-table-view:after{
+	height: 0;
+}
+.mui-popup-inner {
+    position: relative;
+    padding: 15px;
+    border-radius: 13px 13px 0 0;
+    background: rgba(255,255,255,.95);
+}
+.mui-popup-buttons {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: 44px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.mui-btn-red .mui-icon-trash{
+	font-size: 0.5rem;
+}
+.wash-item a{
+    display: block;
+    width:100%;
+}

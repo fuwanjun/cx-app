@@ -1,0 +1,332 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.mui-content form{
+				padding: 0.15rem 0.35rem;
+			}
+			.dataLi label{
+				display: block;
+				margin-bottom: 0.1rem;
+			}
+			.dataLi input,.dataLi textarea{
+				background-color: #f4f8ff;
+				border: none;
+			}
+			.dataLi textarea{
+				height: 1.05rem;
+			}
+			.mui-checkbox.mui-left label,.mui-radio.mui-right label{
+				padding-left: 0rem;
+				padding-right: 0;
+				margin-bottom: 0;
+			}
+			.mui-flex-wrap{
+				flex-wrap: wrap;
+			}
+			.mui-flex .checkBox{
+				width: 18%;
+				display: flex;
+				align-items: center;
+				margin-bottom: 0.1rem;
+			}
+			/*.mui-flex .checkBox:last-of-type{
+				width: 30%;
+			}*/
+			.mui-checkbox input[type=checkbox]:before,.mui-radio input[type=radio]:before{
+				font-size: .2rem;
+				color: #007aff;
+			}
+			.mui-checkbox.mui-left input[type=checkbox],.mui-radio.mui-right input[type=radio]{
+				right: 0;
+				top: 0;
+			}
+			.statusItem{
+				margin-bottom: 0;
+			}
+			.mui-btn-block{
+				padding: .1rem 0;
+			}
+			.mui-flex-start{
+				justify-content: flex-start;
+			}
+			.margin-right-r24{
+				margin-right: 0.24rem;
+			}
+			.header{
+				margin: .18rem 0 .4rem 0;
+			}
+			.imgBox{
+				width: .62rem;
+				height: .62rem;
+				margin: 0.02rem auto;
+				overflow: hidden;
+				box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+				border-radius: 50%;
+				margin-bottom: .12rem;
+				position: relative;
+			}
+			.imgBox img{
+				width: 100%;
+				height: 100%;
+			}
+			.width-p100{
+				width: 100%;
+			}
+			input[type="file"]{
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 100%;
+				top: 0.02rem;
+				opacity: 0;
+			}
+			.submit{
+				padding: 0 .35rem;
+			}
+		</style>
+	</head>
+	<body class="bg-white">
+		<header class="mui-bar mui-bar-nav">
+			<a href="personInfo.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">完善资料</p>
+		</header>	
+		<div class="mui-content bg-white">
+			<div class="header">
+				<div class="imgBox mui-text-center">
+					<img src="../../public/img/picker/head.png"/>
+					<input type="file" id="imgHead"/>
+					<!--<input type="hidden" name="logo" id="logo"/>-->
+				</div>
+				<div class="mui-text-center font-size-16">上传头像</div>
+			</div>
+			<form id="myForm">
+				<div class="dataLi">
+					<label class="font-size-16" for="">1.您的个人信息</label>
+					<div class="mui-flex mui-flex-wrap mui-flex-start">
+						<div class="width-p100">
+							<input type="text" class="font-size-14" name="takerName" id="takerName" value="" placeholder="请输入您的姓名"/>
+						</div>
+						<div class="width-p100">
+							<input type="text" class="font-size-14" name="idCard" id="idCard" value="" placeholder="请输入您的身份证号码"/>
+						</div>
+						<div class="width-p100">
+							<input type="text" class="font-size-14" name="phone" id="phone" value="" placeholder="请输入您的手机号码"/>
+						</div>
+					</div>
+				</div>
+				<div class="dataLi statusItem">
+					<label class="font-size-16">2.性别</label>
+					<div class="mui-flex mui-flex-wrap mui-flex-start">
+						<div class="checkBox mui-radio mui-right margin-right-r24">
+							<label class="checkBox-text font-size-14">男</label>
+							<input type="radio" class="mui-radio" name="sex" id="sex1" value="男" checked=""/>
+						</div>
+						<div class="checkBox mui-radio mui-right margin-right-r24">
+							<label class="checkBox-text font-size-14">女</label>
+							<input type="radio" class="mui-radio" name="sex" id="sex2" value="女" />
+						</div>
+					</div>
+				</div>
+				<div class="dataLi">
+					<label class="font-size-16" for="">3.请输入您所属的洗衣店</label>
+					<div class="mui-flex mui-flex-wrap mui-flex-start">
+						<div class="width-p100">
+							<input type="text" class="font-size-14" name="address" id="address" value="" placeholder="请输入洗衣店名称"/>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="id" id="id" value="" />
+				<input type="hidden" name="password" id="password" value="" />
+				<input type="hidden" name="account" id="account" value="" />
+				<input type="hidden" name="level" id="level" value="" />
+				<input type="hidden" name="picture" id="picture" value="" />
+				<input type="hidden" name="takerEvaluates" id="takerEvaluates" value="" />
+				
+			</form>
+			<div class="submit">
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block submitBtn">提交</button>
+			</div>
+			
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script src="../../public/js/jquery.form.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var token=$.cookie("token");
+			var account=JSON.parse($.cookie("toker")).account;
+			var id=JSON.parse($.cookie("toker")).id;
+			//var globalUrl="http://10.0.0.228:8080/";
+			$(function(){
+				if(!token){
+					window.location.href="login.html";
+					return false;
+				}
+				ajaxInit(account);
+				
+			})
+			//监听文件上传
+			var f_input=document.getElementById("imgHead");
+			$("#imgHead").change(function(){
+				show(this);
+				var formData=new FormData();
+				formData.append("editormd-image-file",f_input.files[0]);
+				$.ajax({
+					type:"post",
+					data:formData,
+					contentType:false,
+					processData:false,
+					cache:false,
+					url:globalUrl+"qiniu/uploadImgQiniu",
+					beforeSend:function(request){
+						request.setRequestHeader("token",token)
+					},
+					success:function(res){
+						console.log(res)
+					}
+				});
+			})
+			//图片回显函数
+			function show(obj) {
+				var file = obj.files[0];
+				var readerFile = new FileReader();
+				readerFile.onload = function(ev) {
+					var data = ev.target.result;
+					$(".imgBox img").attr("src",data);
+				}
+				readerFile.readAsDataURL(file);
+			}
+			function ajaxInit(account){
+				$.ajax({
+					type:"get",
+					url:globalUrl+"takeUser/getTakerByAccount",
+					dataType:"json",
+					data:{account:account},
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader("token",token)
+					},
+					success:function(res){
+						if(res.message){
+							mui.toast(res.message);
+							setTimeout(
+								function(){
+									window.location.href="login.html"
+								},2000
+							)
+							
+						}else{
+							if(res){
+								$("#takerName").val(res.takerName);
+								$("#sex").val(res.sex);
+								if(res.sex=="男"){
+									$("input[name='sex']").eq(0).prop("checked",true);
+								}else if(res.sex=="女"){
+									$("input[name='sex']").eq(1).prop("checked",true);
+								}
+								$("#idCard").val(res.idCard);
+								$("#phone").val(res.phone);
+								$("#address").val(res.address);
+								$("#id").val(id);
+								$("#account").val(res.account);
+								$("#picture").val(res.picture);
+								$("#level").val(res.level);
+								$("#password").val(res.password);
+								$("#takerEvaluates").val(res.takerEvaluates);
+								if(res.picture){
+									$(".imgBox img").attr("src","http://"+res.picture);
+								}	
+							}
+						}
+						
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			}
+			
+			$(".submitBtn").on("tap",function(){
+				var takerName=$("#takerName").val();
+				var idCard=$("#idCard").val();
+				var phone=$("#phone").val();
+				var address=$("#address").val();
+				var sex=$("input[name='sex']:checked").val();
+				
+				if(!takerName){
+					mui.toast("请输入姓名");
+					return false;
+				}
+				if(!idCard){
+					mui.toast("请输入身份证号码");
+					return false;
+				}
+				if(!phone){
+					mui.toast("请输入手机号码");
+					return false;
+				}
+				if(!address){
+					mui.toast("请输入所属洗衣店");
+					return false;
+				}
+				var account = $("#account").val();
+				var picture = $("#picture").val();
+				var level = $("#level").val();
+				var pwd = $("#password").val();
+				var data={takerName:takerName,idCard:idCard,phone:phone,address:address,sex:sex,id:id,account:account,picture:picture,level:level,"password":pwd};
+				$.ajax({
+					contentType:"application/json;charset=utf-8",
+					type:"post",
+					dataType:"json",
+					data:JSON.stringify(data),
+					url:globalUrl+"takeUser/updateTaker",
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader("token",token)
+					},
+					beforeSend:function(){
+						$(".submitBtn").attr("disabled",true)
+					},
+					success:function(data){
+						console.log(data)
+						$(".submitBtn").attr("disabled",false)
+					}
+				});
+			})
+			
+			
+			
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

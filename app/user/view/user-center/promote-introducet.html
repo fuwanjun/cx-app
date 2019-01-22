@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/mui.poppicker.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			body,.mui-content{
+				background:#fff;
+			}
+			.reward-tit{
+				height: 0.75rem;
+				background: -webkit-linear-gradient(top, #cdd3a1 , #c5c896); /* Safari 5.1 - 6.0 */
+				background: -o-linear-gradient(top, #cdd3a1 , #c5c896); /* Opera 11.1 - 12.0 */
+				background: -moz-linear-gradient(top, #cdd3a1 , #c5c896); /* Firefox 3.6 - 15 */
+				background: linear-gradient(top, #cdd3a1 , #c5c896); /* 标准的语法 */
+				color: #fff;
+				text-align: center;
+				line-height: 0.75rem;
+			}
+			.reward-mes{
+				padding: 0.2rem;
+				display: flex;
+				justify-content: space-around;
+				border-bottom: 0.2rem solid #f4f8ff;
+			}
+			.reward-mes .mes-con{
+				text-align: center;	
+			}
+			.line{
+				width: 1px;
+				height: 0.52rem;
+				background: #cdcfb4;
+			}
+			.reward-con-tit{
+				text-align: center;
+				font-size: 0.18rem;
+				color: #333;
+			}
+			.reward-con{
+				padding: 0.2rem 0.4rem;
+			}
+			.reward-con-mes{
+				margin-top: 0.2rem;
+				line-height: 0.25rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">推广介绍</p>
+		</header>
+		<div class="mui-content">
+			<div class="reward-tit">推广奖励</div>
+			<div class="reward-mes">
+				<div class="mes-con">
+					<p>10 积分/粉丝</p>
+					<p>加粉提成</p>
+				</div>
+				<p class="line"></p>
+				<div class="mes-con">
+					<p>5%</p>
+					<p>消费提成</p>
+				</div>
+			</div>
+			<div class="reward-con">
+				<p class="reward-con-tit">权益介绍</p>
+				<p class="reward-con-mes">单粉佣金10积分/粉丝，消费提成为5%。</p>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+</html>

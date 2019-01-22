@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../public/css/public.css" />
+		<link rel="stylesheet" href="../src/css/send-wash.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script src="../src/js/address.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">取衣地址</p>
+		</header>
+		<nav class="mui-bar mui-bar-tab" style="text-align: center;">
+			<a class="mui-tab-item" href="get-address.html">
+				<span class="mui-tab-label">
+					<a id="addPlace">
+						<span class="mui-icon mui-icon-plusempty"></span> 添加地址
+					</a>
+				</span>
+			</a>
+		</nav>
+		<div class="mui-content"></div>
+		
+		<script type="text/javascript">
+			$(function(){
+				mui.init();
+				var orderId=getQueryString('id');
+//				var _goodsId=getQueryString('goodsId');
+				if(orderId==null){
+					getAddressGoods(_goodsId,'order-pay.html');
+				}else{
+					getAddressOrder(orderId,'order-pay.html');
+				}
+				
+				//判断是否能添加地址
+				addressCount('get-address.html');
+				
+				$(".mui-content").on("tap",".wash-item",function(){
+					var area=$(this).find("li .mui-slider-handle .address").html();
+					var addressId=$(this).attr("data-id");
+					console.log(area);
+					console.log(addressId);
+                    area=EncodeUtf8(area);
+					$.cookie("getArea",area);
+					$.cookie("getId",addressId);
+				})
+			})
+			
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../../public/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../src/css/fetchPackage.css"/>
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <style>
+        body{
+            background: #fff;
+        }
+        .mui-table-view-cell{
+            border-bottom: 1px solid #ccc;
+            margin:0;
+        }
+        #sub{
+            width:100%;
+            position: fixed;
+            bottom:0;
+            left:0;
+            font-size:0.2rem;
+            background: #39A4F2;
+            color: #fff;
+        }
+        .pics{
+            margin-bottom:0.5rem;
+        }
+        .pics div{
+            width:100%;
+            height:2rem;
+            margin-top:0.2rem;
+            background: #ccc;
+        }
+        .pic1 img,.pic2 img{
+            width:100%;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="index.html"></a>
+    <p class="mui-title">审核</p>
+</header>
+<ul class="mui-table-view">
+    <li class="mui-table-view-cell" id="userId">用户ID:<span></span></li>
+    <li class="mui-table-view-cell" id="takerName">操作员:<span></span></li>
+    <li class="mui-table-view-cell" id="balance">折扣卡余额:<span></span></li>
+    <li class="mui-table-view-cell" id="real-price">实际金额:<span></span></li>
+</ul>
+<div class="pics">
+    <div class="pic1"><img src="" alt=""></div>
+    <div class="pic2"><img src="" alt=""></div>
+</div>
+<button id="sub" class="mui-btn">审核通过</button>
+</body>
+<script src="../../public/js/public.js"></script>
+<script src="../../public/js/common.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+    var id=getQueryString("id");
+    $(function(){
+        getIdsMsg(id);
+    });
+
+    $("#sub").on("tap",function(){
+        mui.confirm("确定通过退卡审核吗？","审核",['否','是'],function(e){
+            if(e.index == 1){
+                $.ajax({
+                    type:"post",
+                    url:globalUrl+"/verifyCard/cardFinish",
+                    data:{id:id},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success:function(data){
+                        if(data.status==200){
+                            mui.toast('审核通过');
+                            setTimeout(function(){
+                                window.location.href='back-card2.html';
+                            },1000);
+                        }else{
+                            mui.toast(data.msg);
+                        }
+                    }
+                })
+            }
+        })
+
+    });
+
+    function getIdsMsg(id){
+        $.ajax({
+            type:"get",
+            url:globalUrl+"/verifyCard/view",
+            data:{id:id},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:function(data){
+                if(data.status==200){
+                    pics=data.data.billPic.split(",");
+                    $("#userId span").html(data.data.memberId);
+                    $("#takerName span").html(data.data.takerName);
+                    $("#balance span").html(data.data.cardBalance);
+                    $("#before-price span").html(data.data.cardRecharge);
+                    $("#gift-price span").html(data.data.cardGive);
+                    $("#real-price span").html(data.data.cardReal);
+                    $(".pics .pic1 img").attr("src","http://"+pics[0]);
+                    $(".pics .pic2 img").attr("src","http://"+pics[1]);
+                }
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/message.css" />
+		<link rel="stylesheet" href="../../src/css/my-order.css">
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.mui-pull-bottom-pocket{
+				position: absolute!important;
+			}
+			#mess1{
+				padding-bottom: 35px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../mine.html"></a>
+			<p class="mui-title">我的订单</p>
+		</header>
+		<div class="mui-content">
+			<div class="chose">
+				<p><a href="my-order1.html">未付款</a></p>
+				<p class="chose-active"><a href="my-order2.html">已付款</a></p>
+				<p><a href="my-order3.html">已取件</a></p>
+				<p><a href="my-order4.html">已完成</a></p>
+			</div>
+			<div class="chose-con mui-content mui-scroll-wrapper con-active" id="chose-con1">
+				<ul class="mess mui-scroll" id="mess1" ></ul>	
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+			mui.init({
+				pullRefresh:{
+					container:'#chose-con1',
+					up:{
+						height:50,
+						auto:true,
+						contentrefresh:'正在加载...',
+						contentnomore:'没有更多数据',
+						callback:getOrderPage2
+					}
+				}
+			})
+		});
+		var pageCount2=1;
+		function getOrderPage2(){
+            pageLoad("block");
+//			setTimeout(function(){
+				$.ajax({
+					url:globalUrl+'/order/orderListByUserId',
+					type:'post',
+					data:{page:pageCount2,status:20},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+					success:function(data){
+						console.log(data);
+						removeMask();
+						mui('#chose-con1').pullRefresh().endPullupToRefresh((++pageCount2>data.data.navigatepageNums.length));
+						for(var j=0;j<data.data.list.length;j++){
+						var item='<li>'+
+									'<div class="line1">'+
+										'<p>订单号：<span>'+data.data.list[j].orderNo+'</span></p>'+
+										'<p>'+timestampToTime(data.data.list[j].createTime)+'</p>'+
+									'</div>'+
+									'<div class="line2">'+
+										'<div class="goodsImg"><img src="http://'+data.data.list[j].orderItems[0].productImage+'" alt="" /></div>'+
+										'<p>总价：<span class="orderPrice">'+data.data.list[j].payment.toFixed(2)+'</span></p>'+
+									'</div>'+
+									'<div class="line3">'+
+										'<div></div>'+
+										'<div>'+
+											'<a href="order-detail.html?id='+data.data.list[j].orderNo+'"><button class="mui-btn">订单详情</button></a>'+
+										'</div>'+
+									'</div>'+
+								'</li>';
+							$(item).appendTo($("#mess1"));
+						}
+					},
+					error:function(){
+					    removeMask();
+					}
+				})
+//			},500)
+		}
+	</script>
+</html>

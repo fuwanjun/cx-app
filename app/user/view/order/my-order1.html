@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/message.css" />
+		<link rel="stylesheet" href="../../src/css/my-order.css">
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.mui-pull-bottom-pocket{
+				position: absolute!important;
+			}
+
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../mine.html"></a>
+			<p class="mui-title">我的订单</p>
+		</header>
+		<div class="mui-content">
+			<div class="chose">
+				<p class="chose-active"><a href="my-order1.html">未付款</a></p>
+				<p><a href="my-order2.html">已付款</a></p>
+				<p><a href="my-order3.html">已取件</a></p>
+				<p><a href="my-order4.html">已完成</a></p>
+			</div>
+			<div class="chose-con mui-content mui-scroll-wrapper con-active" id="chose-con1">
+				<ul class="mess mui-scroll" id="mess1" ></ul>	
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+			mui.init({
+//				pullRefresh:{
+//					container:'#chose-con1',
+//					up:{
+//						height:50,
+//						auto:true,
+//						contentrefresh:'正在加载...',
+//						contentnomore:'没有更多数据',
+//						callback:getOrders
+//					},
+//					down:{
+//                        style:'circle',//必选下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//                        color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+//                        height:'50px',//可选,默认50px.下拉刷新控件的高度,
+//                        range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+//                        offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+//                        callback:getOrdersRefresh
+//					}
+//				}
+			});
+			mui("#chose-con1").pullRefresh({
+                up:{
+					height:50,
+					auto:true,
+					contentrefresh:'正在加载...',
+					contentnomore:'没有更多数据',
+					callback:getOrders
+				},
+				down:{
+                    style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+					height:'50px',//可选,默认50px.下拉刷新控件的高度,
+					range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+					offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+					callback:getOrdersRefresh
+				}
+			});
+			$("#mess1").on("tap",".btn-del",function(){
+			    var orderNo=$(this).parent().parent().parent().attr("order-id");
+			    var url=globalUrl+"/order/deleteOrder";
+			    var data={orderNo:orderNo};
+			    mui.confirm("确认删除订单","提示",["取消","确定"],function(e){
+                    if(e.index==1){
+                        enAjax(url,'post',true,data,function(){
+                            window.location.reload();
+                        },null,false);
+                    }
+                });
+
+			})
+
+
+		});
+
+
+		var pageCount1=1;
+
+		function getOrders(){
+		    $.ajax({
+                url:globalUrl+'/order/orderListByUserId',
+				type:'post',
+				data:{page:pageCount1,status:10},
+                beforeSend: function (xhr) {
+				xhr.setRequestHeader("token", $.cookie("token"));
+				},
+				crossDomain: true,
+				success:function(data){
+                    console.log(data);
+                    mui('#chose-con1').pullRefresh().endPullupToRefresh((++pageCount1>data.data.navigatepageNums.length));
+                    for(var j=0;j<data.data.list.length;j++){
+                        var item='<li order-id="'+data.data.list[j].orderNo+'">'+
+									'<div class="line1">'+
+										'<p>订单号：<span>'+data.data.list[j].orderNo+'</span></p>'+
+										'<p>'+timestampToTime(data.data.list[j].createTime)+'</p>'+
+									'</div>'+
+									'<div class="line2">'+
+										'<div class="goodsImg"><img src="http://'+data.data.list[j].orderItems[0].productImage+'" alt="" /></div>'+
+										'<p>总价：<span class="orderPrice">'+data.data.list[j].payment.toFixed(2)+'</span></p>'+
+									'</div>'+
+									'<div class="line3">'+
+										'<div></div>'+
+										'<div>'+
+											'<button class="mui-btn mui-btn-danger btn-del" style="margin-right: 0.1rem;">删除订单</button>'+
+											'<a href="pay-money.html?id='+data.data.list[j].orderNo+'"><button class="mui-btn">去付款</button></a>'+
+										'</div>'+
+									'</div>'+
+								'</li>';
+							$(item).appendTo($("#mess1"));
+						}
+					}
+				})
+		}
+
+        function getOrdersRefresh(){
+            $.ajax({
+                url:globalUrl+'/order/orderListByUserId',
+                type:'post',
+                data:{page:1,status:10},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function(data){
+                    console.log(data);
+
+
+                    for(var j=0;j<data.data.list.length;j++){
+                        var item='<li order-id="'+data.data.list[j].orderNo+'">'+
+                            '<div class="line1">'+
+                            '<p>订单号：<span>'+data.data.list[j].orderNo+'</span></p>'+
+                            '<p>'+timestampToTime(data.data.list[j].createTime)+'</p>'+
+                            '</div>'+
+                            '<div class="line2">'+
+                            '<div class="goodsImg"><img src="http://'+data.data.list[j].orderItems[0].productImage+'" alt="" /></div>'+
+                            '<p>总价：<span class="orderPrice">'+data.data.list[j].payment.toFixed(2)+'</span></p>'+
+                            '</div>'+
+                            '<div class="line3">'+
+                            '<div></div>'+
+                            '<div>'+
+                            '<button class="mui-btn mui-btn-danger btn-del" style="margin-right: 0.1rem;">删除订单</button>'+
+                            '<a href="pay-money.html?id='+data.data.list[j].orderNo+'"><button class="mui-btn">去付款</button></a>'+
+                            '</div>'+
+                            '</div>'+
+                            '</li>';
+                        $(item).appendTo($("#mess1"));
+                    }
+                }
+            })
+        }
+
+		//加载对应标签的页面的第一页  未付款
+//		function getOrderPage1(){
+//            pageLoad("block");
+//				$.ajax({
+//					url:globalUrl+'/order/orderListByUserId',
+//					type:'post',
+//					data:{page:pageCount1,status:10},
+//                    beforeSend: function (xhr) {
+//                        xhr.setRequestHeader("token", $.cookie("token"));
+//                    },
+//                    crossDomain: true,
+//					success:function(data){
+//						console.log(data);
+//						removeMask();
+//						mui('#chose-con1').pullRefresh().endPullupToRefresh((++pageCount1>data.data.navigatepageNums.length));
+//						for(var j=0;j<data.data.list.length;j++){
+//						var item='<li order-id="'+data.data.list[j].orderNo+'">'+
+//									'<div class="line1">'+
+//										'<p>订单号：<span>'+data.data.list[j].orderNo+'</span></p>'+
+//										'<p>'+timestampToTime(data.data.list[j].createTime)+'</p>'+
+//									'</div>'+
+//									'<div class="line2">'+
+//										'<div class="goodsImg"><img src="http://'+data.data.list[j].orderItems[0].productImage+'" alt="" /></div>'+
+//										'<p>总价：<span class="orderPrice">'+data.data.list[j].payment.toFixed(2)+'</span></p>'+
+//									'</div>'+
+//									'<div class="line3">'+
+//										'<div></div>'+
+//										'<div>'+
+//											'<button class="mui-btn mui-btn-danger btn-del" style="margin-right: 0.1rem;">删除订单</button>'+
+//											'<a href="pay-money.html?id='+data.data.list[j].orderNo+'"><button class="mui-btn">去付款</button></a>'+
+//										'</div>'+
+//									'</div>'+
+//								'</li>';
+//							$(item).appendTo($("#mess1"));
+//						}
+//					},
+//					error:function(data){
+//					    removeMask();
+//					}
+//				})
+//		}
+	</script>
+</html>

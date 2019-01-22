@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/mui.poppicker.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/earnings.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style type="text/css">
+			.mui-scroll{
+				margin:0;
+				padding:0;
+			}
+			.mui-scroll li{
+				background: #fff;
+				display: flex;
+				justify-content:space-between;
+				padding: 0.2rem 0.2rem 0.1rem 0.2rem;
+				margin-bottom: 0.1rem;
+			}
+			.mui-scroll li p{
+				margin:0;
+				text-align: right;
+			}
+			.money-type{
+				color: #333;}
+			.one-price{
+				color: #ffa63d;
+				font-size:0.18rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="promote.html"></a>
+			<p class="mui-title blue">结算中心</p>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="con">
+			<ul class="mui-scroll"></ul>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        var page=1;
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            var url=globalUrl+"/bonusItem/getBonusListByUserId";
+            var data={page:page};
+            mui.init({
+                pullRefresh:{
+                    container:"#con",
+                    up:{
+                        height:100,
+                        auto:true,
+                        contentrefresh:'正在加载...',
+                        contentnomore:'没有更多数据',
+                        callback:pullupRefresh
+                    }
+                }
+            });
+
+            function pullupRefresh(){
+                setTimeout(function(){
+                    $.ajax({
+                        url:globalUrl+"/bonusItem/getBonusListByUserId",
+                        type:'get',
+						data:{page:page},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("token", $.cookie("token"));
+                        },
+                        crossDomain: true,
+						success:function(data){
+                            putRecord(data);
+						}
+                    })
+                },500)
+            }
+		});
+		function putRecord(data){
+		    console.log(data);
+            mui('#con').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
+            for(var i=0;i<data.data.list.length;i++){
+                var item='<a href="forward-detail.html?id='+data.data.list[i].id+'">'+
+                    	'<li>' +
+                    '<div class="money-type">'+data.data.list[i].bankName+'</div>' +
+                    '<div>' +
+                    '<p class="one-price">-'+data.data.list[i].money.toFixed(2)+'</p>' +
+                    '<p>'+timestampToTime(data.data.list[i].createTime)+'</p>' +
+                    '</div>' +
+                    '</li>' +
+                    '</a>';
+                $(item).prependTo($("#con ul"));
+			}
+		}
+
+	</script>
+</html>

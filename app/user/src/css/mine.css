@@ -1,0 +1,122 @@
+.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after{
+	font-size: 0.3rem;
+	color: rgb(182,215,239);
+}
+.mui-table-view{
+	    margin-bottom: 0.1rem;
+}
+.mui-table-view-cell{
+	color: rgb(73,73,73);
+}
+.mui-table-view:before{
+	background-color: rgb(244,248,255);
+}
+.mui-table-view:after{
+	background-color: rgb(244,248,255);
+}
+.mui-table-view-cell:after{
+	background-color: rgb(244,248,255);
+}
+.head-line{
+	height: 0.3rem;
+}
+.head-mes{
+	height: 2rem;
+	background-color: rgb(57,164,242);
+	text-align: center;
+	color: #fff;
+}
+.head-mes p{
+	color: #fff;
+}
+.head-mes .head-pic{
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-left: auto;
+	margin-right:auto;
+	margin-bottom: 0.1rem;
+	border-radius:50% ;
+	background: #dcdcdc;
+	overflow: hidden;
+}
+.head-mes .head-pic img{
+	width: 100%;
+	height: 100%;
+}
+#mount .mui-navigate-right:after, .mui-push-right:after{
+	content: '';
+}
+#mount .mui-btn{
+	margin-left: 0.5rem;
+}
+.mui-table-view-cell p{
+	display: inline;
+	float: right;
+	font-size: 0.14rem;
+	margin-right: 0.5rem;
+}
+.mui-table-view-chevron .mui-table-view-cell{
+	background: #fff;
+	margin-bottom: 2px;
+}
+.mui-table-view-cell:after{
+	height: 0;
+}
+#mount a p{
+	color: #39a4f2;
+}
+.promote-box{
+	padding: 0.2rem 0.2rem 0.35rem 0.2rem;
+	background: #fff;
+}
+.promote-tit{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-bottom: 0.2rem;
+	width: 1rem;
+	position: relative;
+}
+.promote-tit:before{
+	content: '';
+	position: absolute;
+	width: 0.06rem;
+	height: 0.06rem;
+	background: #ccc;
+	border-radius: 50%;
+	top: 50%;
+	left: 0.05rem;
+	margin-top: -0.03rem;
+}
+.promote-tit:after{
+	content: '';
+	position: absolute;
+	width: 0.06rem;
+	height: 0.06rem;
+	background: #ccc;
+	border-radius: 50%;
+	top:50%;
+	right: 0.05rem;
+	margin-top: -0.03rem;
+}
+.promote-style{
+	display: flex;
+	justify-content: space-around;
+}
+.promote-pic{
+	width: 1.2rem;
+	height:0.75rem;
+	border-radius: 0.05rem;
+	color: #fff;
+	font-size: 0.14rem;
+	text-align: center;
+	line-height: 0.75rem;
+}
+.promote-pic{
+	background:url('../../../public/img/haibaotuiguang.png');
+	background-size: 100% 100%;
+}
+
+.mui-table-view-cell p{
+	margin-right: 0;
+}

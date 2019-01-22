@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../public/css/index.css" />
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<!--<script src="../src/js/message.js"></script>-->
+		<script src="../../public/js/common.js"></script>
+		<style>
+			.mui-pull-bottom-pocket{
+				position: absolute!important;
+				bottom:-0.35rem;
+			}
+			#chose-con2{
+				padding-bottom: 1rem;
+			}
+            .chose p a{
+                color: #333;
+            }
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<p class="mui-title">消息资讯</p>
+		</header>
+		<nav class="mui-bar mui-bar-tab bot">
+			<a class="mui-tab-item" href="index.html">
+				<div class="menu-pic"><img src="../../public/img/footer1-2.png" alt="" /></div>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item mui-active" href="message.html">
+				<div class="menu-pic"><img src="../../public/img/footer2-1.png" alt="" /></div>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="mine.html">
+				<div class="menu-pic"><img src="../../public/img/footer3-2.png" alt="" /></div>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+		
+		<div class="mui-content">
+			<div class="chose">
+				<p><a href="message.html">公告牌</a></p>
+				<p class="chose-active"><a href="message2.html">平台消息</a></p>
+			</div>
+			<div class="chose-con mui-content mui-scroll-wrapper con-active" id="chose-con2">
+				<ul class="mess mui-scroll" id="mess"></ul>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+    <script>
+        $(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            mui.init({
+                pullRefresh:{
+                    container:'#chose-con2',
+                    up:{
+                        height:50,
+                        auto:true,
+                        contentrefresh:'正在加载...',
+                        contentnomore:'没有更多数据',
+                        callback:pullupRefresh2
+                    }
+                }
+            })
+        });
+        mui('body').on('tap','a',function(){document.location.href=this.href;});
+        var count=1;
+        function pullupRefresh2(){
+            setTimeout(
+                function(){
+                    $.ajax({
+                        contentType:'application/json;charset=UTF-8',
+                        url:globalUrl+'/sysNotice/getSysNoticeByScope',
+                        type:'post',
+                        data:JSON.stringify({page:count,scope:$.cookie("userId")}),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("token", $.cookie("token"));
+                        },
+                        crossDomain: true,
+                        success:function(data){
+                            console.log(data);
+                            if(data.code==401){
+                                // alert(data.code);
+                                window.location.href=wxUrl;
+                            }else{
+                                mui('#chose-con2').pullRefresh().endPullupToRefresh((++count>data.pages));
+                                for(var i=0;i<data.list.length;i++){
+                                    var item='<a href="order/order-detail.html?id='+data.list[i].orderNo+'">'+
+                                        '<li mes-id="'+data.list[i].id+'">'+
+                                        '<div class="mess-icon"><p><img src="../../public/img/set.png" alt="" /></p></div>'+
+                                        '<div class="mess-txt">'+
+                                        '<div class="top-text">'+
+                                        '<p class="mess-tit">'+data.list[i].title+'</p>'+
+                                        '<p class="time">'+timestampToTime(data.list[i].createTime)+'</p>'+
+                                        '</div>'+
+                                        '<p>'+data.list[i].content+'</p>'+
+                                        '</div>'+
+                                        '</li>'+
+                                        '</a>';
+                                    $(item).appendTo($("#mess"));
+                                }
+                            }
+
+                        }
+                    })
+                },500)
+        }
+    </script>
+</html>

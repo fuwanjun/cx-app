@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/top_up.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="recharge-center.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">余额充值</p>
+		</header>
+		<div class="mui-content">
+			<div class="show-img">
+				<img src="../../../public/img/mine/banner11.png" alt="" />
+			</div>
+			<form class="mui-input-group">
+				<div class="top-tit">
+					<p class="top-tit-text">账户余额: <span id="balance">0.00</span>元</p>
+				</div>
+				<div id="meal"></div>
+
+			</form>	
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="recharge">立即充值</button>
+		</div>
+		
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+	<script src="../../src/js/top_up.js"></script>
+</html>

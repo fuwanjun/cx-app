@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../src/css/clothes.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.orderNum{width: 100%;padding: 0.1rem 0.2rem;background: #fff;}
+			.clothes{margin-top: 0;}
+			.mui-bar-tab{display:block;padding-bottom: 0;}
+			.diff-num{display: flex;padding: 0.1rem 0.2rem;justify-content: space-between;}
+			.clothes li .mui-numbox{bottom: auto;top: 50%;margin-top: -0.1rem;}
+			.clothes li .mui-numbox input{height: 0.25rem;padding: 0;text-align: center;font-size: 0.13rem;}
+			#submit{padding: 0.2rem 0;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			<p class="mui-title blue">差价补拍</p>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<div class="diff-num">
+				<p>补差价金额累计</p>
+				<p><span id="diff-price">0.00</span>元</p>
+			</div>
+			    <button id="submit" type="button" class="mui-btn mui-btn-primary mui-btn-block">立即付款</button>
+		</nav>
+		<div class="mui-content">
+			<div class="orderNum">订单号: <span></span></div>
+			<ul class="clothes">
+				<form class="mui-input-group" id="shop-car">
+					<!--<li>
+						<div class="mui-checkbox">
+							<label></label>
+							<input name="checkbox" type="checkbox">
+						</div>
+						<div class="clothes-pic"><img src="../../img/c.png" alt="" /></div>
+						<div class="clothes-name">
+							<p>T恤1</p>
+							<p>￥<span>0.00</span></p>
+						</div>
+						<div>
+							<div class="mui-numbox">
+								<input type="number" placeholder="输入补价金额" />
+							</div>
+						</div>
+					</li>-->
+				</form>
+			</ul>
+		</div>
+		<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+		    <!-- 可选择菜单 -->
+		    <ul class="mui-table-view" id="pay">
+		    	<li class="mui-table-view-cell" id="ye-pay">余额支付</li>
+				<li class="mui-table-view-cell" id="czk-pay">折扣卡支付</li>
+		    	<li class="mui-table-view-cell" id="wx-pay">微信支付</li>
+		    </ul>
+		    <!-- 取消菜单 -->
+		    <ul class="mui-table-view tab-close">
+		      <li class="mui-table-view-cell">
+		        <a href="#sheet1"><b>关闭</b></a>
+		      </li>
+		    </ul>
+		</div>
+		<!--余额支付-->
+		<div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close1"></a>
+				<p>账户余额支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<!--<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>-->
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">补差价</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit2">确认支付</button>
+			</div>
+		</div>
+		<!--微信支付-->
+		<div id="sheet3" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close2"></a>
+				<p>微信支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<!--<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>-->
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">补差价</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit3">确认支付</button>
+			</div>
+		</div>
+		<div id="sheet4" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close3"></a>
+				<p>折扣卡支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<!--<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>-->
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">补差价</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">折扣卡余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit4">确认支付</button>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+	<script src="../../src/js/diff-box.js"></script>
+</html>

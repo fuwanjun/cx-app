@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../src/css/picker.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-table-view-cell:after{
+				display: none;
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.loginOut{
+				position: fixed;
+				width: 70%;
+				left:15%;
+				line-height: 1;
+				margin-top: .3rem;
+				bottom: .3rem;		
+			}
+			.loginOut button{
+				padding:.1rem 0;
+				font-size: .16rem;
+			}
+			.mui-content{
+				margin-bottom: 0.5rem;
+			}
+			.mui-bar-nav{
+				background-color: #4d93f7;
+			}
+			ul li{
+				list-style: none;
+			}
+			.pickerMsg{
+				display: flex;
+				justify-content: center;
+			}
+			.pickerScore .stars{
+				display: flex;
+				margin-top:0.75rem;
+			}
+			.stars li{
+				width:0.2rem;
+				height:0.2rem;
+				margin-right: 0.05rem;
+			}
+			.stars li img{
+				width:100%;
+			}
+			.name{margin-top:0.1rem;text-align: left}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<div class="mui-content">
+			<div class="bg_box">
+				<div class="mui-bar mui-bar-nav" style="box-shadow: none">
+					<h1 class="mui-title" style="color: #fff;">个人中心</h1>
+					<a href="index.html" class="mui-icon mui-icon-back" style="color: #fff;"></a>
+					<!--<div class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">
+						<img class="menu_logo" src="img/menu.png" alt="" />
+					</div>-->
+				</div>
+				<div class="pickerMsg">
+					<div class="pickerHead">
+						<img class="headImg" src="" alt="" />
+
+					</div>
+					<div style="width: 0.2rem;"></div>
+					<div class="pickerScore">
+						<ul class="stars">
+							<li><img src="../../public/img/picker/star_no.png" alt="" /></li>
+							<li><img src="../../public/img/picker/star_no.png" alt="" /></li>
+							<li><img src="../../public/img/picker/star_no.png" alt="" /></li>
+							<li><img src="../../public/img/picker/star_no.png" alt="" /></li>
+							<li><img src="../../public/img/picker/star_no.png" alt="" /></li>
+						</ul>
+						<div class="name"></div>
+					</div>
+				</div>
+			</div>
+			<ul class="mui-table-view bg-white margin-bottom-r10">
+				<li class="mui-table-view-cell">
+					<a href="personInfo.html" class="mui-navigate-right flex border-bottom-tiny-blue">
+						<img class="icon-person" src="../../public/img/picker/icon-personInfo.png"/>
+						<span class="icon-txt">个人信息</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="orderListStatistics1.html" class="mui-navigate-right flex">
+						<img class="icon-person" src="../../public/img/picker/icon-statistics.png"/>
+						<span class="icon-txt">订单统计</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view bg-white">
+				<!--<li class="mui-table-view-cell">-->
+					<!--<a href="UserComment.html" class="mui-navigate-right flex border-bottom-tiny-blue">-->
+						<!--<img class="icon-person" src="../../public/img/picker/icon-remark.png"/>-->
+						<!--<span class="icon-txt">用户评价</span>-->
+					<!--</a>-->
+				<!--</li>-->
+				<li class="mui-table-view-cell">
+					<a href="feedback.html" class="mui-navigate-right flex border-bottom-tiny-blue">
+						<img class="icon-person" src="../../public/img/picker/icon-feedback.png"/>
+						<span class="icon-txt">意见反馈</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="" class="mui-navigate-right flex">
+						<img class="icon-person" src="../../public/img/picker/icon-protocol.png"/>
+						<span class="icon-txt">平台注册协议</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="loginOut">
+			<button class="confirmBtn mui-btn mui-btn-danger mui-btn-block">退出登录</button>
+		</div>
+		
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../public/js/mui.min.js"></script>
+	<script src="../../public/js/jquery-1.11.3.min.js"></script>
+	<script src="../../public/js/jquery.cookie.js"></script>
+	<script src="../../public/js/public.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		var token=$.cookie("token");
+		var headImg=$.cookie("userpic");
+        var username=$.cookie("username");
+        var pickerId=$.cookie("id");
+		var toker=JSON.parse($.cookie("taker"));
+        $(".headImg").attr("src","http://"+headImg);
+        $(".name").html(username);
+
+        enAjax2("http://192.168.3.217:8080/takeUser/getLevelById",'get',true,{takerId:pickerId},function(data){
+			for(var i=0;i<data.data;i++){
+			    $(".stars li").eq(i).find("img").attr("src","../../public/img/picker/star_yes.png");
+			}
+		});
+		ajaxInit(toker.account);
+		function ajaxInit(account){
+				$.ajax({
+					type:"get",
+					url:globalUrl+"takeUser/getTakerByAccount",
+					dataType:"json",
+					data:{account:account},
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader("token",token)
+					},
+					success:function(res){
+						if(res.message){
+							mui.toast(res.message);
+							setTimeout(
+								function(){
+									window.location.href="login.html"
+								},2000
+							)
+							
+						}else{
+							if(res){
+								$(".name").text(res.takerName);
+								if(res.picture){
+									$(".headImg").attr("src","http://"+res.picture);
+								}
+							}
+						}
+						
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			}
+		mui(".loginOut").on("tap",".confirmBtn",function(){
+			$.ajax({
+				type:"post",
+				url:globalUrl+"/takeUser/loginOff",
+				data:{token:token},
+				async:false,
+				beforeSend:function(request){
+					request.setRequestHeader("token",token.substr(2))
+				},
+				success:function(res){
+					clearAllCookie();
+					window.location.href="login.html";	
+				}
+				
+			});
+			
+		})
+	</script>
+
+</html>

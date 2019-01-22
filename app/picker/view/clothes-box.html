@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<link rel="stylesheet" href="../src/css/clothes.css"/>
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+	</head>
+	<body style="background: rgb(244,248,255);">
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="touch-action: none; "></a>
+			<p class="mui-title blue">洗衣筐</p>
+			<a class="mui-pull-right ok">删除</a>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>全选</label>
+				<input name="checkbox" value="Item 1" type="checkbox" id="chose-all" checked>
+			</div>
+			<div class="bot-right">
+				<p>总价：<span id="all-price">0.00</span></p>
+				<a>
+					<div id="check-out" class="check-out">结算</div>
+				</a>
+			</div>
+		</nav>
+		<div class="mui-content">
+			<!--<div class="del">-->
+				<!--<p class="mui-pull-right del-btn" id="delete">删除</p>-->
+			<!--</div>-->
+			<ul class="clothes">
+				<form class="mui-input-group" id="shop-car">
+					<!--<li>
+						<div class="mui-checkbox">
+							<label></label>
+							<input name="checkbox" type="checkbox">
+						</div>
+						<div class="clothes-pic"><img src="../../img/c.png" alt="" /></div>
+						<div class="clothes-name">
+							<p>T恤1</p>
+							<p>￥<span>0.00</span></p>
+						</div>
+						<div>
+							<p class="tail-mes">2321323121</p>
+							<div class="mui-numbox" data-numbox-min=1>
+								<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+								<input class="mui-input-numbox" type="number">
+								<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+							</div>
+						</div>
+					</li>-->
+				</form>
+			</ul>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../src/js/clothes-box.js"></script>
+</html>

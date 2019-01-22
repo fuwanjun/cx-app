@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>账户余额支付</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.tit{
+				margin-bottom:0.1rem;
+				color: #333;
+				font-size:0.2rem;
+			}
+			.mui-content{
+				padding:0.15rem;
+				margin-top:0.15rem;
+			}
+			p{
+				margin:0;
+			}
+			.msg{
+				display: flex;
+				margin:0.1rem 0;
+			}
+			.msg p{
+				font-size:0.16rem;
+			}
+			.msg .msg-name{
+				margin-right:0.1rem;
+			}
+			.msg .msg-value{
+				color: #333;
+			}
+			#submit{
+				margin-top:0.2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" href="my-order2.html" class="mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			<p class="mui-title blue">账户余额支付</p>
+		</header>
+
+		<div class="mui-content">
+			<div class="tit">您的支付信息</div>
+			<div class="msg" id="orderNo"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+			<div class="msg" id="orderNum"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+			<div class="msg" id="couponMsg"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>
+			<div class="msg" id="payType"><p class="msg-name">支付类型 :</p><p class="msg-value"></p></div>
+			<div class="msg" id="surplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit">确定</button>
+		</div>
+		</div>
+		
+	</body><div id="nowCity" style="display:none;"></div>
+	<script>
+		var orderId=getQueryString("id");
+		$(function(){
+		    var url=globalUrl+'/order/orderView';
+            var data={orderNo:orderId};
+		    enAjax(url,'post',true,data,function(data){
+		        console.log(data);
+		        $("#orderNo .msg-value").html(data.data.orderNo);
+                $("#orderNum .msg-value").html(data.data.payment.toFixed(2));
+                $("#couponMsg .msg-value").html(data.data.coupon);
+                $("#payType .msg-value").html(data.data.paymentStatus);
+			},null,false);
+
+			var urlSurplus=globalUrl+"/balance/getBalanceByUserId";
+			enAjax2(urlSurplus,'get',true,{userId:$.cookie("userId")},function(data){
+                $("#surplus .msg-value").html(data.money);
+			},null,false)
+		});
+		$("#submit").on("tap",function(){
+		    window.location.href="order-detail.html?id="+orderId;
+		})
+	</script>
+</html>

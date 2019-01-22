@@ -1,0 +1,39 @@
+.top {
+  background: #fff;
+  padding: 0.2rem;
+  margin-bottom: 0.02rem;
+}
+.top .top-tit {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.3rem;
+}
+.top .top-tit .prev,
+.top .top-tit .next {
+  color: #39a4f2;
+}
+.top .all {
+  text-align: center;
+}
+.top .all #all-earnings {
+  font-size: 0.25rem;
+  color: #39a4f2;
+}
+.mui-table-view-cell p {
+  display: inline;
+  float: right;
+  font-size: 0.14rem;
+  margin-right: 0.5rem;
+}
+.mui-table-view-chevron .mui-table-view-cell {
+  background: #fff;
+  margin-bottom: 2px;
+  font-size: 0.15rem;
+  color: #333;
+}
+.mui-table-view-chevron .mui-table-view-cell p {
+  margin-right: 0;
+}
+.mui-table-view-cell:after {
+  height: 0;
+}

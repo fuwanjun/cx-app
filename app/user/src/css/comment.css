@@ -1,0 +1,106 @@
+body,.mui-content{
+	background: #fff;
+}
+ul{
+	margin: 0;
+}
+.order-id,.items,.com{
+	background: #fff;
+	padding: 0.1rem 0.15rem;
+	font-size: 0.13rem ;
+	color: #333;
+}
+.items{
+	border-bottom: 5px solid #f4f8ff;
+}
+.order-id{
+	margin: 0;
+}
+.items ul{
+	padding: 0;
+}
+.items ul li{
+	display: flex;
+	justify-content: space-between;
+}
+.items ul li .item-pic{
+	width: 1rem;
+	height: 0.6rem;
+	margin-right: 10px;
+}
+.items ul li .pic-name{
+	line-height: 0.6rem;
+	display: flex;
+}
+.items ul li .pic-box{
+	display: flex;
+}
+.items ul li .price p{
+	margin: 0;
+}
+.items .pay{
+	text-align: right;
+	color: #333;
+}
+.items .pay span{
+	color: rgb(255,155,86);
+}
+
+.com li{
+	height: 30px;
+	display: flex;
+}
+.com li p{
+	width: 50%;
+	margin: 0;
+	line-height: 30px;
+	font-size: 0.15rem;
+	color: #333;
+}
+.com .stars{
+	padding: 0;
+	margin: 0;
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+}
+.com .stars li{
+	width: 0.25rem;
+	height: 0.25rem;
+	/*background: #CCCCCC;*/
+	margin-top: 0.025rem;
+}
+.com .stars li img{
+	width: 100%;
+}
+.other-com{
+	background: #fff;
+	padding: 10px 15px;
+}
+textarea{
+	font-size: 14px;
+	border: none;
+	background: rgb(250,250,250);
+	padding: 10px;
+}
+button[type=submit]{
+	padding: 10px 0;
+	width: 100%;
+	margin-left: auto;
+	margin-bottom:0.5rem;
+}
+.complaint{
+	padding: 0.1rem 0.15rem;
+	background: #fff;
+}
+.complaint-top{
+	display:flex;
+	justify-content: space-between;
+}
+.mui-checkbox input[type=checkbox]{
+	top: 0;
+}
+.other-tit,.complaint-tit{
+	font-size: 0.15rem;
+	color: #333;
+}

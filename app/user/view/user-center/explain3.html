@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../src/css/index.css"/>-->
+		<link rel="stylesheet" href="../../../public/css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<script src="../../../public/js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../public/js/page.flexible.js"></script>
+		<style>
+			body{
+				background: #fff;
+			}
+			.mui-content{
+				padding:0 0.15rem;
+				margin-top: 0.2rem;
+			}
+			.common-box{
+				padding:0 0.15rem;
+				margin: 0;
+			}
+			.common-pic{
+				width: 1.5rem;
+				height: 1.5rem;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 0.3rem;
+				margin-bottom: 0.1rem;
+			}
+			.common-pic img{
+				width: 100%;
+			}
+			.common-tit{
+				text-align: center;
+				margin-bottom: 0.05rem;
+				color: #39a4f2;
+				font-size: 0.16rem;
+			}
+			.common-text{
+				font-size: 0.14rem;
+				color: #333;
+			}
+			.explain-text{
+				
+			}
+			.explain-tit{
+				font-size: 0.16rem;
+				margin-bottom: 0;
+				text-indent: 0.1rem;
+				position: relative;
+				color: #333;
+			}
+			.explain-tit:after{
+				position: absolute;
+				left: 0;
+				content: '';
+				height: 0.2rem;
+				width: 0.05rem;
+				background: #007AFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">服务流程</p>
+		</header>
+		<div class="mui-content">
+			<p class="explain-tit">服务流程</p>
+			<p class="explain-text">预约——取件——清洗——送回——保障</p>
+			
+			<p class="explain-tit">常见问题</p>
+			<p class="explain-text">Q;如何下单在手机上下单</p>
+			<p class="explain-text">A：点击“我要洗衣”，选择服务类型和需要洗涤的件数，点击下单取件，填写姓名、电话、取送地址后，点击立即支付，选择付款方式，预约取件。耐心等到物流人员取件即可。</p>
+			<p class="explain-text">Q：你们的服务流程是什么？</p>
+			<p class="explain-text">A：用户下单——物流上门取件——送至洗涤工厂——签收——分拣——洗涤(普洗、精洗、干洗、洗鞋、皮具护理)——熨烫——后整理质检——衣物上架——包装——发货——送回。</p>
+			<p class="explain-text">Q：订单下错后怎么办？</p>
+			<p class="explain-text">A:您好，因我们的衣物与订单信息是相匹配的，因此为了保证您的衣物的安全，如果您下错了订单，可以在衣物送至工厂之前，取消订单，重新下单，如果您的衣物已经送至了工厂，在未洗涤之前，也可以取消订单的，但是由此产生的物流费用将由您来承担。</p>
+			<p class="explain-text">Q：你们的衣物一般需要清洗多久？</p>
+			<p class="explain-text">A：通常的衣物的洗涤时间为3-5天，鞋类洗涤时间为6-7天，奢侈品10-15天，因订单数量及物流时效的影响，具体时间以工厂清洗时间为准。</p>
+			<p class="explain-text">Q：是干洗还是水洗？</p>
+			<p class="explain-text">A；衣物进入工厂分拣系统后，我们会根据面料，洗涤标识等进行洗涤前分类，采用不同的方式处理（干洗、水洗、手洗）。不能洗涤的衣物会及时通知您，告知您洗涤风险，您同意后再进行专业洗涤。由此产生的风险，将由您自行承担。</p>
+			<p class="explain-text">Q：洗坏了怎么办？</p>
+			<p class="explain-text">A：若您的衣服在清洗过程中出现损坏，我们会快速核实后，在72小时内给出处理意见，根据我们的赔付标准对您进行赔付。</p>
+			<p class="explain-text">Q:洗得不满意怎么办？</p>
+			<p class="explain-text">A：我们建议您收到衣物的48小时内，在不去除水洗标签的的状态下完成穿着前检查，若发现问题或洗涤不理想，请及时联系我们的客服或者点击意见反馈。</p>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<div id="nowCity" style="display:none;"></div>
+	<script src="../../../public/js/jquery-3.3.1.min.js"></script>
+	<script src="../../../public/js/jquery.cookie.js"></script>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+</html>

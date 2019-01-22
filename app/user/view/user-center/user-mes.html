@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css">
+		<link rel="stylesheet" href="../../src/css/mine.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.mui-table-view-cell p{
+				margin-right: 0;
+			}
+			.user-pic{
+				width: 0.5rem;
+				height: 0.5rem;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.user-pic img{
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="../mine.html"></a>
+			<p class="mui-title blue">个人资料</p>
+		</header>
+		<div class="mui-content">
+			<div class="user-box">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="#" style="line-height: 0.5rem;">
+							我的头像
+							<p class="user-pic"><img src="" alt="" /></p>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="name-modify.html">
+							我的姓名
+							<p id="myname"></p>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="phone-modify.html">
+							我的电话
+							<p id="myphone"></p>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="address-manage.html">
+							我的地址
+							<p id="myarea"></p>
+						</a>
+					</li>
+					<!--<li class="mui-table-view-cell">-->
+						<!--<a class="mui-navigate-right" href="change-password.html">修改支付密码</a>-->
+					<!--</li>-->
+				</ul>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	
+	<script type="text/javascript">
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            mui.init();
+            $("#myarea").html($.cookie("myArea"));
+            var headImg=$.cookie("headImgUrl");
+            var nickName=$.cookie("nickName");
+            var phoneNum=$.cookie("phoneNum");
+            if(!phoneNum || phoneNum==null||phoneNum=="null"){
+                phoneNum="";
+                $.cookie("phoneNum"," ");
+			}
+            var userAddress="";
+			if($.cookie("userAddress")){
+                userAddress=$.cookie("userAddress");
+            }else{
+                userAddress="";
+            }
+            $(".user-pic img").attr("src",headImg);
+            $("#myname").html(nickName);
+            $("#myphone").html(phoneNum);
+		});
+
+	</script>
+</html>

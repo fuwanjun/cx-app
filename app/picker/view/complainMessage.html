@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{position: relative;}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{border-bottom-color: transparent;}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{display: block;content:"";width:20%;position: absolute;left: 40%;height: 2px;background-color:#007aff;bottom: 0;}
+			.mui-content>.mui-table-view:first-child{margin-top: 0;}
+			.mui-table-view-cell:after{display: none;}
+			.mui-table-view{padding:0.075rem;}
+			.mui-table-view:after{background-color:#f4f8ff;}
+			.mui-table-view:before{background-color:#f4f8ff;}
+			.border-bottom-tiny-blue{border-bottom: 2px solid #f4f8ff;}
+			.mui-newUpdate{display: block;width: 0.06rem;height: 0.06rem;position: absolute;top: 0.07rem;left: 0.04rem;background-color: red;border-radius: 50%;line-height:0.06rem;color: #fff;text-align: center;}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="message.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">投诉消息</p>
+		</header>	
+		<div class="mui-content mui-scroll-wrapper" id="cons">
+			<ul class="mui-table-view mui-scroll" id="con">
+				<!--<li class="mui-table-view-cell bg-white margin-bottom-r10 border-radius-r5">-->
+					<!--<div class="font-size-16 margin-bottom-r10">-->
+						<!--<span class="hidden mui-newUpdate"></span>-->
+						<!--<div>-->
+							<!--<span>订单号：</span>-->
+							<!--<span>E1112***6656526</span>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="mui-flex mui-flex-halign-center color-666 font-size-14">-->
+						<!--<div>-->
+							<!--<span>用户：</span><span>张**</span>-->
+						<!--</div>-->
+						<!--<div>-->
+							<!--<span>投诉时间：</span><span>2018-05-15</span>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</li>-->
+			</ul>
+		</div>
+		<script src="../../public/js/public.js"></script>
+		<script type="text/javascript">
+			$(function(){
+			    mui.init({
+                    pullRefresh:{
+                        container:'#cons',
+                        up:{
+                            height:50,
+                            auto:true,
+                            contentrefresh:'正在加载...',
+                            contentnomore:'没有更多数据',
+                            callback:pullupRefresh
+                        }
+                    }
+				});
+
+			});
+			var page=1;
+			function pullupRefresh() {
+                var url = globalUrl + "/takeUser/getTakerReportByTakerId";
+                var data = {takerId: 66, page: page};
+                $.ajax({
+                    url: globalUrl + "/takeUser/getTakerReportByTakerId",
+                    type: 'get',
+                    data: {takerId: 66, page: page},
+                    success: function (data) {
+                        console.log(data);
+                        mui('#cons').pullRefresh().endPullupToRefresh((++page > data.data.navigatepageNums.length));
+                        var state;
+                        for (var i = 0; i < data.data.list.length; i++) {
+                            if (data.data.list[i].state == "READ") {
+                                state = '';
+                            } else if (data.data.list[i].state == "NOT_READ") {
+                                state = '<span class="hidden mui-newUpdate"></span>';
+                            } else {
+                            }
+                            var orderNum = data.data.list[i].orderNo.toString();
+                            var item = '<a href="complainDetail.html?id=' + data.data.list[i].id + '">' +
+                                '<li class="mui-table-view-cell bg-white margin-bottom-r10 border-radius-r5">' +
+                                '<div class="font-size-16 margin-bottom-r10">' +
+                                state +
+                                '<div>' +
+                                '<span>订单号：</span>' +
+                                '<span>' + orderNum + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="mui-flex mui-flex-halign-center color-666 font-size-14">' +
+                                '<div>' +
+                                '<span>用户：</span><span>张**</span>' +
+                                '</div>' +
+                                '<div>' +
+                                '<span>投诉时间：</span><span>2018-05-15</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+                                '</a>';
+                            $(item).prependTo($("#con"))
+                        }
+                    }
+                });
+            }
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

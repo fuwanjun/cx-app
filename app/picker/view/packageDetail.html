@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<link rel="stylesheet" href="../src/css/packageDetail.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">查看详情</p>
+		</header>	
+		<div class="mui-content">
+			<ul class="mui-table-view bg-white margin-top-r10">
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div class="font-size-14">订单编号：<span class="color-999" id="orderNum"></span></div>
+				</li>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#" style="font-size: .14rem;">查看详情</a>
+						<div class="mui-collapse-content" id="orderGoods">
+							<div>
+								<p></p>
+								<p></p>
+								<p></p>
+							</div>
+						</div>
+					</li>
+				</ul>
+
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div class="font-size-14">客户姓名：<span class="color-999" id="userName"></span></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div class="font-size-14">客户电话：<a class="color-999"><a class="color-999" id="userPhone"></a><a id="userPhone2" href=""><img style="width: 0.2rem;height: 0.2rem; float: right;" src="../../public/img/picker/icon/phone.jpg" alt=""></a></a></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div class="font-size-14">取件地址：<span class="color-999" id="userAddress"></span></div>
+				</li>
+				<li id="take-part" class="mui-table-view-cell border-bottom-tiny-blue ">
+					<div class="font-size-14">取件时间：<span class="color-999"></span></div>
+				</li>
+				<li id="enca" class="mui-table-view-cell border-bottom-tiny-blue">
+					<div class="font-size-14" style="display: flex"><div class="encaNum">封装签号：</div><span id="numNum" class="color-999"></span></div>
+				</li>
+			</ul>
+			<ul class="mui-table-view bg-white margin-top-r10">
+				<li class="mui-table-view-cell" id="navigation">
+					<div class="font-size-14 mui-navigate-right"><i class="mui-icon mui-icon-location color-blue font-size-22"></i>导航：<span class="color-999">点击导航</span></div>
+				</li>
+			</ul>
+			<div id="allmap">
+				
+			</div>
+		</div>
+		<!--<footer class="mui-bar mui-bar-tab mui-flex mui-flex-end mui-flex-halign-center" id="foot">-->
+			<!--<div class="color-666 border-color-tiny-blue">拒绝此单</div>-->
+			<!--<div class="color-orange border-color-orange">封签</div>-->
+		<!--</footer>-->
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+	<!--<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>-->
+	<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=GXZBZ-L6UAX-X7G4G-ZQWAF-X6RG7-2QBAH"></script>
+	<script type="text/javascript">
+        var data={};
+        var orderId=getQueryString("orderId");
+        var status=getQueryString("status");
+        var latitude="";
+		var longitude="";
+		$(function(){
+            mui.init();
+
+            if(status==40||status==45||status==50){
+				$(".encaNum").html("物流单编号 : ");
+                $("#numNum").html("扫码获取物流单编号");
+			}else if(status==20||status==30||status==35){
+                $(".encaNum").html("封签号 : ");
+                $("#numNum").html("扫码获取封签号");
+			}
+			$("#orderNum").html(orderId);
+			var initUrl=globalUrl+"/order/orderView";
+			var initData={orderNo:orderId};
+			enAjax(initUrl,'post',true,initData,getInit,null);
+
+            $.ajax({
+                type : "get",
+                url : globalUrl+"/wechatScanne/scannerQrcode",
+                data : {},
+                dataType : "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function (res) {
+                    data=res.data;
+                }
+            });
+		});
+
+		function getInit(data){
+		    console.log(data);
+		    if(data.status==210){
+		        mui.alert(data.msg,function(){
+		            window.history.go(-1).location.reload();
+				});
+			}
+		    var signNumber="";
+		    if(status==40||status==45||status==50){
+                signNumber=data.data.orderShipping.signNumber?data.data.orderShipping.signNumber:"扫码获取物流单号";
+			}
+			if(status==10||status==20||status==30||status==35){
+                signNumber=data.data.orderShipping.signNumber?data.data.orderShipping.signNumber:"扫码获取封签号";
+			}
+			var location=data.data.address.coordinate;
+			var locArr=location.split(",");
+            latitude=locArr[0];
+            longitude=locArr[1];
+            mapInit(latitude,longitude);
+
+//			获取商品
+		    for(var i=0;i<data.data.orderItems.length;i++){
+		        var item='<div style="display: flex; justify-content: space-between;margin: 0.05rem 0;">'+
+							'<p style="width:50%;">'+data.data.orderItems[i].productName+'</p>'+
+							'<p style="width:30%;">*'+data.data.orderItems[i].quantity+'</p>'+
+							'<p style="width:20%; text-align: right">'+data.data.orderItems[i].totalPrice.toFixed(2)+' 元</p>'+
+						'</div>';
+		        $(item).appendTo($("#orderGoods"));
+			}
+//			用户姓名
+			$("#userName").html(data.data.address.userName);
+//			用户手机号
+            $("#userPhone").html(data.data.address.phone);
+            $("#userPhone").attr("href","tel:"+data.data.address.phone);
+            $("#userPhone2").attr("href","tel:"+data.data.address.phone);
+//           取件地址
+            $("#userAddress").html(data.data.address.region+data.data.address.detailAddress);
+
+            $("#enca div span").html(signNumber);
+
+//            取件时间
+			$("#take-part div span").html(timestampToTime(data.data.orderShipping.takeTime));
+
+            //		点击导航
+            $("#navigation").on("tap",function(){
+//		    alert("1");
+                window.location.href="qqmap://map/marker?marker=coord:"+latitude+","+longitude+";title:"+data.data.address.region+";addr:"+data.data.address.detailAddress+"&referer=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77";
+            });
+		}
+
+
+
+//		地圖
+        function mapInit(latitude,longitude) {
+            var center = new qq.maps.LatLng(latitude,longitude);
+            var map = new qq.maps.Map(document.getElementById("allmap"), {
+                // 地图的中心地理坐标。
+                center: new qq.maps.LatLng(latitude,longitude),
+				zoom:16
+            });
+
+            var marker = new qq.maps.Marker({
+                position: center,
+                map: map
+            });
+
+            var anchor = new qq.maps.Point(0, 39),
+                size = new qq.maps.Size(42, 68),
+                origin = new qq.maps.Point(0, 0),
+                markerIcon = new qq.maps.MarkerImage(
+                    "../../public/img/area4.png",
+                    size,
+                    origin,
+                    anchor
+                );
+            marker.setIcon(markerIcon);
+        }
+
+	</script>
+</html>

@@ -1,0 +1,137 @@
+ <!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../public/css/index.css" />
+		<link rel="stylesheet" href="../../public/css/public.css" />
+		<link rel="stylesheet" href="../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../src/css/order-pay.css" />
+		<script src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/mui.picker.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/public.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="goback"></a>
+			<p class="mui-title blue">订单支付</p>
+		</header>
+		<div class="mui-content">
+			<div class="pay-style">
+				<div class="pay-pic"><img src="../../public/img/order/dd.png" alt="" /></div>
+				<div class="pay-txt">
+					<h4>订单状态：<span>确认订单</span></h4>
+					<p>下单时间：<span id="date"></span></p>
+				</div>
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<a href="send-wash.html">
+					<li class="mui-table-view-cell" style="display: flex;">
+						<img style="width: 0.25rem;height: 0.25rem;" src="../../public/img/dz.png" alt="">
+						<p>取衣地址：<span id="get">去哪里收取您的待洗衣物</span></p>
+					</li>
+				</a>
+				<a>
+					<li class="mui-table-view-cell" style="display: flex;">
+						<img style="width: 0.25rem;height: 0.25rem;" src="../../public/img/dz.png" alt="">
+						<p>寄回地址：<span id="back">如与取衣地址一致可不填</span></p>
+					</li>
+				</a>
+			</ul>	
+			<!--订单内容-->
+			<div class="orders" id="orders"></div>
+			<!--优惠券-->
+			<!--<ul class="mui-table-view mui-table-view-chevron pre">-->
+				<!--<li class=" item" id="preferential">-->
+						<!--优惠券<p id="check-yhq"></p>-->
+				<!--</li>-->
+				<!--<li class="item" id="yy-time" style="justify-content: space-between">-->
+					<!--<div id="appoint"style="display: flex;">-->
+						<!--<img style="width:0.25rem;height: 0.25rem;" src="../../public/img/mine/ti.png" alt="">-->
+						<!--<div style="line-height: 0.25rem;margin-left: 0.05rem;color:#999;">预约上门时间</div>-->
+					<!--</div>-->
+
+					<!--<p style="text-align: right" id="get-time"></p>-->
+				<!--</li>-->
+			<!--</ul>	-->
+			
+			<!--商品金额-->
+			<!--<div class="all-price">-->
+				<!--<div class="price-tit">-->
+					<!--<p>商品金额</p>-->
+					<!--<p style="display: none;">￥<span id="price2">0.00</span></p>-->
+				<!--</div>-->
+				<!--<div class="price-detail">-->
+					<!--<div class="price-pic-box"></div>-->
+					<!--<div class="prices">-->
+						<!--<div class="price1">-->
+							<!--<p>运费</p>-->
+							<!--<p>+￥</p>-->
+							<!--<p id="yf">0.00</p>-->
+						<!--</div>-->
+						<!--<div class="price1">-->
+							<!--<p>满减</p>-->
+							<!--<p>-￥</p>-->
+							<!--<p id="mj">0.00</p>-->
+						<!--</div>-->
+						<!--<div class="price1">-->
+							<!--<p>优惠券</p>-->
+							<!--<p>-￥</p>-->
+							<!--<p id="yhq">0.00</p>-->
+						<!--</div>-->
+						<!--<div class="price1">-->
+							<!--<p>淡季促销</p>-->
+							<!--<p>-￥</p>-->
+							<!--<p id="djcx">0.00</p>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+
+			<div class="all" style="margin-top: 10px;">合计 ￥<span id="total">0.00</span></div>
+			<textarea id="textarea" rows="5" placeholder="请填写备注"></textarea>
+			<!--<div class="remarks">-->
+				<!--<p>此服务仅限顺丰工服</p>-->
+				<!--<p>请选择使用50元洗衣券进行洗衣</p>-->
+			<!--</div>-->
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit">立即提交</button>
+		</div>
+		<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<p class="bot-tit">优惠券</p>
+		    <!-- 可选择菜单 -->
+		    <ul class="mui-table-view" id="yhq-box"></ul>
+		    <!-- 取消菜单 -->
+		    <ul class="mui-table-view">
+				<li class="mui-table-view-cell tab-close" style="border-bottom: 1px solid #f3f3f3; padding: 0.2rem 0;">
+					<a href=""><p>不使用优惠券</p></a>
+				</li>
+		      <li class="mui-table-view-cell" style="padding: 0.2rem 0;">
+		        <a href="#sheet1"><b>关闭</b></a>
+		      </li>
+		    </ul>
+		</div>
+		<div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close1"></a>
+				<p>账户余额支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">订单支付</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit2">确认支付</button>
+			</div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+
+	<script src="../src/js/order-pay.js"></script>
+</html>

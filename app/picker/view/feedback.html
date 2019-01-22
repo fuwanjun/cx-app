@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute; 
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.mui-content form{
+				padding: 0.15rem 0.35rem;
+			}
+			.dataLi label{
+				display: block;
+				margin-bottom: 0.1rem;
+			}
+			.dataLi input,.dataLi textarea{
+				background-color: #f4f8ff;
+			}
+			.dataLi textarea{
+				height: 1.05rem;
+			}
+		</style>
+	</head>
+	<body class="bg-white">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">意见反馈</p>
+		</header>	
+		<div class="mui-content bg-white">
+			<form action="">
+				<div class="dataLi">
+					<label for="">姓名</label>
+					<input type="text" name="name" id="name" />
+				</div>
+				<div class="dataLi">
+					<label for="">联系方式</label>
+					<input type="text" name="telephone" id="telephone"/>
+				</div>
+				<!--<div class="dataLi">
+					<label for="">所属店铺</label>
+					<input type="text" name="shop" id="shop"/>
+				</div>-->
+				<div class="dataLi">
+					<label for="">内容描述</label>
+					<textarea name="detail" id="detail"></textarea>
+				</div>
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block margin-top-r10">提交</button>
+			</form>
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.form.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			$("button[type='button']").on("tap",function() {
+                var date = getNowFormatDate();
+                var name = $("#name").val();
+                var phone = $("#telephone").val();
+                //var shop=$("#shop").val();
+                var detail = $("#detail").val();
+                if (!detail) {
+                    mui.toast("请输入反馈内容！");
+                    return false;
+                }
+                if (detail.length < 10) {
+                    mui.toast("反馈内容不小于10个字");
+                    return false;
+                }
+                $.ajax({
+                    contentType: "application/json;charset=UTF-8",
+                    url: globalUrl + '/proposal/putProposal',
+                    type: 'post',
+                    data: JSON.stringify({
+                        createTime: date,
+                        userName: name,
+                        phone: phone,
+                        content: detail
+                    }),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success: function (data) {
+                        if (data) {
+                            mui.alert("意见反馈成功", function () {
+                                window.location.href = "mine.html";
+                            });
+                        }
+                    }
+                });
+            });
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../src/css/integral-mall.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="../mine.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">积分商城</p>
+		</header>
+		
+		<div class="mui-content">
+			<div class="user-box">
+				<div class="head-mes">
+					<div class="head-line"></div>
+					<div class="head-pic" id="head-pic">
+						<img src="" alt="" />
+					</div>
+					<h4 id="userName">未登录</h4>
+					<p class="sumCoupon">总积分 <span id="coupon"></span></p>
+				</div>
+				<ul class="list">
+					<li>
+						<div class="list-pic"><img src="../../../public/img/mine/03.png" alt="" /></div>
+						<p>我的积分</p>
+					</li>
+					<li>
+						<div class="list-pic"><img src="../../../public/img/mine/02.png" alt="" /></div>
+						<p>兑换中心</p>
+					</li>
+					<li>
+						<div class="list-pic"><img src="../../../public/img/mine/01.png" alt="" /></div>
+						<p>我的洗衣券</p>
+					</li>
+				</ul>
+			</div>
+			<div class="tab-con mui-content mui-scroll-wrapper con-active" id="con1">
+				<table class="integral-table mui-scroll">
+					<thead>
+						<tr>
+							<th>积分来源</th>
+							<th>积分</th>
+							<th>增加时间</th>
+						</tr>
+					</thead>
+						<tbody></tbody>
+				</table>
+			</div>
+			
+			<div class="tab-con">
+				<ul class="allCards"></ul>
+			</div>
+			<div class="tab-con">
+				<ul class="cards"></ul>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+	<script src="../../src/js/integral-mall.js"></script>
+</html>

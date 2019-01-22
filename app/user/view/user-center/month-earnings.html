@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/mui.poppicker.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/earnings.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 0.3rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">收益明细</p>
+		</header>
+		<div class="mui-content">
+			<div class="top">
+				<div class="top-tit">
+					<p class="prev" style="display:none;">前一月</p>
+					<p class="date"></p>
+					<p class="next" style="display:none;">后一月</p>
+				</div>
+				<div class="all">
+					<p id="all-earnings"></p>
+					<p>月总收成(元)</p>
+				</div>
+			</div>
+
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+
+						粉丝消费分润
+						<p><span id="consumption"></span>元</p>
+
+				</li>
+				<li class="mui-table-view-cell">
+
+						粉丝充值分润
+						<p><span id="recharge"></span>元</p>
+
+				</li>
+				<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="#">
+						加粉佣金
+						<p><span>0.00</span>元</p>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+           var today=getNowFormatDate();
+           $(".date").html(today);
+           var url=globalUrl+"/rewardFunds/getMonthMoney";
+           enAjax(url,'get',true,{},function(data){$("#all-earnings").html(data.data);},null,false);
+
+           var url2=globalUrl+"/rewardFunds/getMonthMoneyByType";
+           enAjax(url2,'get',true,{type:0},function(data){$("#consumption").html(data.data)});
+            enAjax(url2,'get',true,{type:1},function(data){ $("#recharge").html(data.data)});
+		});
+	</script>
+</html>

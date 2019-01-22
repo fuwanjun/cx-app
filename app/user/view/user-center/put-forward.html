@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../src/css/clothes.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<style>
+			.mui-input-group{background: #fff;}
+			.mui-input-group .mui-input-row{border-bottom: 1px solid #DCDCDC;}
+			#submit{margin-top:0.2rem;width: calc(100% - 0.3rem);margin-left: auto;margin-right: auto;padding:0.1rem 0;}
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-icon mui-icon-left-nav mui-pull-left" href="settlement-center.html"></a>
+			<p class="mui-title blue">提现</p>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row" id="bankName">
+					<label>银行</label>
+					<!--<input type="text" placeholder="请输入银行名">-->
+					<select name="" id="choseBank">
+						<option value="">选择银行</option>
+						<option value="招商银行">招商银行</option>
+						<option value="工商银行">工商银行</option>
+						<option value="建设银行">建设银行</option>
+						<option value="中国银行">中国银行</option>
+					</select>
+				</div>
+				<div class="mui-input-row" id="cardUser">
+					<label>持卡人</label>
+					<input type="text" placeholder="请输入持卡人姓名">
+				</div>
+				<div class="mui-input-row" id="bankCard">
+					<label>卡号</label>
+					<input type="number" placeholder="请输入卡号">
+				</div>
+				<div class="mui-input-row" style="border-bottom: 0;" id="phoneNum">
+					<label>手机号</label>
+					<input type="text" placeholder="请输入手机号">
+				</div>
+			</form>
+			
+			<button id="submit" type="button" class="mui-btn mui-btn-primary mui-btn-block">提交申请</button>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+			var userId=$.cookie("userId");
+            $("#submit").on("tap",function(){
+                var bankName=$("#bankName").find($("#choseBank")).val();
+                var cardUser=$("#cardUser").find("input[type=text]").val();
+                var bankCard=$("#bankCard").find("input[type=number]").val();
+                var phoneNum=$("#phoneNum").find("input[type=text]").val();
+                if(bankName==""||cardUser==""||bankCard==""){
+                    mui.toast("请填写完整的提现信息");
+                    return;
+                }
+                if(!isPhoneNo(phoneNum)){
+                    mui.toast("请填写正确格式的手机号");
+                    return;
+                }
+                var money=$.cookie("putMoney");
+                var url=globalUrl+"/bonusItem/applyPutBonus";
+                var data={userId:userId,money:money,bankName:bankName,bankCard:bankCard,cardUserName:cardUser,phone:phoneNum};
+                enAjax(url,'post',false,data,addPutMoney,null,false);
+			})
+		});
+		function addPutMoney(data){
+			console.log(data);
+			if(data.code==0){
+                window.location.href="settlement-center.html";
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../src/css/comment.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title">评价</p>
+		</header>
+		<div class="mui-content">
+			<p class="order-id">订单号：<span></span></p>
+			<div class="items">
+				<ul>
+					<!--<li>-->
+						<!--<div class="pic-box">-->
+							<!--<div class="item-pic"><img src="" alt="" /></div>-->
+							<!--<p class="pic-name"><span class="n">枕芯 </span> (<span class="s">普洗</span>)</p>-->
+						<!--</div>-->
+						<!--<div class="price">-->
+							<!--<p class="all-items">￥<span>60.00</span></p>-->
+							<!--<p class="item-num">x <span>5</span></p>-->
+						<!--</div>-->
+					<!--</li>-->
+					<!--<li>
+						<div class="pic-box">
+							<div class="item-pic"></div>
+							<p class="pic-name"><span class="n">枕芯 </span> (<span class="s">精洗</span>)</p>
+						</div>
+						<div class="price">
+							<p class="all-items">￥<span>0.00</span></p>
+							<p class="item-num">x <span></span></p>
+						</div>
+					</li>-->
+				</ul>
+				<div class="pay">实付：<span>￥<span class="pay-num" id="payNum">0.00</span></span></div>
+			</div>
+			<!--评价-->
+			<ul class="com">
+				<li id="score2">
+					<p>洗衣质量</p>
+					<ul id="stars2" class="stars">
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+					</ul>
+				</li>
+				<li id="score3">
+					<p>配送服务</p>
+					<ul id="stars3" class="stars">
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+						<li><img src="../../../public/img/order/star1.png" alt="" /></li>
+					</ul>
+				</li>
+			</ul>
+			<!--其他意见-->
+			<form class="mui-input-group">
+				<div class="other-com">
+					<p class="other-tit">其他意见</p>
+					<textarea id="goodsContent" name="" rows="5" cols="" placeholder="亲，写点评价吧。"></textarea>
+				</div>
+				<!--留言投诉-->
+				<div class="complaint">
+					<div class="complaint-top">
+						<p class="complaint-tit">留言投诉 <small>(非必选)</small></p>
+						<div class="mui-input-row mui-checkbox">
+							<label></label>
+						    <input name="checkbox" value="Item 1" type="checkbox">
+						</div>
+					</div>
+					<textarea id="complaint-box" name="" rows="5" cols="" placeholder="输入您对取货员的建议" style="display: none;"></textarea>
+				</div>
+
+			</form>
+			<button class="mui-btn mui-btn-primary mui-btn-block" id="submit" style="margin-bottom: 0;margin-top: 0.5rem;">立即评价</button>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../src/js/comment.js"></script>
+
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../src/css/order-detail.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="my-order1.html"></a>
+			<p class="mui-title">订单详情</p>
+		</header>
+		<div class="mui-content">
+			<div class="head-line"></div>
+			<ul class="process">
+				<li>
+					<div class="process-pic"><img src="../../../public/img/order/1-1.png" alt="" /></div>
+					<p>取送中</p>
+				</li>
+				<li>
+					<div class="process-pic"><img src="../../../public/img/order/2-1.png" alt="" /></div>
+					<p>前往洗衣工厂</p>
+				</li>
+				<li>
+					<div class="process-pic"><img src="../../../public/img/order/3-1.png" alt="" /></div>
+					<p>清洗中</p>
+				</li>
+				<li>
+					<div class="process-pic"><img src="../../../public/img/order/4-1.png" alt="" /></div>
+					<p>送回中</p>
+				</li>
+				<li>
+					<div class="last-pic"><img src="../../../public/img/order/5-1.png" alt="" /></div>
+					<p>已签收</p>
+				</li>
+			</ul>
+			<div class="mes">
+				<div class="mes-tit"><i class="circle"></i><span style="line-height: 33px;">订单信息</span><button style="float: right;" class="mui-btn mui-btn-warning" id="diffBtn">补差价</button></div>
+				<div class="mes-con">
+					<p>订单号：<span id="orderNum"></span></p>
+					<p>封签号：<span id="sealNum"></span></p>
+					<p><span id="user"></span> <span id="userPhone"></span></p>
+					<p>取件时间：<span id="time"></span></p>
+				</div>
+			</div>
+			<!--<div class="mes">-->
+				<!--<div class="mes-tit"><i class="circle"></i>物流信息</div>-->
+				<!--<div class="mes-con">-->
+					<!--<p>2018-6-11 16：44</p>-->
+					<!--<p>【江阴】已取送，快递联系人：小张</p>-->
+					<!--<div class="more-box">-->
+						<!---->
+					<!--</div>-->
+					<!--<p class="more">展开显示更多</p>-->
+				<!--</div>-->
+			<!--</div>-->
+			<div class="mes" id="goodss">
+				<div class="mes-tit"><i class="circle"></i>衣物信息 <span class="num">共<span id="goodsNum"></span>件</span></div>
+				<div class="mes-con" id="allGoods">
+					<div id="oneGoods">
+						<div class="item">
+							<div class="item-pic goodsPic"><img src="" alt="" /></div>
+							<p><span class="goodsName"> </span>*<span class="singleNum"></span></p>
+							<p class="goodsPrice"><span></span>￥</p>
+							<!--<div class="diff">补差价</div>-->
+						</div>
+					</div>
+					<div class="more-box" id="more-goods">
+						
+					</div>
+					<p class="more">展开显示更多</p>
+					
+				</div>
+			</div>
+			<div class="mes">
+				<div class="mes-tit"><i class="circle"></i>支付信息</div>
+				<div class="mes-con">
+					<ul class="price">
+						<li>
+							<p class="l">订单总价</p>
+							<p class="r"><span id="all-price">0.00</span>元</p>
+						</li>
+						<!--<li>-->
+							<!--<p class="l">差价</p>-->
+							<!--<p class="r"><span>0.00</span>元</p>-->
+						<!--</li>-->
+						<li>
+							<p class="l">实付款</p>
+							<p class="r"><span id="pay-price">70.00</span>元</p>
+						</li>
+					</ul>
+					<p>实际付款费用清单</p>
+					<table class="listing">
+						<!--<tr>
+							<td><p>枕芯</p></td>
+							<td><p>35元</p></td>
+							<td><p>*3</p></td>
+						</tr>-->
+					</table>
+				</div>
+			</div>
+			<div class="mes">
+				<div class="mes-tit"><i class="circle"></i>补差价记录</div>
+				<div class="mes-con">
+					<table id="diff-record">
+						<td>商品名</td>
+						<td>原价</td>
+						<td style="text-align: center;">差价</td>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+	<script src="../../src/js/order-detail.js"></script>
+</html>

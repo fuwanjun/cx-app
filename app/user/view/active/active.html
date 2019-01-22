@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-3.3.1.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			.active-page{
+				width:100%;
+
+				background:url("../../../public/img/index/active.png") no-repeat;
+				background-size: 100% 100%;
+				position: relative;
+			}
+			.getDiscount{
+				padding:0.08rem 0;
+				width:80%;
+				text-align: center;
+				position: absolute;
+				top:85%;
+				font-size:0.15rem;
+				-webkit-border-radius: 0.2rem;
+				-moz-border-radius: 0.2rem;
+				border-radius: 0.2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="active-page">
+			<div class="mui-btn-primary getDiscount">领取优惠券</div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script type="text/javascript">
+		var token=$.cookie("token");
+        var checkCode=getQueryString("checkCode");
+        var code=getQueryString("code");
+        var locationHref=window.location.href;
+        var srceenHeight=$(document).height();
+        $(".active-page").css("height",srceenHeight+"px");
+        var btnWidth=$(".getDiscount").width();
+        $(".getDiscount").css("left","50%").css("margin-left",-btnWidth/2+"px");
+
+        if (!token && !code){
+            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Factive%2Factive.html%3FcheckCode%3D"+checkCode+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        }else if (code&&!token){
+            var url=globalUrl+'/wechat/wxLogin';
+            var data={code:code};
+            enAjax(url,'get',true,data,getInfo,null,true);
+		}
+
+
+
+
+        $(".getDiscount").on("tap",function(){
+//            if(!token){
+//                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Factive%2Factive.html%3Fcode%3D"+code+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+//
+//			}else{
+                var url=globalUrl+"/coupon/getSFCoupon";
+                var data={checkCode:checkCode};
+                enAjax(url,'post',true,data,goDiscount,null,false);
+//			}
+		});
+
+		function goDiscount(data){
+            console.log(data);
+            if(data.status==200){
+                mui.alert(data.msg,function(){
+                    window.location.href="../user-center/integral-mall.html";
+                })
+            }else if(data.status==210){
+                mui.alert(data.msg);
+            }
+        }
+        function getInfo(data){
+            // debugger;
+            console.log(data);
+            var nickName=EncodeUtf8(data.data.userInfo.userName);
+            var sex=EncodeUtf8(data.data.userInfo.sex);
+            $.cookie("token",data.data.token);
+            $.cookie("headImgUrl",data.data.userInfo.userPicture);
+            $.cookie("nickName",nickName);
+            $.cookie("userSex",sex);
+            $.cookie("userId",data.data.userInfo.userId);
+            $.cookie("phoneNum",data.data.userInfo.phone,{path: "/"});
+            window.location.href="active.html?checkCode="+checkCode;
+        }
+	</script>
+</html>

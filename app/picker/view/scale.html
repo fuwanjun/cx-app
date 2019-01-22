@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				transition: transform 0.5s;
+				transform: scale(0.8);
+				width: 120px;
+				height: 120px;
+			}
+		</style>
+		<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+//			jQuery("img").hover(
+//				function(){
+//					$(this).css("transform","scale(1.2)")
+//				},
+//				function(){
+//					$(this).css("transform","scale(.8)")
+//				}
+//			)
+//			jQuery("body").on("mouseenter mouseleave","img",
+//				function(ev){
+//					if(ev.type=="mouseenter"){
+//						$(this).css("transform","scale(1.2)")
+//					}else if(ev.type=="mouseleave"){
+//						$(this).css("transform","scale(.8)")
+//					}
+//					
+//				}
+//			)
+			function scaleB(obj){
+				$(obj).css("transform","scale(1.2)")
+			}
+			function scaleS(obj){
+				$(obj).css("transform","scale(.8)")
+			}
+		</script>
+	</head>
+	<body>
+		<!--<img src=""/>-->
+		<img src="" onmouseenter="scaleB(this)" onmouseleave="scaleS(this)"/>
+	</body><div id="nowCity" style="display:none;"></div>
+	
+	<script type="text/javascript">
+		jQuery("img").attr("src","img/head.png")
+		
+	</script>
+</html>

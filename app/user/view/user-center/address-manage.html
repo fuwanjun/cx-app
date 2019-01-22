@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/send-wash.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../src/js/address.js"></script>
+		<!--<script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.js"></script>-->
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="user-mes.html" class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">地址管理</p>
+			<a class="mui-pull-right ok" edit="0" style="line-height: 0.44rem">编辑</a>
+		</header>
+		<nav class="mui-bar mui-bar-tab" style="text-align: center;">
+			<a class="mui-tab-item" href="get-address.html?">
+				<span class="mui-tab-label">
+					<a id="addPlace">
+						<span class="mui-icon mui-icon-plusempty"></span> 添加地址
+					</a>
+
+				</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<!--<ul id="addresses" class="mui-table-view wash-item">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red"><span class="mui-icon mui-icon-trash"></span></a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="mes">
+							<p>爱洗衣</p>
+							<p class="wash-num">15050577801</p>
+						</div>
+						<div class="address">江苏省常州市新北区</div>
+					</div>
+				</li>
+			</ul>-->
+			<!--<ul class="mui-table-view wash-item">-->
+				<!--<div class="mui-checkbox">-->
+					<!--<label></label>-->
+					<!--<input name="checkbox" type="checkbox">-->
+				<!--</div>-->
+				<!--<li class="mui-table-view-cell">-->
+					<!--<div class="mui-slider-right mui-disabled">-->
+						<!--<a class="mui-btn mui-btn-red"><span class="mui-icon mui-icon-trash"></span></a>-->
+					<!--</div>-->
+					<!--<div class="mui-slider-handle">-->
+						<!--<div class="mes">-->
+							<!--<p>爱洗衣</p>-->
+							<!--<p class="wash-num">15050577801</p>-->
+						<!--</div>-->
+						<!--<div class="address">江苏省常州市新北区</div>-->
+					<!--</div>-->
+				<!--</li>-->
+			<!--</ul>-->
+		</div>
+		
+		<script type="text/javascript">
+			$(function(){
+                $("#nowCity").html($.cookie("now"));
+                $("title").html("常洗-"+$("#nowCity").html()+"站");
+			    removeMask();
+				mui.init();
+				var orderId=getQueryString('id');
+				var _goodsId=getQueryString('goodsId');
+				getAddress(false);
+
+
+				//删除选中地址
+				$(".ok").on("tap",function(){
+				   if($(this).attr("edit")==1){
+				       for(var i=0;i<$(".wash-item").length;i++){
+				           if($(".wash-item").eq(i).find("input[type=checkbox]").is(":checked").length==0){
+                           $(this).html("编辑").attr("edit",0);
+                           $(".wash-item .mui-checkbox").css("display","none");
+                       }
+				           if($(".wash-item").eq(i).find("input[type=checkbox]").is(":checked")){
+				               var addressId=$(".wash-item").eq(i).attr("data-id");
+								deleteAddress(addressId);
+						   }
+
+					   }
+						window.location.reload();
+				   }else{
+                       $(this).html("删除").attr("edit",1);
+                       $(".wash-item .mui-checkbox").css("display","block");
+				   }
+				});
+				//判断是否能添加地址
+//				addressCount('get-address.html',false,orderId,_goodsId);
+                $("#addPlace").on("tap",function(){
+                    $.ajax({
+                        url:globalUrl+'/address/getAddressCountByUserId',
+                        type:'get',
+                        data:{userInfoId:$.cookie('userId')},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("token", $.cookie("token"));
+                        },
+                        crossDomain: true,
+                        success:function(data){
+                            if(data.code==401){
+                                window.location.href=wxUrl;
+                                return false;
+                            }
+                            console.log(data);
+                            if(data>=5){
+                                mui.alert('最多同时存在5条地址');
+                            }else{
+                                window.location.href="address-add.html";
+                            }
+                            removeMask();
+                        },
+                        error:function(){
+                            removeMask();
+                        }
+                    })
+				});
+
+			});
+
+            function getAddress(handle){
+                // pageLoad("block");
+                handle=handle?handle:false;
+                $.ajax({
+                    url:globalUrl+'/address/getAddressByUserInfoId',
+                    type:'get',
+                    data:{
+                        userInfoId:$.cookie('userId')
+                    },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success:function(data){
+                        removeMask();
+                        if(!handle&&data.code==401){
+                            window.location.href=wxUrl;
+                            return false;
+                        }
+                        console.log(data);
+                        if(data.length!=0) {
+                            for (var i = 0; i < data.length; i++) {
+                                var list = '<ul class="mui-table-view wash-item" data-id="' + data[i].id + '">' +
+                                    '<div class="mui-checkbox" style="margin-top: 0.2rem;">'+
+                                    '<label></label>'+
+                                    '<input name="checkbox" type="checkbox">'+
+                                    '</div>'+
+                                    '<li class="mui-table-view-cell">' +
+                                    '<div class="mui-slider-right mui-disabled">' +
+                                    '<span class="mui-btn mui-btn-red" data-id="' + data[i].id + '"><span class="mui-icon mui-icon-trash"></span></span>' +
+                                    '</div>' +
+                                    '<div class="mui-slider-handle">' +
+                                    '<div class="mes">' +
+                                    '<p>' + data[i].userName + '</p>' +
+                                    '<p class="wash-num">' + data[i].phone + '</p>' +
+                                    '</div>' +
+                                    '<div class="address">' + data[i].region + '-' + data[i].detailAddress + '</div>' +
+                                    '</div>' +
+                                    '</li>' +
+                                    '</ul>';
+                                $(list).appendTo($(".mui-content"));
+                                //removeMask();
+                            }
+                        }
+
+                    },
+                    error:function(){
+                        removeMask();
+                    }
+                })
+            }
+            //删除地址
+            $(".mui-content").on("tap",".mui-btn-red",function(){
+                var addressId=$(this).attr("data-id");
+                mui.confirm("是否删除该消息？","提示",["否","是"],function(e){
+                    if(e.index==1){
+                        var url=globalUrl+'/address/deleteAddress';
+                        var data={"addressId":addressId};
+                        enAjax(url,'post',true,data,reloadAddress,null,false);
+                        function reloadAddress(data){
+                            location.reload();
+                        }
+                    }else{}
+                })
+            });
+
+			
+		</script>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../src/css/vip.css" />
+		<link rel="stylesheet" href="../../src/css/wash-chose.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/jquery-addShopping.js"></script>
+		<!--<script src="../../src/js/wash-chose.js"></script>-->
+		<style>
+			ul{
+				margin:0;
+				padding:0;
+			}
+			.menu-box{
+				width:100%;
+				height:0.4rem;
+				overflow: hidden;
+				position: relative;
+			}
+			.menu-list{
+				display:flex;
+				position: absolute;
+			}
+			.menu-list li{
+				text-align: center;
+			}
+			.menu-list .menu-active{
+				border-bottom:2px solid #4d93f7;
+			}
+			.con-list li{
+				display: none;
+			}
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item{
+				padding:0;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
+			<p class="mui-title blue">专业日常清洗</p>
+		</header>
+
+		<nav class="mui-bar mui-bar-tab bot-nav bot">
+			<div class="full-remind">单笔订单满<span style="color: #9f0d10;font-weight: bold;"> 68 </span>元免运费</div>
+			<div class="chose-items" id="icon-car">
+				<!--<a href="clothes-box.html">-->
+					<div id="shop-car" class="chose-pic"><img src="../../../public/img/order/shop-car.png" alt="" /><span id="item-num" class="mui-badge mui-badge-danger">0</span></div>
+				<!--</a>-->
+				<p id="all-price" class="chose-price">￥<span>0.00</span></p>
+			</div>
+			<a><button class="mui-btn mui-btn-primary" id="submit">下单取件</button></a>
+		</nav>
+		<div class="mui-content" >
+			<div class="menu-box mui-slider" id="slider">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="menu-list mui-scroll mui-scroll1 slidertab">
+						<!--<li>会员洗衣</li>-->
+						<!--<li class="menu-active">日常洗衣</li>-->
+						<!--<li>鞋类洗涤</li>-->
+						<!--<li>皮衣皮草</li>-->
+						<!--<li>窗帘家纺</li>-->
+					</div>
+				</div>
+				
+			</div>
+			<ul class="con-list mui-slider-group"></ul>
+		</div>
+		<div id="vip-mask">
+			<div id="mask-con">
+				<p class="mui-pull-right close-btn">关闭</p>
+				<div class="mask-pic"><img src="../../../public/img/order/tip-vip.png" alt=""></div>
+				<div class="vip-text">
+					<p>抱歉！这是会员专享商品.</p>
+					<p>请您先充值300元成为会员</p>
+				</div>
+				<p class="go-vip"><a href="../user-center/top_up.html">充值成为会员</a></p>
+				<p class="go-buy"><a href="wash-chose-new1.html?id=3">非会员点此购买</a></p>
+			</div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script>
+		var id=getQueryString("id");
+		weixinReload();
+		$(function(){
+
+		    carPrice();
+		    var listWidth=$(".menu-box").width();
+            var url=globalUrl+"/headTitle/getHeadTitleAll";
+            enAjax(url,'get',true,{},function(data){
+                console.log(data);
+                for(var i=0;i<data.data.length;i++){
+                    if(id==data.data[i].type){
+                        var list='<a class="mui-control-item mui-active" data-type="'+data.data[i].type+'">'+data.data[i].titleName+'</a>';
+                        var listCon='<li class="vip-con mui-slider-item mui-control-content mui-active" data-type="'+data.data[i].type+'"></li>';
+					}else{
+                        var list='<a class="mui-control-item" data-type="'+data.data[i].type+'">'+data.data[i].titleName+'</a>';
+                        var listCon='<li class="vip-con mui-slider-item mui-control-content" data-type="'+data.data[i].type+'"></li>'
+					}
+
+                    $(list).appendTo($(".menu-list"));
+                    $(listCon).appendTo($(".con-list"));
+
+                }
+                getItem(id,$(".con-list li[data-type="+id+"]"));
+                $(".menu-list a").css("width",listWidth/4+"px");
+                $(".menu-list").css("width",listWidth/4*data.data.length);
+
+            },null,false);
+
+
+            $(".menu-list").on("tap","a",function(){
+                var type=$(this).attr("data-type");
+                var i=$(this).index();
+                $(".menu-list a").removeClass("mui-active");
+                $(".menu-list a").eq(i).addClass("mui-active");
+                $(".con-list li").removeClass("mui-active");
+                $(".con-list li").eq(i).addClass("mui-active");
+                var obj=$(".con-list li[data-type="+type+"]");
+                getItem(type,obj);
+            });
+
+            var userId=$.cookie('userId');
+            $("#submit").on("tap", function () {
+                var url = globalUrl + '/orderform/getCartsByUserId';
+                var data = {userId: userId};
+                enAjax(url, 'get', true, data, subMes, null, false);
+                function subMes(data) {
+                    console.log(data);
+
+                    var order = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var goodsId = data[i].goodsId;
+                        var num = data[i].commodityCount;
+                        var partsIds = [goodsId];
+                        for (var j = 0; j < data[i].washMode.length; j++) {
+                            var partsChild = data[i].washMode[j].id;
+                            partsIds.push(partsChild);
+                        }
+                        var splic = partsIds.join("-");
+                        order.push(splic);
+                    }
+                    var orderString = order.toString();
+                    console.log(orderString);
+                    if (orderString == "") {
+                        mui.alert("请选择商品");
+                    } else {
+                        $.ajax({
+                            url: globalUrl + '/order/creatOrder',
+                            type: 'post',
+                            data: {carts: orderString},
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("token", $.cookie("token"));
+                            },
+                            crossDomain: true,
+                            success: function (data) {
+                                console.log(data);
+                                $("#submit").parent().attr("href", "order-pay.html?id=" + data.data);
+                                window.location.href = "order-pay.html?id=" + data.data;
+                            }
+                        })
+                    }
+                }
+            });
+
+			//关闭弹层
+            $("#vip-mask .close-btn").on("tap",function(){
+                $("#vip-mask").css("display","none");
+            });
+
+            //添加商品
+            $(".con-list").on("tap", ".vip-con .adds", function () {
+                _id = $(this).parent().parent().attr("data-id");
+                var left=$(this).offset().left;
+                var top=$(this).offset().top;
+                var carTop=$("#shop-car").offset().top;
+                var carLeft=$("#shop-car").offset().left;
+                var _type=$(this).parent().parent().attr("type");
+                var urlVip=globalUrl+"/userInfo/checkIsVip";
+                enAjax2(urlVip,'get',true,{},function(data){
+                    if(_type==1&&!data){
+                        $("#vip-mask").css("display","block");
+					}else{
+                        var join='<div style="width: 0.25rem;height:0.25rem;position:absolute;top:'+top+'px;left:'+left+'px;border: 1px solid #39a4f2;background:#39a4f2;border-radius: 50%;"><img style="width: 100%;" src="../../../public/img/order/shopcar.png" alt=""></div>';
+
+                        var urlVip=globalUrl+"/userInfo/checkIsVip";
+                        enAjax2(urlVip,'get',true,{},function(data){
+                            console.log(data);
+                            var vipIndex;
+                            for(var i=0;i<$(".menu-list li").length;i++){
+                                if($(".menu-list li").eq(i).hasClass("menu-active")){
+                                    vipIndex=i;
+                                }
+                            }
+                            if(vipIndex==0&&!data){
+                                $("#vip-mask").css("display","block");
+
+                            }else if(_id==11){
+                                var url=globalUrl+"/orderform/putCart";
+                                var data=JSON.stringify({goodsId:_id,commodityCount:"1",washMode:[]});
+                                contentAjax2(url,'post',false,data,function(result){
+                                    console.log(result);
+								});
+                                $.ajax({
+                                    url: globalUrl + '/order/creatOrder',
+									async:false,
+                                    type: 'post',
+                                    data: {carts: data},
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("token", $.cookie("token"));
+                                    },
+                                    crossDomain: true,
+                                    success: function (data) {
+                                        console.log(data);
+                                        window.location.href = "order-pay.html?id=" + data.data;
+                                    }
+                                })
+							}
+                            else{
+                                $(join).appendTo($(".vip-con")).animate({top:carTop+"px",left:carLeft+"px"})//.remove();
+
+                                //获取添加的商品ID
+
+                                var obj=$(this).parent().parent();
+                                var url=globalUrl+'/orderform/putCart';
+                                var data=JSON.stringify({goodsId:_id, commodityCount: "1", washMode: []});
+                                contentAjax2(url,'post',true,data,function(data){
+                                    carPrice()
+                                },null,false);
+                            }
+                        },null,true);
+					}
+				},null);
+            });
+
+            $("#shop-car").on("tap", function () {
+                var token = $.cookie('token');
+                if (token) {
+                    window.location.href = "clothes-box.html";
+                } else {
+                    window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Forder%2Fclothes-box.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+                }
+            });
+		});
+
+        function getItem(type,Obj) {
+            $.ajax({
+                url: globalUrl + '/goods/getGoodsByType',
+                data: {type: type},
+                type: 'get',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data);
+                    $(".vip-con").html("");
+                    var item = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var img = data[i].goodsPicture ? "http://" + data[i].goodsPicture : '../../../public/img/order/pic.png';
+                        item += '<div class="vip-item" data-id="' + data[i].id + '" type="' + data[i].goodsType + '">' +
+                            '<span class="mui-badge mui-badge-danger goodsNum"></span>'+
+                            '<div class="vip-item-pic"><a href="commodity-detail.html?id=' + data[i].id + '"><img src="' + img + '" alt="" /></a></div>' +
+                            '<p class="item-name">' + data[i].goodsName + '</p>' +
+                            '<div class="item-price">' +
+                            '<div class="all-price">' +
+                            '<p class="now-price">￥<span>' + data[i].goodsPrice + '</span></p>' +
+                            '</div>' +
+                            '<div class="adds"><img src="../../../public/img/picker/add.png" alt="" /></div>'+
+                            '</div>' +
+                            '</div>';
+                    }
+
+                    $(Obj).append(item);
+                    carPrice();
+                }
+            })
+        }
+
+        //获取购物车的数量和总价
+        function carPrice(){
+            var url=globalUrl+'/orderform/getCartsByUserId';
+            var data={userId:userId};
+            enAjax2(url,'get',true,data,getCarNumPrice,null,true);
+
+            function getCarNumPrice(data){
+                console.log(data);
+                testDiv(data);
+                var hisNum=0;
+                var hisPrice=0;
+                for(var i=0;i<data.length;i++){
+                    hisNum+=parseFloat(data[i].commodityCount);
+                    hisPrice+=parseFloat(data[i].price);
+                }
+                $("#item-num").html(hisNum);
+                $("#all-price span").html(hisPrice.toFixed(2));
+            }
+        }
+
+        function testDiv(data){
+            if(data){
+                for(var i=0;i<data.length;i++){
+                    // 获取商品id
+                    var goodsId = data[i].goodsId;
+                    var count = data[i].commodityCount;
+                    if(count!=0){
+                        $("div.vip-item[data-id="+goodsId+"]").find(".goodsNum").text(count).css("display","block");
+                    }else{
+                        $("div.vip-item[data-id="+goodsId+"]").find(".goodsNum").css("display","none");
+                    }
+                }
+            }
+        }
+	</script>
+</html>

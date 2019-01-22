@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0;
+			}
+			.mui-table-view-cell:after{
+				display: none;
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.margin-bottom-r10{
+				margin-bottom: 0.1rem;
+			}
+			.color-999{
+				color: #999;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">订单详情</p>
+		</header>	
+		<div class="mui-content">
+			<ul class="mui-table-view bg-white margin-bottom-r10">
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>订单详情</div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>订单编号：<span class="color-999">5645645645645</span></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>封装签号：<span class="color-999">5645645645645</span></div>
+				</li>
+			</ul>
+			<ul class="mui-table-view bg-white">
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>客户姓名：<span class="color-999">小薛</span></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>客户电话：<span class="color-999">18596562356</span></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>送货地址：<span class="color-999">江苏省常州市天宁区红梅街道健身北路锦绣花园</span></div>
+				</li>
+				<li class="mui-table-view-cell border-bottom-tiny-blue">
+					<div>取件时间：<span class="color-999">2018-05-16 下午3:00之前</span></div>
+				</li>
+			</ul>
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

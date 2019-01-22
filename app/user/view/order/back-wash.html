@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/send-wash.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../src/js/address.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">送回地址</p>
+			<a class="mui-pull-right ok" edit="0" style="line-height: 0.44rem">编辑</a>
+		</header>
+		<nav class="mui-bar mui-bar-tab" style="text-align: center;">
+			<a class="mui-tab-item" href="back-address.html">
+				<span class="mui-tab-label">
+					<a id="addPlace">
+						<span class="mui-icon mui-icon-plusempty"></span> 添加地址
+					</a>
+				</span>
+			</a>
+		</nav>
+		<div class="mui-content"></div>
+		
+		<script type="text/javascript">
+			$(function(){
+                $("#nowCity").html($.cookie("now"));
+                $("title").html("常洗-"+$("#nowCity").html()+"站");
+				mui.init();
+				var orderId=getQueryString('id');
+				var _goodsId=getQueryString('goodsId');
+				if(orderId==null){
+					getAddressGoods(_goodsId,'order-pay.html',false);
+				}else{
+					getAddressOrder(orderId,'order-pay.html',false);
+				}
+                //删除选中地址
+                $(".ok").on("tap",function(){
+                    if($(this).attr("edit")==1){
+                        for(var i=0;i<$(".wash-item").length;i++){
+                            if($(".wash-item").eq(i).find("input[type=checkbox]").is(":checked").length==0){
+                                $(this).html("编辑").attr("edit",0);
+                                $(".wash-item .mui-checkbox").css("display","none");
+                            }
+                            if($(".wash-item").eq(i).find("input[type=checkbox]").is(":checked")){
+                                var addressId=$(".wash-item").eq(i).attr("data-id");
+                                deleteAddress(addressId);
+                            }
+
+                        }
+                        window.location.reload();
+                    }else{
+                        $(this).html("删除").attr("edit",1);
+                        $(".wash-item .mui-checkbox").css("display","block");
+                    }
+                });
+				addressCount('back-address.html',false);
+				
+				$(".mui-content").on("tap",".wash-item",function(){
+					var area=$(this).find("li .mui-slider-handle .address").html();
+					var addressId=$(this).attr("data-id");
+                    area=codeTrans(area);
+                    area=codeTrans2(area);
+                    area=codeTrans3(area);
+                    area=EncodeUtf8(area);
+					$.cookie("backArea",area);
+					$.cookie("backId",addressId);
+				})
+			})
+			
+		</script>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+</html>

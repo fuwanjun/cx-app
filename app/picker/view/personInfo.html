@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" type="text/css" href="../src/css/picker.css"/>
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-bar-nav{
+				background-color: #4d93f7;
+			}
+			.mui-bar .mui-btn-link{
+				color: #fff;
+			}
+			.mui-bar-nav~.mui-content{
+				padding-top: 0;
+			}
+			.mui-table-view-cell-double{
+				display: -webkit-box;
+				display: -moz-box;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+			.mui-bar-nav{
+				box-shadow: none;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="mine.html" class="mui-icon mui-icon-back" style="color: #fff;"></a>
+			<p class="mui-title" style="color:#fff;">个人信息</p>
+			<!--<a href="personInfo_improve.html" class="mui-btn mui-btn-link mui-pull-right">修改</a>-->
+		</header>
+	    <div class="mui-content">
+			<div class="bg_box">
+				<div class="pickerMsg">
+					<img class="headImg" src="" alt="" />
+					<div class="name"></div>
+				</div>
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-table-view-cell-double">
+					<div class="mui-table-view-cell-left">性别</div>
+					<div class="mui-table-view-cell-right sex"></div>
+				</li>
+				<!--<li class="mui-table-view-cell mui-table-view-cell-double">-->
+					<!--<div class="mui-table-view-cell-left">身份证号码</div>-->
+					<!--<div class="mui-table-view-cell-right idCard">341221198605184568</div>-->
+				<!--</li>-->
+				<li class="mui-table-view-cell mui-table-view-cell-double">
+					<div class="mui-table-view-cell-left" >手机号码</div>
+					<div class="mui-table-view-cell-right phone"></div>
+				</li>
+				<li class="mui-table-view-cell mui-table-view-cell-double">
+					<div class="mui-table-view-cell-left">所处洗衣店</div>
+					<div class="mui-table-view-cell-right address">洁能洗衣店</div>
+				</li>
+			</ul>
+			
+		</div>	
+
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var token=$.cookie("token");
+			$(".headImg").attr("src","http://"+$.cookie("userpic"));
+            $(".name").html($.cookie("username"));
+			$(".sex").html($.cookie("sex"));
+            $(".phone").html($.cookie("phone"));
+			$(function(){
+				var account=JSON.parse($.cookie("toker")).account;
+				if(!token){
+					window.location.href="login.html";
+					return false;
+				}
+				ajaxInit(account);
+				
+			});
+			function ajaxInit(account){
+				$.ajax({
+					type:"get",
+					url:globalUrl+"takeUser/getTakerByAccount",
+					dataType:"json",
+					data:{account:account},
+					async:true,
+					beforeSend:function(request){
+						request.setRequestHeader("token",token)
+					},
+					success:function(res){
+						if(res.message){
+							mui.toast(res.message);
+							setTimeout(
+								function(){
+									window.location.href="login.html"
+								},2000
+							)
+							
+						}else{
+							if(res){
+								$(".name").text(res.takerName);
+								$(".sex").text(res.sex);
+								$(".idCard").text(res.idCard);
+								$(".phone").text(res.phone);
+								$(".address").text(res.address);
+								if(res.picture){
+									$(".headImg").attr("src","http://"+res.picture);
+								}
+							}
+						}
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			}
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

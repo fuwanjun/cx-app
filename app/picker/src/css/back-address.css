@@ -1,0 +1,52 @@
+body{
+	font-size: 0.16rem;
+}
+.mui-input-group{
+	background-color: rgb(244,248,255);
+}
+.city{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0.15rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+	margin-bottom: 2px;
+	background: #fff;
+}
+.sex{
+	height: 0.4rem;
+	line-height: 0.4rem;
+	margin-bottom: 2px;
+	background: #fff;
+	padding-left: 0.15rem;
+	display: flex;
+}
+.sex input[type=radio]{
+	margin-left: 0.1rem;
+	margin-right: 0.5rem;
+}
+input[type=text]{
+	background: #fff;
+	margin-bottom: 2px;
+}
+button[type=submit]{
+	margin-top: 0.5rem;
+	width: 80%;
+	margin-left:auto;
+	margin-right: auto;
+	background: rgb(57,164,242);
+}
+.mui-input-group .mui-input-row{
+	width: 30%;
+}
+.sex input[type=radio]{
+	margin: 0;
+	
+}
+.mui-input-row label{
+	padding: 0;
+	color: #333;
+}
+input[type=text]{
+	font-size: 0.16rem;
+}

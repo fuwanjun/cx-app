@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<link rel="stylesheet" href="../src/css/UserComment.css">
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style>
+			.mui-bar-nav{
+				background: dodgerblue;
+				box-shadow: none;
+			}
+			header .mui-title{
+				color: #fff;
+			}
+			header .mui-icon{
+				color: #fff;
+			}
+			.rider-top{
+				background: dodgerblue;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">用户评价</p>
+		</header>	
+		<div class="mui-content">
+			<div class="top-header">
+				<div class="rider-top">
+					<div class="top-content">
+						<img style="border-radius: 50%" class="headImg" src="../../public/img/picker/head.png" alt="" />
+						<div class="top-txt">
+							<div class="mui-flex">
+								<div class="level">
+									<img src="../../public/img/picker/star_yes.png" alt="" />
+									<img src="../../public/img/picker/star_yes.png" alt="" />
+									<img src="../../public/img/picker/star_half.png" alt="" />
+									<img src="../../public/img/picker/star_no.png" alt="" />
+									<img src="../../public/img/picker/star_no.png" alt="" />
+									<img src="../../public/img/picker/star_no.png" alt="" />
+								</div>
+								<span class="level_score"><span class="level_number">1.5</span>分</span>
+							</div>							
+							<div class="three_scale">
+								<span>超时取件<span class="scale_number">2</span></span>
+								<span>超时交件<span class="scale_number">2</span></span>
+							</div>
+							<div class="three_scale">投诉数<span class="scale_number">2</span></div>
+						</div>
+					</div>
+					<div class="bottom-content">
+						<div class="mui-flex bg-white three-icon-box">
+							<a href="OvertimeFetchPackage.html" class="three-scale-icon">
+								<img src="../../public/img/picker/user-icon-fetch.png" alt="" />
+								<div>超时取件</div>
+							</a>
+							<!--<a href="OvertimeDeliveryPackage.html" class="three-scale-icon">-->
+								<!--<img src="../../public/img/picker/user-icon-delivery.png" alt="" />-->
+								<!--<div>超时交件</div>-->
+							<!--</a>-->
+							<a href="complainMessage.html" class="three-scale-icon">
+								<img src="../../public/img/picker/user-icon-complain.png" alt="" />
+								<div>投诉</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="list">
+				<div class="listBody">
+					<!--<div class="bg-white padding-r12 rider-content" style="margin: .1rem;border-radius: 0.05rem;">
+						<div class="mui-flex rider-content-flex mui-flex-halign-center">
+							<div class="contentLi mui-flex-halign-center mui-flex">
+								<img src="img/head.png"/>
+								<span class="font-size-14">匿名用户</span>
+							</div>
+							<div class="font-size-14 color-666">2018年6月9日</div>
+						</div>
+						<div class="font-size-14 color-666 server-satisfaction">配送服务：非常满意</div>
+					</div>
+					<div class="bg-white padding-r12 rider-content" style="margin: .1rem;border-radius: 0.05rem;">
+						<div class="mui-flex rider-content-flex mui-flex-halign-center">
+							<div class="contentLi mui-flex-halign-center mui-flex">
+								<img src="img/head.png"/>
+								<span class="font-size-14">匿名用户</span>
+							</div>
+							<div class="font-size-14 color-666">2018年6月9日</div>
+						</div>
+						<div class="font-size-14 color-666 server-satisfaction">配送服务：非常满意</div>
+					</div>-->
+				</div>
+			</div>		
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<!--<script src="../src/js/UserComment.js"></script>-->
+	</body><div id="nowCity" style="display:none;"></div>
+	<script>
+		var userPic=$.cookie("userpic");
+		$(function(){
+		   $(".top-content img").eq(0).attr("src","http://"+userPic);
+			var comUrl=globalUrl+"/takeUser/getTakerReportById";
+			var comData={}
+		   enAjax2(url)
+);
+
+
+	</script>
+
+</html>

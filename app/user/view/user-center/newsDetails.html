@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../src/css/message.css" />
+		<link rel="stylesheet" href="../../src/css/my-order.css">
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<style>
+			.newsTit{
+				text-align: center;
+			}
+			.mui-content{
+				margin-top:0.6rem;
+
+			}
+			.mui-bar-nav~.mui-content{
+				padding-top:0;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title">公告详情</p>
+		</header>
+		<div class="mui-content">
+			<h3 class="newsTit"></h3>
+			<div class="newCon"></div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../../public/js/common.js"></script>
+	<script>
+		var newsId=getQueryString("newsId");
+		$(function(){
+            getCon(newsId)
+		});
+
+		function getCon(id){
+		    var url=globalUrl+"/notice/getNoticeById";
+		    var data={noticeId:id};
+		    enAjax(url,'get',true,data,function(data){
+		        console.log(data);
+		        $(".newsTit").html(data.data.noticeTitle);
+		        $(".newCon").html(data.data.content);
+			},null)
+		}
+	</script>
+</html>

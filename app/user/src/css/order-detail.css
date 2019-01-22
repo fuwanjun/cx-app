@@ -1,0 +1,155 @@
+.process{
+	display: flex;
+	justify-content: space-around;
+	padding: 0;
+	margin-top: 0;
+	background: #fff;
+}
+.process li{
+	width: 20%;
+}
+.head-line{
+	height: 0.3rem;
+	background: #fff;
+}
+.process-pic{
+	width: 0.4rem;
+	height: 0.4rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0.15rem;
+	border-radius: 50%;
+	position: relative;
+}
+.last-pic{
+	width: 0.4rem;
+	height: 0.4rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0.15rem;
+	border-radius: 50%;
+}
+.last-pic img{
+	width: 100%;
+}
+.process-pic:before{
+	content: '';
+	width: 0.1rem;
+	height: 0.1rem;
+	border-radius: 50%;
+	background:#b3e7ff;
+	position: absolute;
+	top: 0.15rem;
+	left: 0.45rem;
+}
+.process-pic:after{
+	content: '';
+	width: 0.04rem;
+	height: 0.04rem;
+	border-radius: 50%;
+	background:#b3e7ff;
+	position: absolute;
+	top: 0.18rem;
+	left: 0.6rem;
+}
+.process-pic img{
+	width: 100%;
+}
+.process li p{
+	text-align: center;
+	font-size: 0.12rem;
+}
+.mes-tit,.mes-con{
+	background: #fff;
+	margin-bottom: 0.03rem;
+}
+.mes-tit{
+	padding: 0.1rem;
+	color: rgb(55,55,55);
+}
+.mes-con{
+	padding-left:0.3rem;
+	padding-top: 0.1rem;
+	padding-bottom: 0.1rem;
+	padding-right: 0.1rem;
+}
+.mes-con2{
+	padding: 0 0.1rem 0 0.3rem;
+}
+.price2{
+	margin: 0;
+}
+.price2 li{
+	height:0.4rem;
+}
+.price2 li p{
+	line-height: 0.4rem;
+}
+.mes-con .more{
+	text-align: center;
+	margin-top: 0.1rem;
+	margin-bottom: 0;
+}
+
+.item{
+	display: flex;
+	justify-content: space-between;
+}
+.item p{
+	line-height: 0.8rem;
+}
+.item .item-pic{
+	width:0.8rem;
+	height: 0.8rem;
+	/*background: #dcdcdc;*/
+}
+.price{
+	padding-left: 0;
+}
+.price li{
+	display: flex;
+	justify-content: space-between;
+}
+.circle{
+	display: inline-block;
+	width: 0.1rem;
+	height: 0.1rem;
+	border-radius: 50%;
+	background: rgb(231,231,231);
+	margin-right: 0.12rem;
+}
+.listing{
+	width: 100%;
+}
+.more-box{
+	/*height: 2rem;*/
+	/*background: #4CD964;*/
+	display: none;
+}
+.num{
+	float: right;
+	font-size: 0.16rem;
+	color: #8f8f94;
+}
+#pay{
+	width: calc(100% - 0.9rem);
+	margin: auto;
+}
+.btn-check{
+	padding: 0.4rem 0;
+	background: #fff;
+}
+.diff{
+	margin-top: 0.3rem;
+	background: orangered;
+	color: #fff;
+	font-size: 0.13rem;
+	width: 0.5rem;
+	height: 0.25rem;
+	line-height: 0.25rem;
+	text-align: center;
+	border-radius: 0.06rem;
+}
+#diff-record{
+	width: 100%;
+}

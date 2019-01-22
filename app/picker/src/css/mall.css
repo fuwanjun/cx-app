@@ -1,0 +1,86 @@
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+	position: relative;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	border: none;
+}
+.mui-content>.mui-table-view:first-child{
+	margin-top: 0;
+}
+
+.mui-table-view-cell:after{
+	display: none;
+}
+.mui-table-view:after{
+	background-color:#f4f8ff;
+}
+.mui-table-view:before{
+	background-color:#f4f8ff;
+}
+.itemIndex{
+	width: .15rem;
+	height: .15rem;
+}
+.specialWidth{
+	width: 50%;
+}
+.mui-flex .mui-control-item{
+	width: 25%;
+}
+.mui-flex .mui-control-item:nth-of-type(2){
+	width: 50%;
+}
+*{ touch-action: none; }
+.uniform{
+	width: 100%;
+}
+.addlogo{
+	width: 0.2rem;
+	height: 0.2rem;
+	border:1px solid #39A4F2;
+	border-radius: 50%;
+}
+.mui-flex .mui-table-view-cell{
+	width: 33.3%;
+}
+.mui-table-view.mui-flex{
+	width: 100%;
+	flex-wrap: wrap;
+}
+.shop-car{
+	width: 0.4rem;
+}
+.number{
+	background-color:red;
+	position: absolute;
+	top: 0;
+	left:.4rem;
+	width: 0.18rem;
+	height: 0.18rem;
+	text-align: center;
+	line-height: 0.18rem;
+	border-radius: 50%;
+	color: white;
+}
+.margin-top-negative{
+	margin-top:-.25rem;
+	border-radius: .05rem;
+	width:1rem;
+	height:1rem;
+	margin-left: 0.3rem
+}
+.overflow_none{
+	overflow: visible!important;
+}
+.typeLabel{
+	/*overflow: hidden;*/
+	padding: .1rem 0;
+}
+#singleNum{
+	width:.3rem;
+	padding: .02rem .04rem;
+	border: none;
+	height: auto;
+	margin-bottom: 0;
+	text-align: center;
+}

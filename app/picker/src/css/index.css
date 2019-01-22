@@ -1,0 +1,68 @@
+.mui-bar-nav{
+			background: #39A4F2;
+		}
+		.mui-bar-nav a,.mui-bar-nav p{
+			color: #fff;
+		}
+		
+		.main-btns{
+			background: #fff;
+			padding-top: 0.2rem ;
+			padding-bottom: 0.2rem;
+			border-bottom-left-radius: 0.2rem;
+			border-bottom-right-radius: 0.2rem;
+		}
+		ul{
+			list-style: none;
+		}
+		.item-pic{
+			height: 2rem;
+		}
+		.item-pic img{
+			height: 100%;
+		}
+		.pics{
+			padding: 0;
+			display: flex;
+			justify-content: space-around;
+		}	
+		.pics2 li .pic{
+			width: 0.45rem;
+			height: 0.45rem;
+			background: -webkit-linear-gradient(left,#E9EABE, #CEC79A); /* Safari 5.1 - 6.0 */
+		    background: -o-linear-gradient(left,#E9EABE, #CEC79A); /* Opera 11.1 - 12.0 */
+		    background: -moz-linear-gradient(left,#E9EABE, #CEC79A); /* Firefox 3.6 - 15 */
+		    background: linear-gradient(left,#E9EABE, #CEC79A); /* 标准的语法（必须放在最后） */
+			margin-bottom: 0.1rem;
+		}
+		.pics3 li .pic{
+			border: none;
+		}
+		.pics li{
+			width: 0.8rem;
+			height: 0.8rem;
+		}
+		.pic{
+			margin:auto;
+			width: 0.6rem;
+			height: 0.6rem;
+			border-radius: 50%;
+		}
+		.pic img{
+			    width: 80%;
+			    margin-left: 10%;
+			    margin-top: 10%;
+		}
+		.pic-text{
+			text-align: center;
+		}
+		.line-pic{
+			height: 0.5rem;
+			background: -webkit-linear-gradient(left,#97D8FE, #7CAAE7); /* Safari 5.1 - 6.0 */
+		    background: -o-linear-gradient(left,#97D8FE, #7CAAE7); /* Opera 11.1 - 12.0 */
+		    background: -moz-linear-gradient(left,#97D8FE, #7CAAE7); /* Firefox 3.6 - 15 */
+		    background: linear-gradient(left,#97D8FE, #7CAAE7); /* 标准的语法（必须放在最后） */
+		}
+		.mui-bar{
+			box-shadow: none;
+		}

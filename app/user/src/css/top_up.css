@@ -1,0 +1,89 @@
+p{margin: 0;}
+.show-img{
+	height: 1.8rem;
+	width: 100%;
+}
+.show-img img{
+	height: 100%;
+	width: 100%;
+}
+.icon{
+	width: 0.3rem;
+	height: 0.3rem;
+	margin-top: 0.05rem;
+}
+label p{
+	margin-left: 0.1rem;
+}
+.icon img{
+	width: 100%;
+}
+.mui-input-group:after{
+	background-color: rgb(244,248,255);
+}
+.mui-input-group:before{
+	background-color: rgb(244,248,255);
+}
+.mui-input-group{
+	background-color: rgb(244,248,255);
+	margin-top: 0.2rem;
+}
+.mui-input-group .mui-input-row{
+	background: #fff;
+	margin-bottom: 2px;
+}
+button[type=submit]{
+	margin-top: 0.3rem;
+	width: 80%;
+	margin-left:auto;
+	margin-right: auto;
+	background: rgb(57,164,242);
+	padding: 10px 0;
+}
+.mui-input-row label{
+	padding: 0 15px;
+}
+.mui-checkbox label, .mui-radio label{
+	display: flex;
+}
+.mui-checkbox label, .mui-radio label p{
+	line-height: 40px;
+}
+.mui-checkbox label p:last-child{
+	margin-left: 0.1rem;
+	color: #333;
+}
+.mui-checkbox label input{
+	font-size: 14px;
+}
+.balance{
+	line-height: 40px;
+	padding: 0 15px;
+	color: #333;
+	font-size: 18px;
+}
+.top-tit{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0.15rem;
+	background: #fff;
+	margin-bottom: 2px;
+	height: 0.4rem;
+	line-height: 0.38rem;
+}
+.top-tit-text{
+	font-size: 0.16rem;
+}
+.recharge-card{
+	background: #ffb400;
+	color:#fff;
+	border-radius: 0.15rem;
+	height: 0.3rem;
+	padding: 0 5px;
+	margin-top: 0.05rem;
+	line-height: 0.3rem;
+}
+#balance{
+	color: #ffb400;
+	font-size: 0.18rem;
+}

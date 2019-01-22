@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/mui.poppicker.css"/>
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/earnings.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style type="text/css">
+			.top{padding: 0.5rem 0.2rem 0.4rem 0.2rem;text-align: center;}
+			.top p:first-child{font-size: 0.2rem;}
+			.top p:first-child span{font-size:0.3rem;color:#333;}
+			.top p:last-child{font-size:0.16rem;}
+			.mui-btn-block{width: 90%;margin:0.5rem auto;padding: 0.06rem 0.12rem;}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="promote.html"></a>
+			<p class="mui-title blue">结算中心</p>
+		</header>
+		<div class="mui-content">
+			<div class="top">
+				<p>￥<span id="price">0.00</span></p>
+				<p>可提现金额</p>
+			</div>
+
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="put-record.html">提现记录</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="income-detail.html">收入明细</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="rule-cash.html">提现规则</a>
+				</li>
+			</ul>
+			
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit">提现</button>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+		var url=globalUrl+"/rewardFunds/getRewardFunds";
+		var data={};
+		enAjax(url,'get',true,data,getMoneyNum,null,false);
+		function getMoneyNum(data){
+		    console.log(data);
+		    $("#price").html(data.data.money);
+		    $.cookie("putMoney",data.data.money);
+		}
+
+		$("#submit").on("tap",function(){
+            var url2=globalUrl+"/rewardFunds/checkPutDay";
+            enAjax(url2,'get',true,{},function(data){
+                console.log(data);
+                if(data.code==-1){
+                    mui.toast(data.message);
+                    return;
+                }
+                window.location.href="put-forward.html";
+            },null,false);
+		});
+
+	</script>
+</html>

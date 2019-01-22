@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/top_up.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			#moneyMsg{
+				display: flex;
+				justify-content: space-around;
+				background: #fff;
+			}
+			#moneyMsg p{
+				width:50%;
+				font-size: 0.15rem;
+				color: #333;
+				font-weight: bold;
+				padding:0.2rem 0 0.2rem 0.2rem;
+			}
+			#moneyMsg p span{
+				color: #ffb400;
+				font-size:0.18rem;
+			}
+			.recharge-type{
+				margin-top:0.1rem;
+			}
+			.recharge-type .type1{
+				display: flex;
+				width:100%;
+				padding:0.1rem 0.2rem;
+				background: #fff;
+				margin-bottom:2px;
+				height:0.5rem;
+			}
+			.recharge-type .type1:active{
+				background: #ccc;
+			}
+			.recharge-type .type1 .icon-text{
+				line-height: 35px;
+				text-indent: 10px;
+			}
+			#tip{
+				width:86%;
+				margin:20px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="../mine.html"></a>
+			<p class="mui-title blue">充值中心</p>
+		</header>
+		<div class="mui-content">
+			<div id="moneyMsg">
+				<p>会员余额：<span id="userPrice">0.00</span>元</p>
+				<p>折扣卡余额：<span id="cardPrice">0.00</span>元</p>
+			</div>
+			<div class="recharge-type">
+				<a href="top_up.html">
+					<div class="type1">
+						<p class="icon"><img src="../../../public/img/mine/recharge1.png" alt=""></p>
+						<p class="icon-text">会员充值</p>
+					</div>
+				</a>
+				<a href="saving-card.html">
+					<div class="type1">
+						<p class="icon"><img src="../../../public/img/mine/recharge2.png" alt=""></p>
+						<p class="icon-text">折扣卡充值</p>
+					</div>
+				</a>
+				<div class="type1" id="cam-recharge">
+					<p class="icon"><img src="../../../public/img/mine/recharge2.png" alt=""></p>
+					<p class="icon-text">折扣卡卡密充值</p>
+				</div>
+			</div>
+			<div id="tip">
+				<p>温馨提示：</p>
+				<p>1、会员充值的余额适用于全商品。会员充值后可以在会员专区购买会员专享的产品</p>
+				<p>2、折扣卡充值的金额不可在会员专区、奢侈品洗护、真丝蚕丝洗护区域使用。其他其余均享受对应折扣。</p>
+				<p>3、充值后余额无变化请联系常洗客服。</p>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+		$(function(){
+		/**
+         * 获取会员余额
+         */
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+        allBalance()
+		});
+
+		$("#cam-recharge").on("tap",function(){
+            mui.prompt("请输入折扣卡兑换码","兑换码","兑换码",["取消","确定"],function(e){
+                if(e.index==1){
+                    cardId=e.value;
+                    $.ajax({
+                        url:globalUrl+'/rechargeCard/useRechargeCard',
+                        type:'post',
+                        async:false,
+                        data:{cardId:cardId},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("token", $.cookie("token"));
+                        },
+                        crossDomain: true,
+                        success:function(data){
+                            console.log(data);
+                            if(data.state==200){
+                                allBalance();
+                                mui.alert(data.msg);
+                            }else{
+                                mui.alert(data.msg);
+							}
+                        }
+                    })
+                }else{
+
+                }
+            });
+		});
+
+	function allBalance(){
+        $.ajax({
+            url:globalUrl+'/balance/getBalanceByUserId',
+            type:'get',
+            async:false,
+            data:{
+                userId:$.cookie("userId")
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:function(data){
+                console.log(data);
+                $("#userPrice").html(data.money.toFixed(2));
+                $("#cardPrice").html(data.disMoney.toFixed(2));
+            }
+        });
+	}
+
+	</script>
+</html>

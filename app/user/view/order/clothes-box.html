@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../src/css/clothes.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			<p class="mui-title blue">洗衣筐</p>
+			<a class="mui-pull-right ok">删除</a>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>全选</label>
+				<input name="checkbox" value="Item 1" type="checkbox" id="chose-all" checked>
+			</div>
+			<div class="bot-right">
+				<p>总价：<span id="all-price">0.00</span></p>
+				<a>
+					<div id="check-out" class="check-out">结算</div>
+				</a>
+			</div>
+		</nav>
+		<div class="mui-content">
+			<ul class="clothes">
+				<form class="mui-input-group" id="shop-car">
+					<!--<li>
+						<div class="mui-checkbox">
+							<label></label>
+							<input name="checkbox" type="checkbox">
+						</div>
+						<div class="clothes-pic"><img src="../../img/c.png" alt="" /></div>
+						<div class="clothes-name">
+							<p>T恤1</p>
+							<p>￥<span>0.00</span></p>
+						</div>
+						<div>
+							<p class="tail-mes">2321323121</p>
+							<div class="mui-numbox" data-numbox-min=1>
+								<button class="mui-btn btn-num btn-reduce">-</button>
+								<input class="mui-input-numbox" type="number">
+								<button class="mui-btn btn-num btn-add">+</button>
+							</div>
+						</div>
+					</li>-->
+				</form>
+			</ul>
+		</div>
+		</div>
+		
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+	<script src="../../src/js/clothes-box.js"></script>
+</html>

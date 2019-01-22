@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../src/css/vip.css" />
+		<link rel="stylesheet" href="../../src/css/wash-chose.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/jquery-addShopping.js"></script>
+		<style>
+			ul{
+				margin:0;
+				padding:0;
+			}
+			.menu-box{
+				width:100%;
+				height:0.4rem;
+				overflow: hidden;
+				position: fixed;
+			}
+			.menu-list{
+				display:flex;
+				position: absolute;
+			}
+			.menu-list li{
+				text-align: center;
+			}
+			.menu-list .menu-active{
+				border-bottom:2px solid #4d93f7;
+			}
+			.con-list li{
+				display: none;
+			}
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item{
+				padding:0;
+			}
+			#vip-banner{
+				display: none;
+
+			}
+			#vip-banner {
+				width:100%;
+				height:0.8rem;
+			}
+			#vip-banner .mui-slider-loop .mui-slider-item{
+				height:0.8rem;
+			}
+			#vip-banner .mui-slider-loop .mui-slider-item img{
+				width:100%;
+				height:100%;
+			}
+			.mui-slider-indicator{
+				position: inherit;
+				display: block;
+			}
+			.u-flyer{
+				width:0.5rem;
+				height:0.5rem;
+				overflow: hidden;
+				border:2px solid #4d93f7;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+			}
+			.u-flyer img{
+				width:100%;
+				height:100%;
+			}
+
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
+			<p class="mui-title blue">专业日常清洗</p>
+		</header>
+
+		<nav class="mui-bar mui-bar-tab bot-nav bot">
+			<div class="full-remind">单笔订单满<span style="color: #9f0d10;font-weight: bold;"> 72 </span>元免运费</div>
+			<div class="chose-items" id="icon-car">
+				<!--<a href="clothes-box.html">-->
+					<div id="shop-car" class="chose-pic"><img src="../../../public/img/order/shop-car.png" alt="" /><span id="item-num" class="mui-badge mui-badge-danger">0</span></div>
+				<!--</a>-->
+				<p id="all-price" class="chose-price">￥<span>0.00</span></p>
+			</div>
+			<a><button class="mui-btn mui-btn-primary" id="submit">下单取件</button></a>
+		</nav>
+		<div class="mui-content" style="padding-bottom: 1rem; position: relative;">
+			<div class="menu-box mui-slider" id="slider">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="menu-list mui-scroll mui-scroll1 slidertab">
+						<!--<li>会员洗衣</li>-->
+						<!--<li class="menu-active">日常洗衣</li>-->
+						<!--<li>鞋类洗涤</li>-->
+						<!--<li>皮衣皮草</li>-->
+						<!--<li>窗帘家纺</li>-->
+					</div>
+				</div>
+
+			</div>
+			<ul class="con-list mui-slider-group" style="padding-top: 0.45rem;">
+				<!--会员专区轮播图-->
+				<div class="mui-slider" id="vip-banner">
+					<div class="mui-slider-group mui-slider-loop"></div>
+				</div>
+				<div id="unOpened" style='display: none; z-index:9999;width: 100%; height: calc(100% - 1.44rem); position: absolute; top:0.84rem; left: 0; background: rgba(0,0,0,0.6);'><h1 style='color: #fff; text-align: center; margin-top:1rem;'>该区域未开放</h1><h1 style='color: #fff; text-align: center;'>敬请期待</h1></div>
+			</ul>
+		</div>
+		<div id="vip-mask">
+			<div id="mask-con">
+				<p class="mui-pull-right close-btn" onclick="closeModal()">关闭</p>
+				<div class="mask-pic"><img src="../../../public/img/order/tip-vip.png" alt=""></div>
+				<div class="vip-text">
+					<p>抱歉！这是会员专享商品.</p>
+					<p>请您先充值300元成为会员</p>
+				</div>
+				<p class="go-vip"><a href="../user-center/top_up.html">充值成为会员</a></p>
+				<p class="go-buy">非会员点此购买</p>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script src="../../../public/js/jquery.fly.min.js"></script>
+	<script>
+		var id=getQueryString("id");
+		var city=$.cookie("now");
+		weixinReload();
+		$(function(){
+            $("#nowCity").html($.cookie("now"));
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
+		    //VIP轮播图
+			$.ajax({
+				url:globalUrl+"/rotationMap/getRotaionMapAll",
+				async:false,
+				data:{type:'VIP'},
+				success:function(data){
+//				    console.log(data);
+				    for(var i=0;i<data.data.length;i++){
+				        var item='<div class="mui-slider-item"><img src="http://'+data.data[i].imgUrl+'"/></div>';
+				        $(item).appendTo($("#vip-banner .mui-slider-loop"));
+					}
+					var vipbanner1='<div class="mui-slider-item"><img src="http://'+data.data[0].imgUrl+'"/></div>';
+                    $(vipbanner1).appendTo($("#vip-banner .mui-slider-loop"));
+                    var vipbanner2='<div class="mui-slider-item"><img src="http://'+data.data[data.data.length-1].imgUrl+'"/></div>';
+                    $(vipbanner2).prependTo($("#vip-banner .mui-slider-loop"));
+				}
+			});
+            var gallery = mui('.mui-slider');
+            gallery.slider({
+                interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+            });
+
+            var listWidth=$(".menu-box").width();
+            var url=globalUrl+"/headTitle/getHeadTitleNomal";
+            enAjax(url,'get',true,{},function(data){
+//                console.log(data);
+                for(var i=0;i<data.data.length;i++){
+                    if(id==data.data[i].type){
+                        var list='<a class="mui-control-item mui-active" data-type="'+data.data[i].type+'" state="'+data.data[i].state+'">'+data.data[i].titleName+'</a>';
+                        $("header .mui-title").html(data.data[i].titleName);
+                        var listCon='<li class="vip-con mui-slider-item mui-control-content mui-active" data-type="'+data.data[i].type+'"></li>';
+                    }else{
+                        var list='<a class="mui-control-item" data-type="'+data.data[i].type+'" state="'+data.data[i].state+'">'+data.data[i].titleName+'</a>';
+                        var listCon='<li class="vip-con mui-slider-item mui-control-content" data-type="'+data.data[i].type+'"></li>'
+                    }
+
+                    $(list).appendTo($(".menu-list"));
+                    $(listCon).appendTo($(".con-list"));
+
+                }
+
+                if(id==9||id==1){
+//                    $("#unOpened").hide();
+                    for(var i=0;i<$(".mui-control-item").length;i++){
+                        $(".mui-control-item").removeClass("mui-active");
+						$(".mui-control-item[data-type=9]").addClass("mui-active");
+                        $(".vip-con").removeClass("mui-active");
+                        $(".vip-con[data-type=9]").addClass("mui-active");
+                        $("#vip-banner").show();
+					}
+                    getItem(9,$(".con-list li[data-type=9]"));
+				}
+				else if(id==8){
+                    for(var i=0;i<$(".mui-control-item").length;i++){
+                        $(".mui-control-item").removeClass("mui-active");
+                        $(".mui-control-item[data-type=8]").addClass("mui-active");
+                        $(".vip-con").removeClass("mui-active");
+                        $(".vip-con[data-type=8]").addClass("mui-active");
+                    }
+                    getItem(8,$(".con-list li[data-type=8]"));
+                    $("#unOpened").show();
+                }
+                else if(id==10){
+                    for(var i=0;i<$(".mui-control-item").length;i++){
+                        $(".mui-control-item").removeClass("mui-active");
+                        $(".mui-control-item[data-type=10]").addClass("mui-active");
+                        $(".vip-con").removeClass("mui-active");
+                        $(".vip-con[data-type=10]").addClass("mui-active");
+                    }
+                    getItem(10,$(".con-list li[data-type=10]"));
+                    $("#unOpened").show();
+                }
+				else{
+                    getItem(id,$(".con-list li[data-type="+id+"]"));
+                    for(var i=0;i<$(".slidertab .mui-control-item").length;i++){
+                        if($(".slidertab .mui-control-item").eq(i).hasClass("mui-active")){
+                            if($(".slidertab .mui-control-item").eq(i).attr("state")=="CLOSE"){
+//                                $("body").css("overflow","hidden");
+                                $("#unOpened").show();
+							}
+						}
+					}
+                }
+
+
+                $(".menu-list a").css("width",listWidth/4+"px");
+                $(".menu-list").css("width",listWidth/4*data.data.length);
+
+            },null,false);
+
+		});
+
+		$(".go-buy").on("tap",function(){
+            	closeModal();
+                $(".mui-control-item").removeClass("mui-active");
+                $(".mui-control-item[data-type=1]").addClass("mui-active");
+                $(".vip-con").removeClass("mui-active");
+                $(".vip-con[data-type=1]").addClass("mui-active");
+            getItem(1,$(".con-list li[data-type=1]"));
+		});
+
+		//选择菜单
+        $(".menu-list").on("tap","a",function(){
+			var state=$(this).attr("state");
+            var type=$(this).attr("data-type");
+            var i=$(this).index();
+            if(type==9){
+                $("#vip-banner").show();
+			}else{
+                $("#vip-banner").hide();
+			}
+			if(state==0){
+                $("#unOpened").hide();
+                $("header .mui-title").html($(this).html());
+                $(".menu-list a").removeClass("mui-active");
+                $(".menu-list a").eq(i).addClass("mui-active");
+                $(".con-list li").removeClass("mui-active");
+                $(".con-list li").eq(i).addClass("mui-active");
+                var obj=$(".con-list li[data-type="+type+"]");
+                getItem(type,obj);
+			}else if(state==1){
+                $("header .mui-title").html($(this).html());
+                $(".menu-list a").removeClass("mui-active");
+                $(".menu-list a").eq(i).addClass("mui-active");
+                $(".con-list li").removeClass("mui-active");
+                $(".con-list li").eq(i).addClass("mui-active");
+                var obj=$(".con-list li[data-type="+type+"]");
+                getItem(type,obj);
+                $("#unOpened").show();
+			}
+
+        });
+
+        //关闭弹层
+		function closeModal(){
+            $("body").css('overflow','hidden').css('height','100%');
+            $("#vip-mask").css("display","none");
+            bol=true;
+		}
+
+        //添加商品
+		var bol=true;
+        $(".con-list").on("tap", ".vip-con .adds", function () {
+            if(!bol){
+                return false;
+            }
+            bol=false;
+
+			var thisAdd=$(this);
+
+//            var top=thisAdd.position().top;
+
+//            console.log(city);
+			if(searchOpenCity(city)){
+			    mui.toast("该城市目前未开放服务，敬请期待...");
+			    return false;
+			}else{
+                var left=thisAdd.offset().left;
+                var ofTop=thisAdd.offset().top;
+                var carTop=$("#icon-car").offset().top;
+                var carLeft=$("#icon-car").offset().left;
+                _goodsId = $(this).parent().parent().attr("data-id");
+                var _type=$(this).parent().parent().parent().attr("data-type");
+                var urlVip=globalUrl+"/userInfo/checkState";
+                enAjax2(urlVip,'get',true,{},function(data){
+                    if(_type==9&&data.data.vip==0){
+                        $('body').css("overflow","hidden");
+                        $("#vip-mask").css("display","block");
+
+                    }else{
+//                        addFly(thisAdd,left,top);
+                        var join='<div style="width: 0.25rem;height:0.25rem;position:absolute;top:'+(ofTop-80)+'px;left:'+left+'px;border: 1px solid #39a4f2;background:#39a4f2;border-radius: 50%;"><img style="width: 100%;" src="../../../public/img/order/shopcar.png" alt=""></div>';
+                        $(join).appendTo($(".vip-con")).animate({top:(carTop)+"px",left:carLeft+"px"},function(){
+                            $(this).hide();
+						});
+
+//                        if(_goodsId==11){
+//                            setTimeout(function(){
+//                                bol=true;
+//							},500);
+////							console.log(thisAdd);
+//                            var url=globalUrl+'/orderform/putCart';
+//                            var data=JSON.stringify({goodsId:_goodsId, commodityCount: "1", washMode: []});
+//                            contentAjax2(url,'post',true,data,function(data){
+//                                console.log(data);
+//                                $.ajax({
+//                                    url:globalUrl+'/order/creatOrder',
+//                                    type:'post',
+//                                    //type=2 顺丰专享优惠券
+//                                    data:{carts:_goodsId,type:2},
+//                                    beforeSend: function (xhr) {
+//                                        xhr.setRequestHeader("token", $.cookie("token"));
+//                                    },
+//                                    success:function(data){
+//
+//                                        window.location.href="order-pay.html?id="+data.data;
+//                                    }
+//                                })
+//                            },null,false);
+//
+//                        }
+//                        else{
+                            setTimeout(function(){
+                                bol=true;
+                            },10);
+                            var url=globalUrl+'/orderform/putCart';
+                            var data=JSON.stringify({goodsId:_goodsId, commodityCount: "1", washMode: []});
+                            contentAjax2(url,'post',true,data,function(data){
+                                carPrice()
+                            },null,false);
+//                        }
+                    }
+                },null,false);
+			}
+        });
+
+        //进购物车
+        $("#shop-car").on("tap", function () {
+            var token = $.cookie('token');
+            if (token) {
+                window.location.href = "clothes-box.html";
+            } else {
+                window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Forder%2Fclothes-box.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            }
+        });
+
+        //点击提交
+        $("#submit").on("tap", function () {
+            var url = globalUrl + '/orderform/getCartsByUserId';
+            var data = {userId: userId};
+            enAjax(url, 'get', true, data, subMes, null, false);
+            function subMes(data) {
+                console.log(data);
+
+                var order = [];
+                for (var i = 0; i < data.length; i++) {
+                    var goodsId = data[i].goodsId;
+                    var num = data[i].commodityCount;
+                    var partsIds = [goodsId];
+                    for (var j = 0; j < data[i].washMode.length; j++) {
+                        var partsChild = data[i].washMode[j].id;
+                        partsIds.push(partsChild);
+                    }
+                    var splic = partsIds.join("-");
+                    order.push(splic);
+                }
+                var orderString = order.toString();
+                console.log(orderString);
+                if (orderString == "") {
+                    mui.alert("请选择商品");
+                } else {
+                    $.ajax({
+                        url: globalUrl + '/order/creatOrder',
+                        type: 'post',
+                        data: {carts: orderString},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("token", $.cookie("token"));
+                        },
+                        crossDomain: true,
+                        success: function (data2) {
+                            console.log(data2);
+                          window.location.href = "order-pay.html?id=" + data2.data;
+                        }
+                    })
+                }
+            }
+        });
+
+        function getItem(type,Obj) {
+            $.ajax({
+                url: globalUrl + '/goods/getGoodsByType',
+                data: {type: type},
+                type: 'get',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success: function (data) {
+//                    console.log(data);
+                    $(".vip-con").html("");
+                    var item = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var img = data[i].goodsPicture ? "http://" + data[i].goodsPicture : '../../../public/img/order/pic.png';
+                        item += '<div class="vip-item" data-id="' + data[i].id + '" type="' + data[i].goodsType + '">' +
+                            '<span class="mui-badge mui-badge-danger goodsNum"></span>'+
+                            '<div class="vip-item-pic"><a href="commodity-detail.html?id=' + data[i].id + '"><img src="' + img + '" alt="" /></a></div>' +
+                            '<p class="item-name">' + data[i].goodsName + '</p>' +
+                            '<div class="item-price">' +
+                            '<div class="all-price">' +
+                            '<p class="now-price">￥<span>' + data[i].goodsPrice + '</span></p>' +
+                            '</div>' +
+                            '<div class="adds"><img src="../../../public/img/picker/add.png" alt="" /></div>'+
+                            '</div>' +
+                            '</div>';
+                    }
+
+                    $(Obj).append(item);
+                    carPrice();
+                }
+            })
+        }
+
+        //获取购物车的数量和总价
+        function carPrice(){
+            var url=globalUrl+'/orderform/getCartsByUserId';
+            var data={userId:userId};
+            enAjax2(url,'get',true,data,getCarNumPrice,null,true);
+
+            function getCarNumPrice(data){
+//                console.log(data);
+                testDiv(data);
+                var hisNum=0;
+                var hisPrice=0;
+                for(var i=0;i<data.length;i++){
+                    hisNum+=parseFloat(data[i].commodityCount);
+                    hisPrice+=parseFloat(data[i].price);
+                }
+                $("#item-num").html(hisNum);
+                $("#all-price span").html(hisPrice.toFixed(2));
+            }
+        }
+
+        function testDiv(data){
+            if(data){
+                for(var i=0;i<data.length;i++){
+                    // 获取商品id
+                    var goodsId = data[i].goodsId;
+                    var count = data[i].commodityCount;
+                    if(count!=0){
+                        $("div.vip-item[data-id="+goodsId+"]").find(".goodsNum").text(count).css("display","block");
+                    }else{
+                        $("div.vip-item[data-id="+goodsId+"]").find(".goodsNum").css("display","none");
+                    }
+                }
+            }
+        }
+        function searchOpenCity(cityName){
+            var url=globalUrl+"/city/checkCityOpen";
+            var data={cityName:cityName};
+            enAjax2(url,'get',true,data,function(data){
+//                console.log(data);
+                if(data.data){
+					return true
+				}else{
+					return false
+				}
+            },null,false);
+		}
+
+		function addFly(obj,left,top){
+            var offsetLeft=$("#shop-car").offset().left;
+            var offsetTop=$("#shop-car").offset().top;
+            var img=$(obj).parent().parent().find($(".vip-item-pic a img")).attr("src");
+            var flyImg = $('<div class="u-flyer"><img src="'+img+'"/></div>');
+            console.log(event);
+            flyImg.fly({
+				start:{
+				    left:left-50,
+					top:top-100
+				},
+				end:{
+					left:offsetLeft,
+					top:offsetTop,
+					width:25,
+					height:25
+				},
+            })
+		};
+	</script>
+</html>

@@ -1,0 +1,112 @@
+p{
+	margin: 0;
+}
+ul{margin: 0;}
+.chose{
+	height: 0.5rem;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+}
+.chose p{
+	font-size: 0.18rem;
+	line-height: 0.6rem;
+	padding-left: 0.1rem;
+	padding-right: 0.1rem;
+	padding-bottom: 0.5rem;
+}
+.chose .chose-active{
+	border-bottom: 0.03rem solid #39A4F2;
+}
+.mui-card-content{
+	width: 100%;
+}
+.chose-con{
+	display: none;
+	margin-bottom: 0.5rem;
+}
+.mui-content .con-active{
+	display: block;
+}
+.mess{
+	padding: 0;
+}
+.mess li{
+	margin-bottom: 0.08rem;
+	width: calc(100% - 0.3rem);
+	background: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.1rem 0.15rem 0.1rem 0.1rem;
+	border-radius:0.1rem;
+	display: flex;
+	justify-content: center;
+}
+.mess li .mess-icon{
+	width: 0.25rem;
+	margin-right: 0.1rem;
+}
+.mess li .mess-icon p{
+	width: 0.25rem;
+	height: 0.25rem;
+	margin-top: 0.13rem;
+}
+.mess li .mess-icon p img{
+	width:100%;
+}
+
+.mess li .mess-txt .top-text{
+	display: flex;
+	justify-content: space-between;
+}
+.mui-card-content img{
+	width: 100%;
+}
+.mui-card-content-inner{
+	padding:0;
+}
+.mui-card-footer:before, .mui-card-header:after{
+	height: 0;
+}
+.mui-card-footer{
+	font-size: 0.16rem;
+	color: #333;
+}
+.mui-card-content{
+	width: calc(100% - 0.3rem);
+	margin: auto;
+}
+.card-tit{
+	font-size:0.16rem;
+	color: #333;
+}
+.top-btn{
+	font-size:0.16rem;
+	background: #4d93f7;
+	color: #fff;
+	padding: 0.02rem;
+	border-radius: 0.05rem;
+}
+.mui-bar-tab~.mui-content{
+	padding-bottom:0px;
+}
+.mui-content{
+	margin-bottom: 0.6rem;
+	margin-top: 0.6rem;
+}
+.chose{
+	width: 100%;
+	position: fixed;
+	top: 0.44rem;
+	z-index: 9999;
+}
+#mess{
+	margin-top: 0.5rem;
+}
+.mui-content {
+    margin-bottom: 0.5rem;
+    margin-top: 0.6rem;
+}
+ul li .mess-txt{
+	width: calc(100% - 0.25rem);
+}

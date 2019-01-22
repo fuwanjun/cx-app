@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" href="../../src/css/clothes.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+
+		<style>
+			body{background: #fff;}
+			.mui-content{padding: 0.3rem 0.15rem;background: #fff;}
+			.text-tit{font-size: 0.15rem;color: #08aaf5;text-align: center;padding: 0.3rem 0;}
+			.text-con{font-size: 0.14rem;line-height: 0.25rem;margin-bottom: 0.2rem;}
+			#submit{padding: 0.1rem 0;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			<p class="mui-title blue">提现规则</p>
+		</header>
+		<div class="mui-content">
+			<p class="text-tit">注意事项</p>
+			<p class="text-con">1、您每个月有一次申请提现的机会，第一次提现日期为11-13日，申请成功后其提现金额于该月15日统一到达您的申请提现账户中。</p>
+			<p class="text-con">2、如您当月未申请提现，则收成累积到下一个自然月进行提现</p>
+			<p class="text-con" style="letter-spacing: 3px;">3、若在申请过程中遇到异常情况敬请联系我们 0519-400</p>
+			<a href="put-forward.html"><button id="submit" type="button" class="mui-btn mui-btn-primary mui-btn-block">立即提现</button></a>
+		</div>
+		
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+</html>

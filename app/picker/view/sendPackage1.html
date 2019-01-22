@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<link rel="stylesheet" href="../src/css/fetchPackage.css"/>
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<style>
+			html body .wrap{
+				width:100%;
+				height:100%;
+			}
+			.wrap {
+				overflow-y: scroll;
+				-webkit-overflow-scrolling: touch;
+			}
+			.mui-bar{
+				position: absolute;
+			}
+
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<!--<div class="wrap">-->
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-back" href="index.html"></a>
+				<p class="mui-title">送件</p>
+			</header>
+			<div class="mui-content">
+				<div id="top">
+					<div class="bg-white mui-flex mui-flex-halign-center border-bottom-tiny-blue searchBox">
+						<div>
+							<span>总数：</span>
+							<span id="mesNum">0</span>
+						</div>
+						<div class="areaSelect">
+							<input type="text" placeholder="请输入关键字" style="margin-bottom: 0;"/>
+						</div>
+						<div>
+							<i class="mui-icon mui-icon-search"></i>
+						</div>
+					</div>
+					<div class="bg-white" style="padding:0 10px">
+						<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+							<a class="mui-control-item chose-btn mui-active" href="sendPackage1.html">
+								待送
+							</a>
+							<a class="mui-control-item chose-btn" href="sendPackage2.html">
+								在送
+							</a>
+							<a class="mui-control-item chose-btn" href="sendPackage3.html">
+								已送
+							</a>
+						</div>
+						<!--<div class="sortBox mui-flex" style="padding: 4px 0;border-top: 1px solid #f4f8ff;">-->
+							<!--<div class="mui-text-center flexbox-f1 sort-active" id="earliest">预约最早</div>-->
+							<!--<div class="mui-text-center flexbox-f1">距离最近</div>-->
+						<!--</div>-->
+					</div>
+				</div>
+
+				<div id="item1" class="mui-content mui-scroll-wrapper" style="margin-top: 1.8rem;">
+					<ul class="mui-table-view mui-scroll"></ul>
+				</div>
+				<!--<div id="item2" class="mui-content mui-scroll-wrapper">-->
+				<!--<ul class="mui-table-view mui-scroll"></ul>-->
+				<!--</div>-->
+				<!--<div id="item3" class="mui-content mui-scroll-wrapper">-->
+				<!--<ul class="mui-table-view mui-scroll"></ul>-->
+				<!--</div>-->
+			</div>
+		<!--</div>-->
+
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../public/js/public.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+	<script>
+
+        weixinReload();
+            mui.init({
+                pullRefresh:{
+                    container:'#item1',
+                    up:{
+                        height:50,
+                        auto:true,
+                        contentrefresh:'正在加载...',
+                        contentnomore:'没有更多数据',
+                        callback:pullupRefresh1
+                    }
+                }
+            });
+		$("#item1 ul").on("tap",".detail-mes",function(){
+		    var orderId=$(this).attr("orderId");
+			mui.prompt("提示","请输入运单号码","运单号",["取消","确定"],function(e){
+			    var orderNum=e.value;
+                if(e.index==0){
+                    window.location.reload();
+                }
+			    if(e.index==1){
+			        if(e.value !=""){
+                        sealNum(orderId,orderNum);
+					}else{
+			            mui.alert("运单号不能为空");
+					}
+
+				}
+			});
+            return false
+		});
+		$("#item1").on("tap",".mui-table-view-cell",function(){
+		   	var goId=$(this).attr("orderId");
+		   	window.location.href="packageDetail.html?status=40&orderId="+goId;
+		});
+
+        var page=1,data={};
+        function pullupRefresh1(){
+            $.ajax({
+                type:"get",
+                url:globalUrl+"/sender/listByStatus",
+                data:{page:page,status:40},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function(data){
+                    console.log(data);
+                    mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
+                    $("#mesNum").html(data.data.total);
+//                    $("#item1 ul").html("");
+                    if(data.data.list==0){
+                        var tipMessage='<p style="text-align:center;margin-top:0.3rem;background:#f4f8ff;">没有未取订单</p>';
+                        $(tipMessage).appendTo($("#item1 ul"));
+                    }
+                    for(var i=0;i<data.data.list.length;i++){
+                        var address="";
+                        var detailAddress="";
+                        var userName="";
+						if(data.data.list[i].address){
+						 	if(data.data.list[i].address.region){
+                                address=data.data.list[i].address.region;
+							}
+							if(data.data.list[i].address.detailAddress){
+                                detailAddress=data.data.list[i].address.detailAddress;
+							}
+							if(data.data.list[i].address.userName){
+                                userName=data.data.list[i].address.userName;
+							}
+						}else{
+                            address="";
+                            detailAddress="";
+                            userName="";
+						}
+
+                        var item= '<li class="mui-table-view-cell bg-white" orderId="'+data.data.list[i].orderNo+'">'+
+										'<div class="font-size-12 color-666 margin-bottom-r10">'+
+										'<span>订单编号：</span><span>'+data.data.list[i].orderNo+'</span>'+
+										'</div>'+
+										'<div class="mui-flex font-size-14 margin-bottom-r10">'+
+										'<div class="widthLimit"><i class="mui-icon mui-icon-location font-size-16"></i>'+address+detailAddress+'</div>'+
+										//											'<div class="font-size-12">距离1.7km</div>'+
+										'</div>'+
+										'<div class="font-size-12 color-333 margin-bottom-r10">'+
+										'<span class="customerName">'+userName+'</span><span>'+data.data.list[i].address.phone+'</span>'+
+										'</div>'+
+										'<div class="font-size-12 mui-flex" style="justify-content: space-between">'+
+										'<div class="color-666"><span>下单时间：</span><span>'+timestampToTime(data.data.list[i].createTime)+'</span></div>'+
+										'<div class="border-orange" orderId="'+data.data.list[i].orderNo+'">扫运单码</div>'+
+										'<div class="border-blue detail-mes" orderId="'+data.data.list[i].orderNo+'">输运单号</div>' +
+										'</div>'+
+									'</li>';
+                        $(item).appendTo($("#item1 ul"));
+                    }
+                }
+            });
+		}
+
+
+		$.ajax({
+            type : "get",
+            url : globalUrl+"/wechatScanne/scannerQrcode",
+            data : {},
+            dataType : "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+			success:function (res) {
+                data=res.data;
+            }
+		});
+
+		$("#item1 ul").on("tap",".border-orange",function(){
+			var orderId=$(this).attr("orderId");
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: data.appId, // 必填，公众号的唯一标识
+				timestamp: data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: data.nonceStr, // 必填，生成签名的随机串
+				signature: data.signature,// 必填，签名，见附录1
+				jsApiList: [
+					'checkJsApi',
+					'startRecord',
+					'stopRecord',
+					'translateVoice',
+					'scanQRCode',// 微信扫一扫接口
+					'openCard'
+				] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+			wx.ready(function() {
+				wx.scanQRCode({
+					needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+					scanType : [ "qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+					success : function(res) {
+						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+						//window.location.href = result;//因为我这边是扫描后有个链接，然后跳转到该页面
+//                        alert(result);
+						mui.confirm(result,"封签号",["取消","确定"],function(e){
+                            if(e.index==0){
+                                window.location.reload();
+                            }
+							if(e.index==1){
+								sealNum(orderId,result);
+							}
+						})
+					},
+					error : function(){
+
+					}
+				});
+			});
+			return false;
+		});
+
+		//封签号绑定订单
+			function sealNum(orderNo,signNumber){
+                $.ajax({
+                    url:globalUrl+"/sender/pickUpByOrderNO",
+                    type:'post',
+                    data:{orderNo:orderNo,signNumber:signNumber},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success:function(data){
+                        if(data.status==200){
+                            window.location.href="packageDetail.html?status=20&orderId="+orderNo;
+						}else{
+                            mui.toast(data.msg);
+						}
+                    }
+                })
+			}
+
+
+		//定位
+        function hasToken(){
+            $.ajax({
+                type : "get",
+                url : globalUrl+"/wechatLocation/getLocation",
+                data : {},
+                dataType : "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function (res) {
+                    var data=res.data;
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: data.appId, // 必填，公众号的唯一标识
+                        timestamp: data.timestamp , // 必填，生成签名的时间戳
+                        nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                        signature: data.signature,// 必填，签名，见附录1
+                        jsApiList: [ 'checkJsApi', 'openLocation', 'getLocation','translateVoice'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }
+            });
+
+            wx.checkJsApi({
+                jsApiList: ['getLocation'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function(res) {
+                    if (res.checkResult.getLocation == false) {
+                        alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                        return;
+                    }
+                }
+            });
+            var latitude;
+            var longitude;
+            var speed;
+            wx.ready(function(){	    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wx.getLocation({
+                    success : function(res) {
+                        latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        speed = res.speed; // 速度，以米/每秒计
+//                        alert(latitude+"/"+lon
+//                        locationArea(latitude,longitude);
+                    },
+                    cancel : function(res) {
+                        alert('未能获取地理位置');
+                    }
+                });
+            });
+//            wx.error(function(res){	    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+//                alert("验证出错");
+//            });
+        }
+	</script>
+</html>

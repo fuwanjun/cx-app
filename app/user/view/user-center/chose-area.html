@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../../public/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../src/css/top_up.css"/>
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<style>
+			body{
+				background: #fff;
+			}
+			.mui-content{
+				padding:0.15rem;
+				background: #fff;
+			}
+			.citys{
+				display: flex;
+				flex-wrap: wrap;
+				margin:0.2rem 0;
+			}
+			.city{
+				padding:0.05rem 0.1rem;
+				background: #f6f7f9;
+				-webkit-border-radius: 0.05rem;
+				-moz-border-radius: 0.05rem;
+				border-radius: 0.05rem;
+				margin:0.05rem 0.1rem;
+				font-size:0.14rem;
+				color: #333;
+			}
+			.city:active{
+				color: #fff;
+				background: #b6b6b6;
+			}
+			.now-city,.open-citys,.hot-citys,.all-citys{
+				margin-top:0.2rem;
+			}
+			.noCity{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
+			<p class="mui-title blue">城市定位</p>
+		</header>
+		<div class="mui-content">
+			<div class="now-city">
+				<div style="display: flex;justify-content: space-between">
+					<p>当前定位城市</p>
+					<div class="add" id="positionAgain" style="top: 0.4rem; left: 0.1rem; position: inherit">
+						<p class="add-pic" style="width: auto;line-height: 0.2rem;margin-right: 0;">重新定位</p>
+					</div>
+				</div>
+
+				<div class="citys" style="justify-content:space-between">
+					<div id="now"></div>
+					<p class="noCity">该城市暂未开放服务</p>
+				</div>
+			</div>
+
+			<div class="open-citys">
+				<p>已开放服务城市</p>
+				<div class="citys">
+
+				</div>
+			</div>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script>
+        var indexArea=$.cookie("nowPlace")?$.cookie("nowPlace"):"";
+		$(function(){
+            getOpenCity();
+		    var now=$.cookie("now");
+		    $("#now").html(now);
+		    var nowCityName=$("#now").html();
+            searchOpenCity(nowCityName);
+            $(".citys").on("tap",".city",function(){
+                var nowAreaName=$(this).html();
+                $.cookie('nowPlace', '', {path:"/"});
+                $.cookie("nowPlace",EncodeUtf8($(this).html()), {path:"/"});
+
+                window.location.href="../index.html";
+            })
+		});
+		/**
+		 * 重新定位按钮
+		 */
+        $("#positionAgain").on("tap",function(){hasToken()});
+        if(indexArea){
+            $("#area-name").html(indexArea);
+        }else{
+            if(token){
+                hasToken();
+            }
+        }
+
+        /**
+		 * 查询已经开放的城市
+         */
+        function getOpenCity(){
+            var url=globalUrl+"/city/selectOpenCity";
+            enAjax(url,'get',true,{},function(data){
+                console.log(data);
+                for(var i=0;i<data.data.length;i++){
+                    var item='<div class="city">'+data.data[i].cityName+'</div>';
+					$(item).appendTo($(".open-citys .citys"));
+				}
+			},null,false);
+		}
+
+
+		function searchOpenCity(cityName){
+            var url=globalUrl+"/city/checkCityOpen";
+            var data={cityName:cityName};
+            enAjax(url,'get',true,data,function(data){
+                if(!data.data){
+                    $(".noCity").show();
+				}
+            },null,false);
+		}
+
+        /**
+		 * 获取当前定位
+         */
+        function hasToken(){
+            $.ajax({
+                type : "get",
+                url : globalUrl+"/wechatLocation/getLocation",
+                data : {},
+                dataType : "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function (res) {
+                    var data=res.data;
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: data.appId, // 必填，公众号的唯一标识
+                        timestamp: data.timestamp , // 必填，生成签名的时间戳
+                        nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                        signature: data.signature,// 必填，签名，见附录1
+                        jsApiList: [ 'checkJsApi', 'openLocation', 'getLocation','translateVoice'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }
+            });
+
+            wx.checkJsApi({
+                jsApiList: ['getLocation'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function(res) {
+                    if (res.checkResult.getLocation == false) {
+                        alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                        return;
+                    }
+                }
+            });
+            var latitude;
+            var longitude;
+            var speed;
+            wx.ready(function(){	    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wx.getLocation({
+                    success : function(res) {
+                        latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        speed = res.speed; // 速度，以米/每秒计
+//                        alert(latitude+"/"+lon
+                        locationArea(latitude,longitude);
+                    },
+                    cancel : function(res) {
+                        alert('未能获取地理位置');
+                    }
+                });
+            });
+            wx.error(function(res){	    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+//                alert("验证出错");
+            });
+        }
+
+        /**
+		 * 根据经纬度查询当前所在城市
+         * @param latitude
+         * @param longitude
+         */
+        function locationArea(latitude,longitude){
+            var url=globalUrl+'/address/getNowCity';
+            var data={laglng:latitude+","+longitude};
+            enAjax2(url,'get',true,data,function(result){
+//		        console.log(result);
+                $("#area-name").html(result.message);
+                $.cookie("now",EncodeUtf8(result.message),{path:"/"});
+                $.cookie("nowPlace",EncodeUtf8(result.message),{path:"/"});
+                window.location.href="../index.html";
+            },null,true);
+        }
+	</script>
+</html>

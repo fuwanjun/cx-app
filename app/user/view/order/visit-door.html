@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../src/css/visit-door.css">
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/mui.poppicker.js"></script>
+		<script src="../../../public/js/city.data-3.js"></script>
+		<script src="../../../public/js/public.js"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">上门时间</p>
+		</header>
+		<div class="mui-content">
+			<!--<div class="chose">-->
+				<!--<div class="chose-type type-active" express-type="1">顺丰取件</div>-->
+			<!--</div>-->
+			<div class="tit">
+				<p>选择上门取件时间</p>
+			</div>
+			<div class="chose-item con-active">
+				<div class="week-box">
+					<ul class="chose-times">
+
+					</ul>
+				</div>
+
+				<ul class="time-detail">
+					<li data-time="09">9:00-11:00</li>
+					<li data-time="10">10:00-12:00</li>
+					<li data-time="11">11:00-13:00</li>
+					<li data-time="12">12:00-14:00</li>
+					<li data-time="13">13:00-15:00</li>
+					<li data-time="14">14:00-16:00</li>
+					<li data-time="15">15:00-17:00</li>
+					<li data-time="16">16:00-18:00</li>
+				</ul>
+			</div>
+			<div class="chose-item"></div>
+			<button id="submit" type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit">确定</button>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	
+	<script type="text/javascript">
+	var orderId=getQueryString("id");
+	$(function(){
+	    //获取后10天的日期和星期几
+	    for(var i=0;i<10;i++){
+	        var active;
+            var time=GetDateStr(i);
+
+            var weekName=getWeek(time);
+	        if(i==0){
+	            active="time-active";
+			}else{
+	            active="";
+			}
+	        var item='<li class="'+active+'" year="'+time.substring(0,4)+'">'+
+						'<p class="week-name">'+weekName+'</p>'+
+						'<p class="week-time">'+time.substring(5)+'</p>'+
+					'</li>';
+	        $(item).appendTo($(".chose-times"));
+		}
+
+		var curTime=new Date().getHours();
+		$.each($(".time-detail li"),function(index,value){
+		    if($(value).attr("data-time")<curTime){
+		       $(value).addClass("detail_disabled");
+		       $(value).removeClass("detail_active");
+			}else{
+                $(value).removeClass("detail_disabled");
+                $(value).addClass("detail_active");
+			}
+		});
+		//左右滑
+		$(".chose-times").on("swipeleft",function(){
+            $(".chose-times").animate({marginLeft:"-100%"});
+
+		});
+        $(".chose-times").on("swiperight",function(){
+            $(".chose-times").animate({marginLeft:"0px"});
+        });
+
+		//选择取件方式
+		$(".chose-type").on("tap",function(){
+		    var i=$(this).index();
+            $(".chose-type").removeClass("type-active");
+            $(".chose-type").eq(i).addClass("type-active");
+		});
+		//选择日期
+		$(".chose-times li").on("tap",function(){
+		    var i=$(this).index();
+            $(".chose-times li").removeClass("time-active");
+            $(".chose-times li").eq(i).addClass("time-active");
+            var curDate_m=$(this).find(".week-time").text().split("-")[0];
+			var curDate_d=$(this).find(".week-time").text().split("-")[1];
+			//当前天数
+			var curDate=new Date().getDate();
+            $.each($(".time-detail li"),function(index,value){
+                //当前月数
+                var c_m=new Date().getMonth()+1;
+				if(c_m<curDate_m){
+                    $(value).removeClass("detail_disabled");
+                    if(index==0){
+                        $(value).addClass("detail_active");
+                    }
+				}else{
+                    if(curDate<curDate_d){
+                        $(value).removeClass("detail_disabled");
+                        if(index==0){
+                            $(value).addClass("detail_active");
+                        }
+                    }else if(curDate=curDate_d){
+                        var curTime=new Date().getHours();
+                        if($(value).attr("data-time")<=curTime){
+                            $(value).addClass("detail_disabled");
+                            $(value).removeClass("detail_active");
+                        }else{
+                            $(value).removeClass("detail_disabled");
+                            $(value).addClass("detail_active");
+                        }
+                    }else{
+                        $(value).addClass("detail_disabled");
+                    }
+
+                }
+
+
+            })
+		});
+		//选择具体上门取件时间
+		$(".time-detail li").on("tap",function(){
+		    if($(this).hasClass("detail_disabled")){
+		        return false;
+			}
+		    var i=$(this).index();
+            $(".time-detail li").removeClass("detail-active");
+            $(".time-detail li").eq(i).addClass("detail-active");
+		});
+
+		//点击确定时间
+		$("#submit").on("tap",function(){
+		    var year="";
+		    var time="";
+		    var detail="";
+
+			//获取选中日期
+			for(var i=0;i<$(".chose-times li").length;i++){
+		        if($(".chose-times li").eq(i).hasClass("time-active")){
+		            year=$(".chose-times li").eq(i).attr("year");
+		            time=$(".chose-times li").eq(i).find($(".week-time")).html();
+				}
+			}
+			//获取选中时间段
+			for(var i=0;i<$(".time-detail li").length;i++){
+			    if($(".time-detail li").eq(i).hasClass("detail-active")){
+			        detail=$(".time-detail li").eq(i).attr("data-time");
+				}
+			}
+			$.cookie("year",year);
+            $.cookie("time",time);
+            $.cookie("detail",detail);
+            if($.cookie("detail")){
+                window.location.href="order-pay.html?id="+orderId;
+			}else{
+             	mui.toast('请选择预约时间');
+			}
+		})
+	});
+
+	//获取AddDayCount天的日期
+    function GetDateStr(AddDayCount) {
+        var dd = new Date();
+        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+        var y = dd.getFullYear();
+        var m = dd.getMonth()+1;//获取当前月份的日期
+        if (m >= 1 && m <= 9) {
+            m = "0" + m;
+        }
+        var d = dd.getDate();
+        return y+"-"+m+"-"+d;
+    }
+
+    /**
+	 * 通过日期判断星期几
+     * @param dateString
+     * @returns {string}
+     */
+    function getWeek(dateString){
+        var date;
+		var dateArray = dateString.split("-");
+		date = new Date(dateArray[0], parseInt(dateArray[1] - 1), dateArray[2]);
+        return "星期" + "日一二三四五六".charAt(date.getDay());
+    };
+
+
+	</script>
+</html>

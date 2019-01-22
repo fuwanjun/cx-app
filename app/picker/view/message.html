@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0;
+			}
+			.mui-table-view-cell:after{
+				display: none;
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="index.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">消息中心</p>
+		</header>	
+		<div class="mui-content bg-white">
+			<ul class="mui-table-view">
+				<a href="fetchPackageMessage.html">
+					<li class="mui-table-view-cell mui-flex border-bottom-tiny-blue" style="justify-content: space-between">
+						<div class="mui-flex mui-flex-halign-center">
+							<img class="notice-relativeImg" src="../../public/img/picker/icon-fetch.png" alt="" />
+							<span class="hidden mui-position"></span>
+							<span class="color-333 font-size-16">取件消息</span>
+						</div>
+						<!--<div class="color-666 font-size-16" style="line-height: 0.44rem">-->
+							<!--<span>06-17</span>-->
+							<!--<span>17:15</span>-->
+						<!--</div>-->
+					</li>
+				</a>
+				<a href="deliverPackageMessage.html">
+					<li class="mui-table-view-cell mui-flex border-bottom-tiny-blue" style="justify-content: space-between">
+						<div class="mui-flex mui-flex-halign-center">
+							<img class="notice-relativeImg" src="../../public/img/picker/danger.png" alt="" />
+							<span class="mui-position"></span>
+							<span class="color-333 font-size-16">预警消息</span>
+						</div>
+						<!--<div class="color-666 font-size-16" style="line-height: 0.44rem">-->
+							<!--<span>06-17</span>-->
+							<!--<span>17:15</span>-->
+						<!--</div>-->
+					</li>
+				</a>
+				<!--<a href="complainMessage.html?type=complaint">-->
+					<!--<li class="mui-table-view-cell mui-flex mui-flex-halign-center border-bottom-tiny-blue">-->
+						<!--<div class="mui-flex mui-flex-halign-center">-->
+							<!--<img class="notice-relativeImg" src="../../public/img/picker/icon-complain.png" alt="" />-->
+							<!--<span class="mui-position"></span>-->
+							<!--<span class="color-333 font-size-16">投诉消息</span>-->
+						<!--</div>-->
+						<!--<div class="color-666 font-size-16">-->
+							<!--<span>06-17</span>-->
+							<!--<span>17:15</span>-->
+						<!--</div>-->
+					<!--</li>-->
+				<!--</a>-->
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			mui.init();
+			var url=globalUrl+'/takeNotice/getNoticeTypeCount';
+			var data={scope:$.cookie("id")};
+			enAjax(url,'get',true,data,noReadNum,null);
+
+			//投诉信息
+//			var url2=globalUrl+"/takeUser/getTakerReportCountByTakerId";
+//			var data2={takerId:66};
+//            enAjax(url2,'get',true,data2,getNum,null);
+//            function getNum(data){
+//				console.log(data);
+//				if(data.data==0){
+//                    $(".mui-position").eq(2).hide();
+//				}else{
+//                    $(".mui-position").eq(2).show();
+//                    $(".mui-position").eq(2).html(data.data);
+//				}
+//			}
+
+            function noReadNum(data){
+                console.log(data);
+                if(data.TAKE==0){
+                    $(".mui-position").eq(0).hide();
+                }else{
+                    $(".mui-position").eq(0).show();
+                    $(".mui-position").eq(0).html(data.TAKE);
+                }
+                if(data.WARN==0){
+                    $(".mui-position").eq(1).hide();
+                }else{
+                    $(".mui-position").eq(1).show();
+                    $(".mui-position").eq(1).html(data.WARN);
+                }
+            }
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

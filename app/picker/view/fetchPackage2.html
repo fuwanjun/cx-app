@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<link rel="stylesheet" href="../src/css/fetchPackage.css"/>
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-back" href="index.html"></a>
+			<p class="mui-title">取件</p>
+		</header>	
+		<div class="mui-content">
+			<div id="top">
+				<div class="bg-white mui-flex mui-flex-halign-center border-bottom-tiny-blue searchBox">
+					<div>
+						<span>总数：</span>
+						<span id="mesNum">0</span>
+					</div>
+					<div class="areaSelect">
+						<input type="text" placeholder="请输入关键字" style="margin-bottom: 0;"/>
+					</div>
+					<div>
+						<i class="mui-icon mui-icon-search"></i>
+					</div>
+				</div>
+				<div class="bg-white" style="padding:0 10px">
+					<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+						<a class="mui-control-item chose-btn" href="fetchPackage0.html">
+							未付
+						</a>
+						<a class="mui-control-item chose-btn" href="fetchPackage1.html">
+							未取
+						</a>
+						<a class="mui-control-item chose-btn mui-active" href="fetchPackage2.html">
+							未交
+						</a>
+						<a class="mui-control-item chose-btn" href="fetchPackage3.html">
+							已交
+						</a>
+					</div>
+					<div class="sortBox mui-flex" style="padding: 4px 0;border-top: 1px solid #f4f8ff;">
+						<!--<div class="mui-text-center flexbox-f1 sort-active" id="earliest">预约最早</div>-->
+						<!--<div class="mui-text-center flexbox-f1">距离最近</div>-->
+						<!--<div class="mui-text-center flexbox-f1">当天订单</div>-->
+					</div>
+				</div>
+			</div>
+
+			<div id="item1" class="mui-content mui-scroll-wrapper" style="margin-top: 1.5rem;">
+				<ul class="mui-table-view mui-scroll"></ul>
+			</div>
+			<!--<div id="item2" class="mui-content mui-scroll-wrapper">-->
+				<!--<ul class="mui-table-view mui-scroll"></ul>-->
+			<!--</div>-->
+			<!--<div id="item3" class="mui-content mui-scroll-wrapper">-->
+				<!--<ul class="mui-table-view mui-scroll"></ul>-->
+			<!--</div>-->
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../public/js/public.js"></script>
+	<script>
+            mui.init({
+                pullRefresh:{
+                    container:'#item1',
+                    up:{
+                        height:50,
+                        auto:true,
+                        contentrefresh:'正在加载...',
+                        contentnomore:'没有更多数据',
+                        callback:pullupRefresh1
+                    }
+                }
+            });
+
+        var page=1;
+        function pullupRefresh1(){
+            $.ajax({
+                type:"get",
+                url:globalUrl+"/taker/listByStatus",
+                data:{page:page,status:30},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                success:function(data){
+                    console.log(data);
+                    mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
+                    $("#mesNum").html(data.data.total);
+//                    $("#item1 ul").html("");
+                    if(data.data.list==0){
+                        var tipMessage='<p style="text-align:center;margin-top:0.3rem;background:#f4f8ff;">没有未取订单</p>';
+                        $(tipMessage).appendTo($("#item1 ul"));
+                    }
+                    for(var i=0;i<data.data.list.length;i++){
+                        var address=data.data.list[i].address.region?data.data.list[i].address.region:" ";
+                        var detailAddress=data.data.list[i].address.detailAddress?data.data.list[i].address.detailAddress:" ";
+
+                        var item='<li class="mui-table-view-cell bg-white">'+
+                            '<div class="font-size-12 color-666 margin-bottom-r10">'+
+                            '<span>订单编号：</span><span>'+data.data.list[i].orderNo+'</span>'+
+                            '</div>'+
+                            '<div class="mui-flex font-size-14 margin-bottom-r10">'+
+                            '<div class="widthLimit"><i class="mui-icon mui-icon-location font-size-16"></i>'+address+detailAddress+'</div>'+
+                            //											'<div class="font-size-12">距离1.7km</div>'+
+                            '</div>'+
+                            '<div class="font-size-12 color-333 margin-bottom-r10">'+
+                            '<span class="customerName">'+data.data.list[i].address.userName+'</span><span>'+data.data.list[i].address.phone+'</span>'+
+                            '</div>'+
+                            '<div class="font-size-12 mui-flex" style="justify-content: space-between">'+
+                            '<div class="color-666"><span>下单时间：</span><span>'+timestampToTime(data.data.list[i].createTime)+'</span></div>'+
+//                            '<div class="border-orange">扫码封签</div>'+
+                            '<a href="packageDetail.html?status=30&orderId='+data.data.list[i].orderNo+'"><div class="border-blue detail-mes">查看详情</div></a>'+
+                            '</div>'+
+                            '</li>';
+                        $(item).appendTo($("#item1 ul"));
+                    }
+                }
+            });
+		}
+	</script>
+</html>

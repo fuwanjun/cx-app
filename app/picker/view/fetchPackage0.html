@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<link rel="stylesheet" href="../src/css/fetchPackage.css"/>
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+        <style>
+            .goodsPic{
+                width: 80px;
+                height: 80px;
+                box-shadow: 2px 2px 10px #ccc;
+            }
+        </style>
+	</head>
+	<body class="bg-tiny-blue">
+		<div class="wrap">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-back" href="index.html"></a>
+				<p class="mui-title">取件</p>
+			</header>
+			<div class="mui-content">
+				<div id="top">
+					<div class="bg-white mui-flex mui-flex-halign-center border-bottom-tiny-blue searchBox">
+						<div>
+							<span>总数：</span>
+							<span id="mesNum">0</span>
+						</div>
+						<div class="areaSelect">
+							<input type="text" placeholder="请输入关键字" style="margin-bottom: 0;"/>
+						</div>
+						<div>
+							<i class="mui-icon mui-icon-search"></i>
+						</div>
+					</div>
+					<div class="bg-white" style="padding:0 10px">
+						<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+							<a class="mui-control-item chose-btn mui-active" href="fetchPackage0.html">
+								未付
+							</a>
+							<a class="mui-control-item chose-btn" href="fetchPackage1.html">
+								未取
+							</a>
+							<a class="mui-control-item chose-btn" href="fetchPackage2.html">
+								未交
+							</a>
+							<a class="mui-control-item chose-btn" href="fetchPackage3.html">
+								已交
+							</a>
+						</div>
+						<!--<div class="sortBox mui-flex" style="padding: 4px 0;border-top: 1px solid #f4f8ff;">-->
+							<!--<div class="mui-text-center flexbox-f1" id="earliest">预约最早</div>-->
+							<!--<div class="mui-text-center flexbox-f1">距离最近</div>-->
+						<!--</div>-->
+					</div>
+				</div>
+
+				<div id="item1" class="mui-content mui-scroll-wrapper" style="margin-top: 1.5rem;">
+					<ul class="mui-table-view mui-scroll"></ul>
+				</div>
+			</div>
+		</div>
+
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../public/js/public.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+	<script>
+        weixinReload();
+            mui.init({
+                pullRefresh: {
+                    container: '#item1',
+                    up: {
+                        height: 50,
+                        auto: true,
+                        contentrefresh: '正在加载...',
+                        contentnomore: '没有更多数据',
+                        callback: pullupRefresh1
+                    },
+//                    down: {
+//                        height: 50,
+//                        auto: false,
+//                        contentdown: "下拉可以刷新",
+//                        contentover: "释放立即刷新",
+//                        contentrefresh: "正在刷新...",
+//                        callback: pullupRefresh2
+//                    }
+                }
+            });
+
+		$("#item1 ul").on("tap",".detail-mes",function(){
+		    var orderId=$(this).attr("orderId");
+			mui.prompt("提示","请输入封签号码","封签号",["取消","确定"],function(e){
+			    var orderNum=e.value;
+                if(e.index==0){
+                    window.location.reload();
+                }
+			    if(e.index==1){
+                    mui.prompt('','请输入装衣带数量','数量',['取消','确定'],function(e){
+                        var num=e.value;
+                        if(e.index==0){
+                            window.location.reload();
+                        }else if(e.index==1){
+                            sealNum(orderId,orderNum,num);
+                        }
+                    });
+				}
+			});
+            return false
+		});
+//		$("#item1").on("tap",".mui-table-view-cell",function(event){
+//		    event.preventDefault();
+//		   	var goId=$(this).attr("orderId");
+//		   	window.location.href="packageDetail.html?status=20&orderId="+goId;
+//		});
+
+//		点击去付款
+        $("#item1").on("tap",".goPay",function(event){
+            event.preventDefault();
+            var goId=$(this).attr("orderId");
+            window.location.href="pay-money.html?id="+goId;
+        });
+
+        var page=1,data={};
+        function pullupRefresh1(){
+            $.ajax({
+                type:"get",
+                url:globalUrl+"/taker/getNoPay",
+                data:{page:page,status:10},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function(data){
+                    console.log(data);
+                    mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
+                    $("#mesNum").html(data.data.total);
+//                    $("#item1 ul").html("");
+                    if(data.data.list==0){
+                        var tipMessage='<p style="text-align:center;margin-top:0.3rem;background:#f4f8ff;">没有未取订单</p>';
+                        $(tipMessage).appendTo($("#item1 ul"));
+                    }
+                    for(var i=0;i<data.data.list.length;i++){
+
+						var signNumber="";
+                        if(data.data.list[i].orderShipping){
+                            signNumber="";
+						}else{
+                            signNumber='<div style="margin-right: 0.1rem;" class="border-orange" orderId="'+data.data.list[i].orderNo+'">扫封签码</div>'+
+                                '<div class="border-blue detail-mes" orderId="'+data.data.list[i].orderNo+'">输封签码</div>' ;
+						}
+                        var item= '<li class="mui-table-view-cell bg-white" orderId="'+data.data.list[i].orderNo+'">'+
+										'<div class="font-size-12 color-666 margin-bottom-r10" style="display: flex;justify-content: space-between;">'+
+                                            '<div>'+
+                                                '<span>订单编号：</span><span>'+data.data.list[i].orderNo+'</span>'+
+                                            '</div>'+
+                                            '<div>'+
+                                                '<span>下单时间：</span><span>'+timestampToTime(data.data.list[i].createTime)+'</span>'+
+                                            '</div>'+
+										'</div>' +
+                                        '<div style="display: flex;justify-content: space-between;">' +
+                                            '<div class="goodsPic"><img style="width: 100%;height: 100%;" src="http://'+data.data.list[i].orderItems[0].productImage+'" alt=""></div>' +
+                                            '<p style="line-height: 80px;">总价：<span>'+(data.data.list[i].payment).toFixed(2)+'</span></p>' +
+                                        '</div>'+
+										'<div style="display: flex; justify-content: flex-end;font-size: 0.12rem;">' +
+											'<div style="margin-right: 0.1rem;" class="border-green goPay" orderId="'+data.data.list[i].orderNo+'">去付款</div>'+
+											signNumber+
+										'</div>'+
+
+									'</li>';
+                        $(item).appendTo($("#item1 ul"));
+                    }
+                }
+            });
+		}
+        function pullupRefresh2(){
+            $.ajax({
+                type:"get",
+                url:globalUrl+"/taker/getNoPay",
+                data:{page:1,status:10,search:search,distance:distance},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function(data){
+                    var item="";
+                    mui('#item1').pullRefresh().endPulldownToRefresh();
+                    $("#mesNum").html(data.data.total);
+                    $("#item1 ul").html("");
+
+                    for(var i=0;i<data.data.list.length;i++){
+                        var range="";
+                        if(data.data.list[i].distance){
+                            range=(data.data.list[i].distance/1000).toFixed(2)+"km";
+                        }else{
+                            range="";
+                        }
+                        var subTime="";
+                        var subTimeName="";
+                        if(data.data.list[i].subTime){
+                            subTime=data.data.list[i].subTime;
+                            subTimeName="预约时间:"
+						}else{
+                            subTime="";
+                            subTimeName=""
+						}
+                        var address=data.data.list[i].address.region?data.data.list[i].address.region:" ";
+                        var detailAddress=data.data.list[i].address.detailAddress?data.data.list[i].address.detailAddress:" ";
+                        var createTime=timestampToTime(data.data.list[i].createTime);
+                        item+='<li class="mui-table-view-cell bg-white" orderId="'+data.data.list[i].orderNo+'">'+
+                            '<div class="font-size-12 color-666 margin-bottom-r10" style="display: flex; justify-content: space-between">'+
+							'<div>'+
+                            '<span>订单编号：</span><span>'+data.data.list[i].orderNo+'</span>'+
+							'</div>'+
+							'<div><span>'+subTimeName+'</span><span>'+subTime+'</span></div>'+
+                            '</div>'+
+                            '<div class="mui-flex font-size-14 margin-bottom-r10" style="display:flex;justify-content: space-between">'+
+                            '<div class="widthLimit"><i class="mui-icon mui-icon-location font-size-16"></i>'+address+detailAddress+'</div>'+
+							'<div class="font-size-12">'+range+'</div>'+
+                            '</div>'+
+                            '<div class="font-size-12 color-333 margin-bottom-r10">'+
+                            '<span class="customerName">'+data.data.list[i].address.userName+'</span><span>15263258965</span>'+
+                            '</div>'+
+                            '<div class="font-size-12 mui-flex" style="justify-content: space-between">'+
+                            '<div class="color-666"><span>下单时间：</span><span>'+createTime+'</span></div>'+
+                            '<div class="border-orange" orderId="'+data.data.list[i].orderNo+'">扫码封签</div>'+
+                            '<a href="packageDetail.html?status=20&orderId='+data.data.list[i].orderNo+'"><div class="border-blue detail-mes">输封签码</div></a>'+
+                            '</div>'+
+                            '</li>';
+
+                    }
+
+                    $("#item1 ul").html(item);
+                }
+            });
+        }
+
+
+		$.ajax({
+            type : "get",
+            url : globalUrl+"/wechatScanne/scannerQrcode",
+            data : {},
+            dataType : "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+			success:function (res) {
+                data=res.data;
+            }
+		});
+
+		$("#item1 ul").on("tap",".border-orange",function(){
+		    var orderId=$(this).attr("orderId");
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: data.appId, // 必填，公众号的唯一标识
+                timestamp: data.timestamp, // 必填，生成签名的时间戳
+                nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                signature: data.signature,// 必填，签名，见附录1
+                jsApiList: [
+                    'checkJsApi',
+                    'startRecord',
+                    'stopRecord',
+                    'translateVoice',
+                    'scanQRCode',// 微信扫一扫接口
+                    'openCard'
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            wx.ready(function() {
+                wx.scanQRCode({
+                    needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType : [ "qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success : function(res) {
+                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                        //window.location.href = result;//因为我这边是扫描后有个链接，然后跳转到该页面
+//                        alert(result);
+                        mui.confirm(result,"封签号",["取消","确定"],function(e){
+                            if(e.index==0){
+                                window.location.reload();
+							}
+                            if(e.index==1){
+                                mui.prompt('','请输入装衣带数量','数量',['取消','确定'],function(e){
+                                    var num=e.value;
+                                    if(e.index==0){
+                                        window.location.reload();
+                                    }else if(e.index==1){
+                                        sealNum(orderId,result,num);
+                                    }
+                                });
+							}
+						})
+                    },
+                    error : function(){
+
+                    }
+                });
+            });
+			return false;
+        });
+
+		//封签号绑定订单
+			function sealNum(orderNo,signNumber,num){
+                $.ajax({
+                    url:globalUrl+"/taker/pickUpByOrderNO",
+                    type:'post',
+                    data:{orderNo:orderNo,signNumber:signNumber,num},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success:function(data){
+                        console.log(data);
+                        if(data.status==210){
+							mui.alert("该封签号已被使用",function(){
+							    window.location.reload();
+							    return false
+							});
+						}else{
+                            window.location.href="packageDetail.html?status=10&orderId="+orderNo;
+						}
+//                        alert(data.msg);
+
+                    }
+                })
+			}
+
+        $(".sortBox div").on("tap",function(){
+            var index=$(this).index();
+            switch (index){
+                case 0:
+                    $(this).addClass("sort-active").siblings().removeClass("sort-active");
+                    search=1;
+                    distance="";
+                    pullupRefresh2();
+                    break;
+                case 1:
+                    $(this).addClass("sort-active").siblings().removeClass("sort-active");
+                    search=2;
+                    hasToken();
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        //定位
+        function hasToken(){
+            $.ajax({
+                type : "get",
+                url : globalUrl+"/wechatLocation/getLocation",
+                data : {},
+				async:false,
+                dataType : "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+                success:function (res) {
+                    var data=res.data;
+//                    alert(JSON.stringify(res));
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: data.appId, // 必填，公众号的唯一标识
+                        timestamp: data.timestamp , // 必填，生成签名的时间戳
+                        nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                        signature: data.signature,// 必填，签名，见附录1
+                        jsApiList: [ 'checkJsApi', 'openLocation', 'getLocation','translateVoice'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                }
+            });
+
+            wx.checkJsApi({
+                jsApiList: ['getLocation'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function(res) {
+                    if (res.checkResult.getLocation == false) {
+                        alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                        return;
+                    }
+                }
+            });
+            var latitude;
+            var longitude;
+            var speed;
+            wx.ready(function(){	    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wx.getLocation({
+                    success : function(res) {
+                        latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        speed = res.speed; // 速度，以米/每秒计
+//                        alert(latitude+"/"+lon
+//                        locationArea(latitude,longitude);
+						distance=latitude+","+longitude;
+//						alert(distance);
+                        pullupRefresh2();
+                    },
+                    cancel : function(res) {
+                        alert('未能获取地理位置');
+                    }
+                });
+            });
+            wx.error(function(res){
+//                alert(JSON.stringify(res));
+                alert("验证出错");
+            });
+        }
+	</script>
+</html>

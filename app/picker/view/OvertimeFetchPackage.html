@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>
+		<link rel="stylesheet" href="../src/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<style type="text/css">
+			.mui-bar-nav{
+				background-color: #4d93f7;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0;
+			}
+			.mui-table-view-cell:after{
+				display: none;
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.searchBox{
+				padding: 0 0.15rem;
+				font-size: .14rem;
+			}
+			.areaSelect{
+				padding: 0.1rem 0;
+			}
+			.areaSelect input{
+				border-radius: 0.3rem;
+				font-size: .14rem;
+				min-width: 1.9rem;
+				height: .26rem;
+			}
+			.sortBox{
+				font-size: .12rem;
+			}
+			.sortBox div{
+				text-align: center;
+				opacity: 0.5;
+			}
+			.flexbox-f1 {
+			    position: relative;
+			    -webkit-box-flex: 1;
+			    flex: 1;
+			}
+			.sortBox .sort-active{
+				opacity: 1;
+			}
+			.border-radius-r5{
+				border-radius: 0.05rem;
+			}
+			.widthLimit{
+				width: 50%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+			.border-orange{
+				border:1px solid #ffa63d;
+				padding: .01rem .08rem;
+				border-radius: 0.2rem;
+				color:#ffa63d;
+			}
+			.border-blue{
+				border:1px solid #4d93f7;
+				padding: .01rem .08rem;
+				border-radius: 0.2rem;
+				color: #4d93f7;
+			}
+			.customerName{
+				padding-right: 0.05rem;
+			}
+			.customer{
+				padding: 0 .15rem;
+			}
+			.white{
+				color: #fff;
+			}
+			.bg-blue{
+				background-color: #39A4F2;
+			}
+			.padding-r5{
+				padding:0.05rem;
+			}
+			.padding-r20{
+				padding: .2rem;
+			}
+			.padding-r12{
+				padding: .12rem;
+			}
+			.padding-tb-r2{
+				padding-top: 0.02rem;
+				padding-bottom: 0.02rem;
+			}
+			.margin-tb-r5{
+				margin-top: .05rem;
+				margin-bottom: 0.05rem;
+			}
+			.margin-top-r5{
+				margin-top: .05rem;
+			}
+			.rider-top{
+				height: 1.78rem;
+				background: url(img/bg-index.png) center/100% 100% no-repeat;
+				margin-bottom: .6rem;
+				position: relative;
+			}
+			.riderImgBox img{
+				width:100%;
+			}
+			.headImg{
+				width: .69rem;
+				vertical-align: top;
+			}
+			.top-content{
+				padding: .16rem 0 0 .33rem;
+				vertical-align: top;
+			}
+			.top-txt{
+				display: inline-block;
+				margin:.11rem 0 0 0.2rem;
+			}
+			.level{
+				margin-bottom: .12rem;
+			}
+			.level img{
+				width: .17rem;
+				margin-right: .06rem;
+			}
+			.level_number{
+				color: #f8ff82;
+			}
+			.level_score{
+				font-size: .14rem;
+				color: #a5caff;
+			}
+			.three_scale{
+				font-size: 0.13rem;
+				color: #a5caff;
+			}
+			.scale_number{
+				padding: 0 .06rem;
+			}
+			.bottom-content{
+				position: absolute;
+				width: 100%;
+				padding: 0 .33rem;
+				bottom: -0.45rem;
+			}
+			.three-scale-icon img{
+				width: .41rem;
+				margin-bottom: .1rem;
+			}
+			.three-scale-icon{
+				text-align: center;
+				width: 33.3%;
+				padding: .14rem 0;
+				font-size: .15rem;
+			}
+			.three-icon-box{
+				border-radius: .08rem;
+			}
+			.contentLi img{
+				width: 0.23rem;
+				border-radius: 50%;
+				border: 1px solid #4d93f7;
+				margin-right: .08rem;
+			}
+			.server-satisfaction{
+				padding: 0.06rem 0rem 0 0rem;
+			}
+			.color-blue{
+				color: #007aff;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-back"></a>
+			<p class="mui-title">超时取件</p>
+		</header>	
+		<div class="mui-content">
+			<div class="mui-text-center padding-r12 font-size-14 bg-white color-blue border-bottom-tiny-blue">超时总数：10</div>
+			<div class="bg-white" style="padding:0 10px">
+				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item1">
+						去用户方
+					</a>
+					<a class="mui-control-item" href="#item2">
+						去工厂方
+					</a>
+				</div>
+			</div>
+			<div class="" style="margin-top: .08rem;padding:0 .075rem;">
+				<div id="item1" class="mui-control-content mui-active bg-white border-radius-r5">
+					<div class="bg-white padding-r12 rider-content" style="margin: .1rem;border-radius: 0.05rem;padding-bottom: 0.12rem;">
+						<div class="mui-flex rider-content-flex mui-flex-halign-center">
+							<div class="contentLi">
+								<span class="font-size-14">订单号：E78979798</span>
+							</div>
+							<div class="font-size-14 color-666">2018年6月9日</div>
+						</div>
+						<div class="font-size-14 color-666 server-satisfaction">送件超时。</div>
+					</div>
+				</div>
+				<div id="item2" class="mui-control-content bg-white border-radius-r5">
+					<div class="bg-white padding-r12 rider-content" style="margin: .1rem;border-radius: 0.05rem;">
+						<div class="mui-flex rider-content-flex mui-flex-halign-center">
+							<div class="contentLi">
+								<span class="font-size-14">订单号：E78979798</span>
+							</div>
+							<div class="font-size-14 color-666">2018年6月9日</div>
+						</div>
+						<div class="font-size-14 color-666 server-satisfaction">取件超时。</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui(".sortBox").on("tap","div",function(){
+				jQuery(this).addClass("sort-active").siblings().removeClass("sort-active");
+			})
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

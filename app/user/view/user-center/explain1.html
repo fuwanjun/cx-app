@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		
+		<link href="../../../public/css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" type="text/css" href="../../src/css/index.css"/>-->
+		<link rel="stylesheet" href="../../../public/css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<script src="../../../public/js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../public/js/page.flexible.js"></script>
+		<style>
+			body{
+				background: #fff;
+			}
+			.mui-content{
+				padding:0 0.15rem;
+				margin-top: 0.2rem;
+			}
+			.common-box{
+				padding:0 0.15rem;
+				margin: 0;
+			}
+			.common-pic{
+				width: 1.5rem;
+				height: 1.5rem;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 0.3rem;
+				margin-bottom: 0.1rem;
+			}
+			.common-pic img{
+				width: 100%;
+			}
+			.common-tit{
+				text-align: center;
+				margin-bottom: 0.05rem;
+				color: #39a4f2;
+				font-size: 0.16rem;
+			}
+			.common-text{
+				font-size: 0.14rem;
+				color: #333;
+			}
+			.explain-text{
+				
+			}
+			.explain-tit{
+				font-size: 0.16rem;
+				margin-bottom: 0;
+				text-indent: 0.1rem;
+				position: relative;
+				color: #333;
+			}
+			.explain-tit:after{
+				position: absolute;
+				left: 0;
+				content: '';
+				height: 0.2rem;
+				width: 0.05rem;
+				background: #007AFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title blue">服务介绍</p>
+		</header>
+		<div class="mui-content">
+			<p class="explain-text">常洗是常州市常洗洗涤科技有限公司旗下的互联网家庭洗护平台，以“让洗衣更便捷”为经营理念，致力为用户提供便捷、专业、高品质的洗护服务。用户通过关注微信公众号“常洗”。手机下单，由常洗物流或者顺丰快递上门取件送至中央洗涤工厂，经高品质洗涤后在由快递送至用户手中。目前业务包括日常洗衣、日常洗鞋、窗帘清洗、家居家纺、衣物救治等领域。</p>
+
+				<p class="explain-tit">洗涤，专业品质</p>
+				<p class="explain-text">常洗团队拥有18余年的洗护管理经验，自建中央洗涤工厂。采用国内最先进的洗涤设备，使用全国最安全环保的洗涤化料，拥有国家一级洗衣师，对每道清洗流程都有着严格的要求。洗涤工厂端制定了“123”洗衣法和质量把控的“365”标准，该标准囊括十五道洗衣工序、五种洗涤方式、六套整熨消毒工艺、三层质量品控流程，保证了用户每件衣物的洗护品质，为用户提供更高品质的洗护体验。</p>
+				
+				
+				<p class="explain-tit">取送，快速安全</p>
+				<p class="explain-text">常洗采用常洗自备物流和顺丰快递，上门取送衣物。当用户通过微信端下单后，常洗就会按照用户约定的时间，上门取走需要清洗的衣物，并于规定的时间内，将完成清洗的衣物送至用户手中。让用户足不出户，就能享受常洗贴心服务。</p>
+				
+				
+				<p class="explain-tit">价格、性价比高</p>
+				<p class="explain-text">去门店化运作帮助常洗为您提供更为贴心的衣物清洗价格，价格低于传统门店并无需上门。</p>
+				
+				<p class="explain-tit">保障，全程监控</p>
+				<p class="explain-text">常洗深知投诉是不可回避的问题，面对投诉，常洗一直抱着积极面对、快速解决的态度去处理。为了确保用户的体验和权益，我们每一单都会做详细记录，并用高清摄像头采集衣物洗涤前原本状况，洗护过程确保每件衣服的安全不出差错，如遇洗涤问题赔付标准按照洗染行业的规定进行赔付。</p>
+				
+				<p class="explain-text">常洗您身边的洗护专家，洗衣更便捷！希望我们用心的服务让您的生活更美好！</p>
+
+			</p>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script src="../../../public/js/jquery-3.3.1.min.js"></script>
+	<script src="../../../public/js/jquery.cookie.js"></script>
+	<script>
+        $("#nowCity").html($.cookie("now"));
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
+	</script>
+</html>

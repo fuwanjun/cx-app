@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			body{
+				width: 100%;
+			}
+			.mui-content{
+				width: 100%;
+				height: 100%;
+				padding:.17rem 0.2rem .4rem .2rem;
+			}
+			.mui-content-body{
+				width: 100%;
+				height: 100%;
+			}
+			.mui-bar-nav~.mui-content{
+				padding-top: 60px;
+			}
+			.logo{
+				height: .64rem;
+				margin: .72rem 0 .23rem 0;
+			}
+			.color-darkblue{
+				color: #6f9fe1;
+			}
+			.loginData{
+				padding: .15rem;
+				margin-top: .6rem;
+			}
+			.loginBtn{
+				padding: .15rem;
+			}
+			.forgetpassword{
+				margin: .2rem 0;
+			}
+			input.border-none{
+				border: none;
+			}
+			input.bg-tiny-blue{
+				padding-left: 0.45rem;
+				background:#f4f8ff url(../../public/img/picker/user_icon.png) 0.15rem center/0.22rem .22rem no-repeat;
+			}
+			.password>input.bg-tiny-blue{
+				background-image: url(../../public/img/picker/lock.png);
+			}
+		</style>
+	</head>
+	<body class="bg-color-blue">
+		<header class="mui-bar mui-bar-nav">
+			<!--<a href="" class="mui-action-back mui-icon mui-icon-back"></a>-->
+			<p class="mui-title">常洗助手</p>
+		</header>	
+		<div class="mui-content bg-color-blue">
+			<div class="mui-content-body bg-white border-radius-r5">
+				<div class="mui-text-center">
+					<img class="logo" src="../../public/img/picker/logo.png"/>
+				</div>
+				<div class="appName mui-text-center color-darkblue">常洗洗衣</div>
+				<div class="loginData">
+					<div class="">
+						<input class="bg-tiny-blue border-none" type="text" name="account" id="account" value="" placeholder=""/>
+					</div>
+					<div class="password">
+						<input class="bg-tiny-blue border-none" type="password" name="password" id="password" value="" />
+					</div>
+				</div>
+				<div class="loginBtn">
+					<div class="mui-btn mui-btn-block mui-btn-darkblue color-white">登录</div>
+				</div>
+				<div class="mui-text-center forgetpassword font-size-14 color-666">忘记密码？</div>
+			</div>
+		</div>
+		<script src="../../public/js/mui.min.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<script src="../../public/js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			$(".loginBtn .mui-btn").on("tap",function(){
+
+				var account=$("#account").val();
+				var pwd=$("#password").val();
+				if(!account){
+					mui.toast("请输入用户名");
+					return false;
+				}
+				if(!pwd){
+					mui.toast("请输入密码");
+					return false;
+				}
+				var user=$("#account").val();
+				var userp=$("#password").val();
+				var url=globalUrl+"/takeUser/login";
+				var data={"account":user,"password":userp};
+				enAjax(url,'post',true,data,login,null);
+				function login(data){
+				    if(data.code==-1){
+				        mui.toast(data.msg);
+				        return;
+					}
+				    var qydNum=data.taker.surplusNum?data.taker.surplusNum:0;
+                    $.cookie("token",data.token);
+                    $.cookie("shopId",data.taker.shopId);
+                    var taker=JSON.stringify(data.taker);
+                    $.cookie("sex",EncodeUtf8(data.taker.sex));
+                    $.cookie("levelType",data.taker.levelType);
+                    $.cookie("surplusNum",qydNum);
+                    $.cookie("taker",encodeURI(taker));
+                    $.cookie("username",EncodeUtf8(data.taker.takerName));
+                    $.cookie("level",data.taker.level);
+                    $.cookie("id",data.taker.id);
+                    $.cookie("phone",data.taker.phone);
+                    $.cookie("userpic",data.taker.picture);
+                    $.cookie("userCode",data.taker.openId);
+                    	window.location.href='index.html';
+//                        window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fpicker%2fview%2findex.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+//                    window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2f192.168.3.211:8081%2fapp%2fpicker%2fview%2findex.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+//                    setTimeout(function() {
+//						window.location.href = "index.html";
+//					}, 200);
+				}
+			})
+		</script>
+	</body><div id="nowCity" style="display:none;"></div>
+
+</html>

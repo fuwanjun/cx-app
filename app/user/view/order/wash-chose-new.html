@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>常洗</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../../public/css/mui.min.css"/>
+    <link rel="stylesheet" href="../../../public/css/index.css"/>
+    <link rel="stylesheet" href="../../../public/css/public.css"/>
+    <link rel="stylesheet" href="../../src/css/vip.css"/>
+    <link rel="stylesheet" href="../../src/css/wash-chose.css"/>
+    <script src="../../../public/js/page.flexible.js"></script>
+    <script src="../../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../../public/js/mui.min.js"></script>
+    <script src="../../../public/js/mui.picker.min.js"></script>
+    <script src="../../../public/js/jquery.cookie.js"></script>
+    <script src="../../../public/js/common.js"></script>
+    <script src="../../../public/js/public.js"></script>
+    <script src="../../../public/js/jquery-addShopping.js"></script>
+    <!--<script src="../../src/js/wash-chose.js"></script>-->
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-box {
+            width: 100%;
+            height: 0.4rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-list {
+            display: flex;
+            position: absolute;
+        }
+
+        .menu-list li {
+            text-align: center;
+        }
+
+        .menu-list .menu-active {
+            border-bottom: 2px solid #4d93f7;
+        }
+
+        .con-list li {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
+    <p class="mui-title blue">专业日常清洗</p>
+</header>
+
+<nav class="mui-bar mui-bar-tab bot-nav bot">
+    <div class="full-remind">单笔订单满<span style="color: #9f0d10;font-weight: bold;"> 68 </span>元免运费</div>
+    <div class="chose-items" id="icon-car">
+        <!--<a href="clothes-box.html">-->
+        <div id="shop-car" class="chose-pic"><img src="../../../public/img/order/shop-car.png" alt=""/><span
+                id="item-num" class="mui-badge mui-badge-danger">0</span></div>
+        <!--</a>-->
+        <p id="all-price" class="chose-price">￥<span>0.00</span></p>
+    </div>
+    <a>
+        <button class="mui-btn mui-btn-primary" id="submit">下单取件</button>
+    </a>
+</nav>
+<div class="mui-content">
+    <div class="menu-box">
+        <ul class="menu-list">
+            <!--<li>会员洗衣</li>-->
+            <!--<li class="menu-active">日常洗衣</li>-->
+            <!--<li>鞋类洗涤</li>-->
+            <!--<li>皮衣皮草</li>-->
+            <!--<li>窗帘家纺</li>-->
+        </ul>
+    </div>
+    <ul class="con-list"></ul>
+</div>
+</body><div id="nowCity" style="display:none;"></div>
+<script>
+    $(function () {
+        var listWidth = $(".menu-box").width();
+        var url = globalUrl + "/headTitle/getHeadTitleAll";
+        enAjax(url, 'get', true, {}, function (data) {
+            console.log(data);
+            for (var i = 0; i < data.data.length; i++) {
+                var list = '<li>' + data.data[i].titleName + '</li>';
+                var listCon = '<li class="vip-con">这是第' + (i + 1) + '个DIV</li>'
+                $(list).appendTo($(".menu-list"));
+                $(listCon).appendTo($(".con-list"));
+
+            }
+            $(".menu-list li").css("width", listWidth / 4 + "px");
+            $(".menu-list").css("width", listWidth / 4 * data.data.length)
+        }, null, false);
+
+        $(".menu-list").on("tap", "li", function () {
+            var i = $(this).index();
+            $(".menu-list li").removeClass("menu-active");
+            $(".menu-list li").eq(i).addClass("menu-active");
+            $(".con-list li").removeClass("con-active");
+            $(".con-list li").eq(i).addClass("con-active");
+        });
+        //左右滑动菜单
+        var moveLeft = 0;
+        var moveRight = 0;
+        $(".menu-list").on("swipeleft", function () {
+//                alert($(".menu-list").offset().left);
+            if ($(".menu-list").offset().left <= listWidth - $(".menu-list").width()) {
+                $(".menu-list").animate({left: $(".menu-list").offset().left + "px"});
+                moveLeft = 0;
+            } else {
+                $(".menu-list").animate({left: -(moveLeft += listWidth / 4) + "px"});
+            }
+
+        });
+        $(".menu-list").on("swiperight", function () {
+            if ($(".menu-list").offset().left >= 0) {
+                $(".menu-list").animate({left: "0px"});
+                moveRight = 0;
+            } else {
+                $(".menu-list").animate({left: moveRight += listWidth / 4 + "px"});
+            }
+
+        });
+    });
+
+    function getItem(type) {
+        $.ajax({
+            url: globalUrl + '/goods/getGoodsByType',
+            data: {type: type},
+            type: 'get',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success: function (data) {
+                console.log(data);
+                $(".vip-con").eq(type - 1).html("");
+                var item = '';
+                for (var i = 0; i < data.length; i++) {
+                    var img = data[i].goodsPicture ? "http://" + data[i].goodsPicture : '../../../public/img/order/pic.png';
+                    item += '<div class="vip-item" data-id="' + data[i].id + '" type="' + data[i].goodsType + '">' +
+                        '<span class="mui-badge mui-badge-danger goodsNum"></span>' +
+                        '<div class="vip-item-pic"><a href="commodity-detail.html?id=' + data[i].id + '"><img src="' + img + '" alt="" /></a></div>' +
+                        '<p class="item-name">' + data[i].goodsName + '</p>' +
+                        '<div class="item-price">' +
+                        '<div class="all-price">' +
+                        '<p class="now-price">￥<span>' + data[i].goodsPrice + '</span></p>' +
+                        '</div>' +
+                        '<div class="adds"><img src="../../../public/img/picker/add.png" alt="" /></div>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+                $(".vip-con").eq(type - 1).append(item);
+                carPrice();
+            }
+        })
+    }
+
+    (function ($) {
+
+    })(window.jQuery || window.Zepto);
+
+</script>
+</html>

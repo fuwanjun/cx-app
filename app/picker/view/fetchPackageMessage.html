@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../public/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../public/css/message.css" />
+		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+		<script src="../../public/js/mui.min.js"></script>
+		<script type="text/javascript" src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/common.js"></script>
+		<script src="../../public/js/jquery.cookie.js"></script>
+		<style type="text/css">
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+				position: relative;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+				border-bottom-color: transparent;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+				display: block;
+				content:"";
+				width:20%;
+				position: absolute;
+				left: 40%;
+				height: 2px;
+				background-color:#007aff;
+				bottom: 0;
+			}
+			.mui-content>.mui-table-view:first-child{
+				margin-top: 0;
+			}
+			.mui-table-view-cell:after{
+				display: none;
+			}
+			.mui-table-view{
+				padding:0.075rem;
+			}
+			.mui-table-view:after{
+				background-color:#f4f8ff;
+			}
+			.mui-table-view:before{
+				background-color:#f4f8ff;
+			}
+			.border-bottom-tiny-blue{
+				border-bottom: 2px solid #f4f8ff;
+			}
+			.mui-newUpdate{
+				display: block;
+				width: 0.06rem;
+				height: 0.06rem;
+				position: absolute;
+				top: 0.07rem;
+				left: 0.04rem;
+				background-color: red;
+				border-radius: 50%;
+				line-height:0.06rem;
+				color: #fff;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body class="bg-tiny-blue">
+		<header class="mui-bar mui-bar-nav">
+			<a href="message.html" class="mui-icon mui-icon-back"></a>
+			<p class="mui-title">取件消息</p>
+		</header>	
+		<div class="mui-content" id="cons">
+			<ul class="mui-table-view" id="con"></ul>
+		</div>
+	</body><div id="nowCity" style="display:none;"></div>
+	<script type="text/javascript" src="../../public/js/public.js"></script>
+	<script type="text/javascript">
+        mui("body").on("tap","a",function(){
+            window.location.href=this.href;
+        });
+		$(function(){
+
+            mui.init({
+                pullRefresh:{
+                    container:'#cons',
+                    up:{
+                        height:50,
+                        auto:true,
+                        contentrefresh:'正在加载...',
+                        contentnomore:'没有更多数据',
+                        callback:pullupRefresh
+                    }
+                }
+            });
+		});
+		var page=1;
+		function pullupRefresh(){
+            var mesType=getQueryString('type');
+			$.ajax({
+				url:globalUrl+"/takeNotice/getNoticeByScopeType",
+				type:'get',
+				data:{scope:$.cookie("id"),type:"TAKE",page:page},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("token", $.cookie("token"));
+                },
+                crossDomain: true,
+				success:function(data){
+                    console.log(data);
+                    mui('#cons').pullRefresh().endPullupToRefresh((++page > data.data.navigatepageNums.length));
+                    var state;
+                    for(var i=0;i<data.data.list.length;i++){
+                        if (data.data.list[i].state == "READ") {
+                            state = '';
+                        } else if (data.data.list[i].state == "NOT_READ") {
+                            state = '<span class="hidden mui-newUpdate"></span>';
+                        } else {
+                        }
+                        var item='<a href="packageDetail.html?orderId='+data.data.list[i].content+'">' +
+							'<li class="mui-table-view-cell bg-white margin-bottom-r10 border-radius-r5">' +
+                            '<div class="font-size-16 margin-bottom-r10 mui-flex mui-flex-halign-center">' +
+							state+
+                            '<div class="color-333">' +
+                            '<span>订单号：</span>' +
+                            '<span></span>' +
+                            '</div>' +
+                            '<div class="color-666">' +
+                            '<span>'+data.data.list[i].createTime+'</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="color-666 font-size-14">' +
+                            '<div>' +
+                            '<span>'+data.data.list[i].content+'</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '</li>'+
+                            '</a>';
+                        $(item).appendTo($("#con"))
+                    }
+				}
+			})
+		}
+
+	</script>
+</html>

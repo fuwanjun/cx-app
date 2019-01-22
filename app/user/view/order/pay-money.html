@@ -1,0 +1,172 @@
+ <!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常洗</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../public/css/index.css" />
+		<link rel="stylesheet" href="../../../public/css/public.css" />
+		<link rel="stylesheet" href="../../src/css/vip.css" />
+		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../src/css/wash-chose.css"/>
+		<link rel="stylesheet" href="../../src/css/order-pay.css" />
+		<link rel="stylesheet" href="../../src/css/commodity-detail.css" />
+		<script src="../../../public/js/page.flexible.js"></script>
+		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../../public/js/mui.min.js"></script>
+		<script src="../../../public/js/mui.picker.min.js"></script>
+		<script src="../../../public/js/jquery.cookie.js"></script>
+		<script src="../../../public/js/common.js"></script>
+		<script src="../../../public/js/public.js"></script>
+		<script src="../../src/js/pay-money.js"></script>
+		<script src="../../../public/js/jweixin-1.2.0.js"></script>
+		<script src="../../../public/js/wenxin-pay.js"></script>
+		<style>
+			.mui-popup-button{
+				background: rgba(255,255,255,1);
+			}
+			mui-popup-inner{
+				background: rgba(255,255,255,1);
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="my-order1.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<p class="mui-title">订单支付</p>
+		</header>
+		<div class="mui-content">
+			<div class="pay-style">
+				<div class="pay-pic"><img src="../../../public/img/order/dd(1).png" alt="" /></div>
+				<div class="pay-txt">
+					<h4 style="color: #ea8f3e;">订单状态：<span>待支付</span></h4>
+					<p>下单时间：<span id="date">2018.5.28</span></p>
+				</div>
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<p>取衣地址：<span id="get">去哪里收取您的待洗衣物</span></p>
+				</li>
+				<li class="mui-table-view-cell">
+					<p>寄回地址：<span id="back">如与取衣地址一致可不填</span></p>
+				</li>
+			</ul>	
+			<!--订单内容-->
+			<div class="orders" id="orders">
+
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron pre">
+				<li class=" item">
+					<span id="wl">物流方式</span>
+					<p id="wlName"></p>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron pre">
+				<li class=" item">
+					<span>支付方式</span>
+					<p id="payType"></p>
+				</li>
+			</ul>
+			<!--优惠券-->
+			<ul class="mui-table-view mui-table-view-chevron pre">
+				<li class=" item">
+					<span id="express">预约上门时间</span>
+					<p id="time"></p>
+				</li>
+			</ul>	
+			
+			<!--商品金额-->
+			<div class="all-price">
+				<div class="price-tit">
+					<p>商品金额</p>
+					<p style="display: none;">￥<span id="price2">0.00</span></p>
+				</div>
+				<div class="price-detail">
+					<div class="price-pic-box"></div>
+					<div class="prices">
+						<div class="price1">
+							<p>运费</p>
+							<p>+￥</p>
+							<p id="yf"></p>
+						</div>
+						<div class="price1">
+							<p>优惠券</p>
+							<p>-￥</p>
+							<p id="yhq">0.00</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="all">合计 ￥<span id="total">0.00</span></div>
+			<div id="tipText">
+				<p class="tip-tit">备注</p>
+				<p id="tip-text"></p>
+			</div>
+			<a><button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit">立即支付</button></a>
+		</div>
+		<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+		    <!-- 可选择菜单 -->
+		    <ul class="mui-table-view" id="pay">
+		    	<li class="mui-table-view-cell" id="ye-pay">余额支付</li>
+				<li class="mui-table-view-cell" id="czk-pay">折扣卡支付</li>
+		    	<li class="mui-table-view-cell" id="wx-pay">微信支付</li>
+		    </ul>
+		    <!-- 取消菜单 -->
+		    <ul class="mui-table-view tab-close">
+		      <li class="mui-table-view-cell">
+		        <a href="#sheet1"><b>关闭</b></a>
+		      </li>
+		    </ul>
+		</div>
+		<!--余额支付-->
+		<div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close1"></a>
+				<p>账户余额支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">订单支付</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit2">确认支付</button>
+			</div>
+		</div>
+		<!--微信支付-->
+		<div id="sheet3" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close2"></a>
+				<p>微信支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>你的支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">订单支付</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">账户余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit3">确认支付</button>
+			</div>
+		</div>
+		<div id="sheet4" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="sheet-tit">
+				<a style="position: absolute;left: 0.1rem;" class="mui-icon mui-icon-left-nav mui-pull-left btn-close3"></a>
+				<p>折扣卡支付</p>
+			</div>
+			<div class="sheet-con">
+				<div>支付信息</div>
+				<div class="msg msg-id"><p class="msg-name">订单编号 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-num"><p class="msg-name">订单金额 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-coupon"><p class="msg-name">优惠信息 :</p><p class="msg-value"></p></div>
+				<div class="msg msg-type"><p class="msg-name">支付类型 :</p><p class="msg-value">订单支付</p></div>
+				<div class="msg msg-curplus"><p class="msg-name">折扣卡余额 :</p><p class="msg-value"></p></div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="submit4">确认支付</button>
+			</div>
+		</div>
+	</body>
+	<div id="nowCity" style="display:none;"></div>
+</html>

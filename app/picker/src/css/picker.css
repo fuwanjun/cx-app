@@ -1,0 +1,100 @@
+/*首页*/
+*{
+	margin: 0;
+	padding: 0;
+}
+.bg-tiny-blue{
+	background-color: #f4f8ff;
+}
+.bg-white{
+	background-color: #fff;
+}
+.bg_box{
+	height: 2.27rem;
+	background: url(../../../public/img/picker/bg-index.png) center/100% 100% no-repeat;
+	overflow: hidden;
+}
+.indexNotice{
+	width:.185rem;
+	height: .18rem;
+}
+.mui-bar-nav{
+	background-color: transparent;
+}
+.menu_logo{
+	width:.185rem;
+	height: .18rem;
+}
+.headImg{
+	display: block;
+	width: .69rem;
+	height:.69rem;
+	margin:0 auto;
+	margin-top: .62rem;
+	margin-bottom: .31rem;
+	border-radius: 50%;
+}
+.name{
+	font-size: 0.2rem;
+	text-align: center;
+	color: #fff;
+}
+#iconBox.icon-box{
+	display: flex!important;
+	display: -webkit-flex;
+	flex-wrap:wrap!important;
+	width: 100%;
+	align-items: center;
+	padding: .1rem .12rem;
+}
+.index-icon{
+	height: 1.33rem;
+	width: 50%!important;
+	text-align: center;
+	margin-bottom:.1rem;
+	padding: .1rem;
+}
+.index-icon:nth-child(2n-1){
+	padding-left: 0rem!important;
+	padding-right:.05rem!important;
+}
+.index-icon:nth-child(2n){
+	padding-right:0!important;
+	padding-left: .05rem!important;
+}
+.mui-table-view.icon-box .index-icon a{
+	background-color: #fff;
+}
+.index-icon img{
+	border-radius: 0.05rem;
+	overflow: hidden;
+	width: .45rem;
+	margin-top: .35rem;
+}
+.index-icon>div{
+	border-radius: 0.1rem;
+	background-color: #fff;
+	overflow: hidden;
+}
+.index-icon .icon-name{
+	font-size: .16rem;
+	margin: 0.15rem 0;
+	color: #333;
+}
+/*个人中心*/
+.flex{
+	display: flex!important;
+	align-items: center!important;
+}
+.icon-person{
+	width:0.16rem;
+	height: .16rem;
+	margin-right: 0.08rem;
+}
+.icon-txt{
+	font-size: .16rem;
+	color: #333;
+}
+.margin-bottom-r10{
+	margin-bottom: .1rem;
+}
