@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>常洗</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../../public/css/mui.min.css"/>
+    <link rel="stylesheet" href="../../../public/css/index.css"/>
+    <link rel="stylesheet" href="../../../public/css/public.css"/>
+    <!--<link rel="stylesheet" href="../../src/css/vip.css" />-->
+    <!--<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />-->
+    <!--<link rel="stylesheet" href="../../src/css/wash-chose.css"/>-->
+    <!--<link rel="stylesheet" href="../../src/css/commodity-detail.css" />-->
+    <link rel="stylesheet" href="../../src/css/order-pay.css"/>
+    <link rel="stylesheet" href="../../src/css/another-pay.css">
+    <!--<script src="../../../public/js/page.flexible.js"></script>-->
+    <script src="../../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../../public/js/mui.min.js"></script>
+    <!--<script src="../../../public/js/mui.picker.min.js"></script>-->
+    <script src="../../../public/js/jquery.cookie.js"></script>
+    <!--<script src="../../../public/js/common.js"></script>-->
+    <!--<script src="../../../public/js/public.js"></script>-->
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-left-nav mui-pull-left" id="goback"></a>
+    <p class="mui-title blue">自取自送</p>
+</header>
+<div class="mui-content">
+    <p class="top-tip" style="color: #1dc739;font-weight: bold;">自取自送有<span style="color: #af1310;">8%</span>的跑腿费优惠哦</p>
+    <div class="pay-style">
+        <div class="pay-pic"><img src="../../../public/img/order/dd.png" alt=""/></div>
+        <div class="pay-txt">
+            <h4>订单状态：<span>确认订单</span></h4>
+            <p>下单时间：<span id="date"></span></p>
+        </div>
+    </div>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <a href="">
+            <li class="mui-table-view-cell" style="display: flex;">
+                <img style="width: 0.25rem;height: 0.25rem;" src="../../../public/img/dz.png" alt="">
+                <p>取衣地址：<span id="get">选择取衣代收点</span></p>
+            </li>
+        </a>
+        <a>
+            <li class="mui-table-view-cell" style="display: flex;">
+                <img style="width: 0.25rem;height: 0.25rem;" src="../../../public/img/dz.png" alt="">
+                <p>寄回地址：<span id="back">选择送回代收点(不填默认和取衣点相同)</span></p>
+            </li>
+        </a>
+    </ul>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;padding: 0.05rem 0.1rem;">
+            <p>毛衣</p>
+            <p>X1</p>
+            <p>￥50</p>
+        </li>
+        <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;padding: 0.05rem 0.1rem;">
+            <p>皮衣</p>
+            <p>X1</p>
+            <p>￥60</p>
+        </li>
+        <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;padding: 0.05rem 0.1rem;">
+            <p>卫衣</p>
+            <p>X2</p>
+            <p>￥100</p>
+        </li>
+    </ul>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell" style="display: flex;justify-content: space-between">
+            <p>优惠券</p>
+            <p>无可用优惠券</p>
+        </li>
+    </ul>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell" style="display: flex;justify-content: space-between">
+            <p>支付方式</p>
+            <p>无可用优惠券</p>
+        </li>
+    </ul>
+</div>
+</body>
+<div id="nowCity" style="display:none;"></div>
+<script src="../../../public/js/public.js"></script>
+<script src="../../src/js/another-pay.js"></script>
+</html>

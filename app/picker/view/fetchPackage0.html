@@ -318,7 +318,7 @@
                     success:function(data){
                         console.log(data);
                         if(data.status==210){
-							mui.alert("该封签号已被使用",function(){
+							mui.alert(data.msg,function(){
 							    window.location.reload();
 							    return false
 							});

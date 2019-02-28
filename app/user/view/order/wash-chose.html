@@ -86,7 +86,7 @@
 		</header>
 
 		<nav class="mui-bar mui-bar-tab bot-nav bot">
-			<div class="full-remind">单笔订单满<span style="color: #9f0d10;font-weight: bold;"> 72 </span>元免运费</div>
+			<div class="full-remind">单笔订单满<span id="fullNum" style="color: #9f0d10;font-weight: bold;"> 72 </span>元免运费</div>
 			<div class="chose-items" id="icon-car">
 				<!--<a href="clothes-box.html">-->
 					<div id="shop-car" class="chose-pic"><img src="../../../public/img/order/shop-car.png" alt="" /><span id="item-num" class="mui-badge mui-badge-danger">0</span></div>
@@ -158,6 +158,12 @@
             var gallery = mui('.mui-slider');
             gallery.slider({
                 interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+            });
+
+            enAjax2(globalUrl+'/orderConfig/getOrderConfigByKey',"get",true,{key:'paymentNum'},function(res){
+                if(res.code==0){
+                    $("#fullNum").html(res.data);
+				}
             });
 
             var listWidth=$(".menu-box").width();
@@ -360,7 +366,7 @@
             if (token) {
                 window.location.href = "clothes-box.html";
             } else {
-                window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Forder%2Fclothes-box.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+                window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             }
         });
 

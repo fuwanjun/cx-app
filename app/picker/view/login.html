@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="../../public/css/message.css" />
 		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
 		<script src="../../public/js/jquery-1.11.3.min.js"></script>
+		<script src="../../public/js/common.js"></script>
 		<style type="text/css">
 			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
 				position: relative;
@@ -100,6 +101,12 @@
 		<script src="../../public/js/public.js"></script>
 		<script type="text/javascript">
 			mui.init();
+//            var code = getQueryString('code');
+//			$(function(){
+//                if (!code) {
+//                    window.location.href = window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fpicker%2fview%2flogin.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+//                }
+//			});
 			$(".loginBtn .mui-btn").on("tap",function(){
 
 				var account=$("#account").val();
@@ -136,6 +143,7 @@
                     $.cookie("phone",data.taker.phone);
                     $.cookie("userpic",data.taker.picture);
                     $.cookie("userCode",data.taker.openId);
+//                    $.cookie("code",code);
                     	window.location.href='index.html';
 //                        window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fpicker%2fview%2findex.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 //                    window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2f192.168.3.211:8081%2fapp%2fpicker%2fview%2findex.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
@@ -145,6 +153,6 @@
 				}
 			})
 		</script>
-	</body><div id="nowCity" style="display:none;"></div>
+	</body>
 
 </html>

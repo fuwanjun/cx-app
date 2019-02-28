@@ -13,6 +13,7 @@ var totalPrice="";
  * 初始化
  */
 $(function(){
+    $("#date").html(getNowFormatDate());
     /**
      * 获取商品信息
      */

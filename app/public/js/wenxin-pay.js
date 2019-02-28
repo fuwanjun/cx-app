@@ -21,12 +21,11 @@ function onBridgeReady(){
                 $.cookie("couponId", "", {expires: -1});
                 var url=globalUrl+"/balance/wxpayOver";
                 var data={orderNumber:  orderId};
-                mui.toast("付款成功");
+                // mui.toast("付款成功");
                 enAjax(url,'post',false,data,wxCheck,null,false);
                 function wxCheck(data){
                     window.location.href="order-detail.html?id="+orderId;
                 }
-
             }else{
                 // mui.alert(res.err_desc);
             }
@@ -44,7 +43,7 @@ function pay(orderId){
         },
         crossDomain: true,
         success:function(result){
-            console.log(result);
+            // mui.alert(result.data);
             wxData=result.data;
             if (typeof WeixinJSBridge == "undefined") {
                 if (document.addEventListener) {
@@ -68,11 +67,11 @@ function onBridgeReady2(){
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
             "appId":"wx31fd1e1bad23db37",       //公众号名称，由商户传入
-            "timeStamp":wxData.timeStamp,       //时间戳，自1970年以来的秒数
-            "nonceStr":wxData.nonceStr,         //随机串
-            "package":wxData.packageValue,
-            "signType":wxData.signType,         //微信签名方式：
-            "paySign":wxData.paySign            //微信签名
+            "timeStamp":wxData2.timeStamp,       //时间戳，自1970年以来的秒数
+            "nonceStr":wxData2.nonceStr,         //随机串
+            "package":wxData2.packageValue,
+            "signType":wxData2.signType,         //微信签名方式：
+            "paySign":wxData2.paySign            //微信签名
         },
         function(res){
             if(res.err_msg == "get_brand_wcpay_request:ok" ){
@@ -98,7 +97,7 @@ function onBridgeReady2(){
         });
 }
 
-var wxData={};
+var wxData2={};
 function pay2(orderId){
     $.ajax({
         url:globalUrl+"/wechat/unifiedOrder",
@@ -111,7 +110,7 @@ function pay2(orderId){
         crossDomain: true,
         success:function(result){
             console.log(result);
-            wxData=result.data;
+            wxData2=result.data;
             if (typeof WeixinJSBridge == "undefined") {
                 if (document.addEventListener) {
                     document.addEventListener('WeixinJSBridgeReady',

@@ -6,7 +6,7 @@ $(function(){
 		for(var i=0;i<data.data.length;i++){
 			var menuItem='<div class="menuList"><a class="mui-control-item" href="#item'+data.data[i].id+'">'+data.data[i].titleName+'</a></div>';
 			var conItem='<div id="item'+data.data[i].id+'" class="mui-control-content mui-active bg-white border-radius-r5">'+
-							'<ul class="mui-table-view mui-flex"></ul>'+
+							'<ul class="mui-table-view mui-flex" style="overflow: scroll"></ul>'+
 						'</div>';
 			if(data.data[i].id==9||data.data[i].id==10){}
 			if(data.data[i].id==1||data.data[i].id==3||data.data[i].id==4||data.data[i].id==5){
@@ -19,6 +19,7 @@ $(function(){
 		}
 		$("#menu1 .menuList").eq(0).find("a").addClass("mui-active");
 	});
+    mui('.mui-scroll-wrapper').scroll();
     getItems(1);
     hisNum();
 	//监听点击商品类目
@@ -78,6 +79,18 @@ $(function(){
 
 	//点击加号进行商品添加
 	mui("body").on("tap",".addlogo",function(){
+		var thisAdd=$(this);
+        var left=thisAdd.offset().left;
+        var top=thisAdd.offset().top;
+        var carLeft=$(".shop-car").offset().left;
+        var carTop=$(".shop-car").offset().top;
+		console.log("L:"+left+"-T:"+top);
+        console.log("CL:"+carLeft+"-CT:"+carTop);
+        var join='<div style="width: 0.25rem;height:0.25rem;position:absolute;top:'+(top-200)+'px;left:'+left+'px;border: 1px solid #39a4f2;background:#39a4f2;border-radius: 50%;"></div>';
+        $(join).appendTo($("#goodsCon")).animate({top:(carTop)+"px",left:(carLeft-200)+"px"},function(){
+            $(this).hide();
+        });
+
 		var goodsId=$(this).attr("data-id");
         putCar({goodsId:goodsId, commodityCount: 1, washMode: []})
 	});
@@ -178,7 +191,8 @@ function getItems(type){
 
 			for(var i=0;i<data.length;i++){
 				var img=data[i].goodsPicture?"http://"+data[i].goodsPicture:'../../public/img/picker/icon/pic.png';
-				var item='<li class="mui-table-view-cell">'+
+				var item='<li class="goodsBox mui-table-view-cell" data-id="'+data[i].id+'">' +
+							'<span class="mui-badge mui-badge-danger goodsNum"></span>'+
 							'<div class="font-size-12 color-666 pic-goods"><img class="uniform" src="'+img+'" alt=""></div>'+
 							'<div class="mui-flex font-size-14 thisName">'+data[i].goodsName+'</div>'+
 							'<div class="font-size-12 color-333 mui-flex mui-flex-between">'+
@@ -187,6 +201,7 @@ function getItems(type){
 						'</li>';
 				$(item).appendTo($("#item"+type+' ul'));
 			}
+            hisNum();
 		}
 	})
 }
@@ -239,6 +254,7 @@ function hisNum(){
         crossDomain: true,
 		success:function(data){
 			console.log(data);
+            getGoodsNum(data);
 			var hisNum=0;
 			var hisPrice=0;
 			for(var i=0;i<data.length;i++){
@@ -254,5 +270,19 @@ function hisNum(){
 		$(this).css("display","none");
 	}else{
 		$(this).css("display","block");
+	}
+}
+
+function getGoodsNum(data){
+	if(data){
+		for(var i=0;i<data.length;i++){
+            var goodsId = data[i].goodsId;
+            var count = data[i].commodityCount;
+            if(count!=0){
+                $(".goodsBox[data-id="+goodsId+"]").find(".goodsNum").text(count).css("display","block");
+            }else{
+                $(".goodsBox[data-id="+goodsId+"]").find(".goodsNum").css("display","none");
+            }
+		}
 	}
 }

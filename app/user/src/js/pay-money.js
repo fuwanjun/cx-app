@@ -1,5 +1,4 @@
 var orderId=getQueryString("id");
-
 $(function(){
     $("#nowCity").html($.cookie("now"));
     $("title").html("常洗-"+$("#nowCity").html()+"站");

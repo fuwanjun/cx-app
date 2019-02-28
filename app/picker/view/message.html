@@ -53,19 +53,15 @@
 		</header>	
 		<div class="mui-content bg-white">
 			<ul class="mui-table-view">
-				<a href="fetchPackageMessage.html">
-					<li class="mui-table-view-cell mui-flex border-bottom-tiny-blue" style="justify-content: space-between">
-						<div class="mui-flex mui-flex-halign-center">
-							<img class="notice-relativeImg" src="../../public/img/picker/icon-fetch.png" alt="" />
-							<span class="hidden mui-position"></span>
-							<span class="color-333 font-size-16">取件消息</span>
-						</div>
-						<!--<div class="color-666 font-size-16" style="line-height: 0.44rem">-->
-							<!--<span>06-17</span>-->
-							<!--<span>17:15</span>-->
+				<!--<a href="fetchPackageMessage.html">-->
+					<!--<li class="mui-table-view-cell mui-flex border-bottom-tiny-blue" style="justify-content: space-between">-->
+						<!--<div class="mui-flex mui-flex-halign-center">-->
+							<!--<img class="notice-relativeImg" src="../../public/img/picker/icon-fetch.png" alt="" />-->
+							<!--<span class="hidden mui-position"></span>-->
+							<!--<span class="color-333 font-size-16">取件消息</span>-->
 						<!--</div>-->
-					</li>
-				</a>
+					<!--</li>-->
+				<!--</a>-->
 				<a href="deliverPackageMessage.html">
 					<li class="mui-table-view-cell mui-flex border-bottom-tiny-blue" style="justify-content: space-between">
 						<div class="mui-flex mui-flex-halign-center">
@@ -73,25 +69,8 @@
 							<span class="mui-position"></span>
 							<span class="color-333 font-size-16">预警消息</span>
 						</div>
-						<!--<div class="color-666 font-size-16" style="line-height: 0.44rem">-->
-							<!--<span>06-17</span>-->
-							<!--<span>17:15</span>-->
-						<!--</div>-->
 					</li>
 				</a>
-				<!--<a href="complainMessage.html?type=complaint">-->
-					<!--<li class="mui-table-view-cell mui-flex mui-flex-halign-center border-bottom-tiny-blue">-->
-						<!--<div class="mui-flex mui-flex-halign-center">-->
-							<!--<img class="notice-relativeImg" src="../../public/img/picker/icon-complain.png" alt="" />-->
-							<!--<span class="mui-position"></span>-->
-							<!--<span class="color-333 font-size-16">投诉消息</span>-->
-						<!--</div>-->
-						<!--<div class="color-666 font-size-16">-->
-							<!--<span>06-17</span>-->
-							<!--<span>17:15</span>-->
-						<!--</div>-->
-					<!--</li>-->
-				<!--</a>-->
 			</ul>
 		</div>
 
@@ -100,20 +79,6 @@
 			var url=globalUrl+'/takeNotice/getNoticeTypeCount';
 			var data={scope:$.cookie("id")};
 			enAjax(url,'get',true,data,noReadNum,null);
-
-			//投诉信息
-//			var url2=globalUrl+"/takeUser/getTakerReportCountByTakerId";
-//			var data2={takerId:66};
-//            enAjax(url2,'get',true,data2,getNum,null);
-//            function getNum(data){
-//				console.log(data);
-//				if(data.data==0){
-//                    $(".mui-position").eq(2).hide();
-//				}else{
-//                    $(".mui-position").eq(2).show();
-//                    $(".mui-position").eq(2).html(data.data);
-//				}
-//			}
 
             function noReadNum(data){
                 console.log(data);

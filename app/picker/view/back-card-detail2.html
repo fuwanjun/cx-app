@@ -34,7 +34,7 @@
         }
         .pics div{
             width:100%;
-            height:2rem;
+            /*height:2rem;*/
             margin-top:0.2rem;
             background: #ccc;
         }
@@ -66,6 +66,10 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
     var id=getQueryString("id");
+    var checkType=getQueryString("type");
+    if(checkType==1){
+        $("#sub").hide();
+    }
     $(function(){
         getIdsMsg(id);
     });

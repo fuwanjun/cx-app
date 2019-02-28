@@ -26,23 +26,6 @@ function getOrder(orderId){
     var data={orderNo:orderId};
     enAjax(url,'post',true,data,getOrderIn,null);
     function getOrderIn(data){
-        console.log(data);
-        // var diffPrice;
-        // if(data.data.status==20){
-        //     $('.process li').eq(0).find($(".process-pic img")).attr("src","../../../public/img/order/1.png");
-        //     diffPrice='<div class="diff">补差价</div>';
-        // }else if(data.data.status==35){
-        //     $('.process li').eq(1).find($(".process-pic img")).attr("src","../../../public/img/order/2.png");
-        //     diffPrice='<div class="diff">补差价</div>';
-        // }
-        // else if(data.data.status==60){
-        //     $('.process li').eq(4).find($(".process-pic img")).attr("src","../../../public/img/order/5.png");
-        //     diffPrice="<div></div>";
-        //     $("#oneGoods .item").eq(0).find($(".diff")).html("").removeClass("diff");
-        //
-        // }else{
-        //
-        // }
         var signNum="";
         var signTime="";
         if(data.data.orderShipping){

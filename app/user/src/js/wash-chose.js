@@ -52,7 +52,7 @@ $(function () {
         if (token) {
             window.location.href = "clothes-box.html";
         } else {
-            window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Forder%2Fclothes-box.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         }
     });
 

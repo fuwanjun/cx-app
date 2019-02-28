@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审核</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../../public/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../src/css/fetchPackage.css"/>
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <style>
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+            width:34%;
+            left:33%;
+        }
+        .mui-table-view li{
+            background: #fff;
+            margin-bottom:0.1rem;
+            padding:0.1rem 0.15rem;
+        }
+        .line1,.line2{
+            display: flex;
+            justify-content: space-between;
+
+        }
+        .line1 p{
+            font-size:0.17rem;
+            color: #333;
+        }
+        .line2{
+            margin-top:0.2rem;
+        }
+        .line2 p{
+            font-size:0.15rem;
+        }
+        p{
+            margin:0;
+        }
+        .bg-white{
+            position: fixed;
+            top: 0.44rem;
+            z-index: 999;
+            border-top: 2px solid #ccc;
+        }
+        .card-type{
+            width:100%;
+            position: fixed;
+            top:0.84rem;
+            z-index:999;
+            border-top:4px solid #f4f8ff;
+            margin-top:2px;
+            display: flex;
+            background: #fff;
+            height:0.4rem;
+        }
+        .card-type a{
+            display: block;
+            width:50%;
+            line-height: 0.4rem;
+            text-align: center;
+        }
+        .card-active{
+            color: #000;
+            font-weight:bold;
+        }
+        .chose-content .mui-content{
+            display: none;
+        }
+        .chose-content .con-active{
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-tiny-blue">
+<div class="wrap">
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-icon mui-icon-back" href="index.html"></a>
+        <p class="mui-title">审核</p>
+    </header>
+    <div class="mui-content">
+        <div class="bg-white">
+            <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+                <a class="mui-control-item chose-btn" href="back-card1.html">会员退卡</a>
+                <a class="mui-control-item chose-btn" href="back-card2.html">折扣退卡</a>
+                <a class="mui-control-item chose-btn mui-active" href="back-card3.html">已审核</a>
+            </div>
+        </div>
+        <div class="card-type">
+            <a href="back-card3.html"><p>会员卡</p></a>
+            <a href="back-card4.html"><p class="card-active">折扣卡</p></a>
+        </div>
+        <div class="chose-content">
+            <div id="item1" class="mui-content mui-scroll-wrapper" style="margin-top: 1.4rem;">
+                <ul class="mui-table-view mui-scroll"></ul>
+            </div>
+            <div id="item2" class="mui-content mui-scroll-wrapper con-active" style="margin-top: 1.4rem;">
+                <ul class="mui-table-view mui-scroll"></ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="../../public/js/public.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+    var page=1;
+//    var page2=1;
+    var pageSize=10;
+    mui.init({
+        pullRefresh: {
+            container: '#item2',
+            up: {
+                height: 50,
+                auto: true,
+                contentrefresh: '正在加载...',
+                contentnomore: '没有更多数据',
+                callback: getMsg
+            }
+        }
+    });
+
+    //    点击查看详情
+    $("#item2 ul").on("tap","li",function(){
+        var id=$(this).attr("data-id");
+        window.location.href='back-card-detail2.html?type=1&id='+id;
+    });
+
+    function getMsg(){
+        $.ajax({
+            type:"get",
+            url:globalUrl+"/verifyCard/listByFinish",
+            data:{type:"discountCard",page:page,pageSize:pageSize},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:function(data){
+                if(data.status==200){
+                    mui('#item2').pullRefresh().endPullupToRefresh((++page>data.data.pages));
+//                    $("#item2 ul").html("");
+                    for(var i=0;i<data.data.list.length;i++){
+                        var name=data.data.list[i].memberName;
+                        var item='<li data-id="'+data.data.list[i].id+'">' +
+                            '<div class="line1">' +
+                            '<p class="userId">会员ID:<span>'+data.data.list[i].memberId+'</span></p>' +
+                            '<p class="price">实际金额:<span>'+data.data.list[i].cardReal+'</span>元</p>' +
+                            '</div>' +
+                            '<div class="line2">' +
+                            '<p class="subUser">申请人:<span>'+name+'</span></p>' +
+                            '<p class="subTime">申请时间:<span>'+timestampToTime(data.data.list[i].createTime)+'</span></p>' +
+                            '</div>' +
+                            '</li>';
+                        $(item).appendTo($("#item2 ul"));
+                    }
+                }
+            }
+        })
+    }
+
+//    function getMsg2(){
+//        $.ajax({
+//            type:"get",
+//            url:globalUrl+"/verifyCard/listByFinish",
+//            data:{type:"discountCard",page:page2,pageSize:pageSize},
+//            beforeSend: function (xhr) {
+//                xhr.setRequestHeader("token", $.cookie("token"));
+//            },
+//            crossDomain: true,
+//            success:function(data){
+//                if(data.status==200){
+//                    mui('#item2').pullRefresh().endPullupToRefresh((++page>data.data.pages));
+//                    $("#item2 ul").html("");
+//                    for(var i=0;i<data.data.list.length;i++){
+//                        var name=data.data.list[i].memberName;
+//                        var item='<li data-id="'+data.data.list[i].id+'">' +
+//                            '<div class="line1">' +
+//                            '<p class="userId">会员ID:<span>'+data.data.list[i].memberId+'</span></p>' +
+//                            '<p class="price">实际金额:<span>'+data.data.list[i].cardReal+'</span>元</p>' +
+//                            '</div>' +
+//                            '<div class="line2">' +
+//                            '<p class="subUser">申请人:<span>'+name+'</span></p>' +
+//                            '<p class="subTime">申请时间:<span>'+timestampToTime(data.data.list[i].createTime)+'</span></p>' +
+//                            '</div>' +
+//                            '</li>';
+//                        $(item).appendTo($("#item2 ul"));
+//                    }
+//                }
+//            }
+//        })
+//    }
+//
+//    $(".card-type p").on("tap",function(){
+//        var i=$(this).index();
+//        $(".card-type p").removeClass("card-active");
+//        $(".card-type p").eq(i).addClass("card-active");
+//        $(".chose-content .mui-content").removeClass("con-active");
+//        $(".chose-content .mui-content").eq(i).addClass("con-active");
+//    })
+</script>
+</html>

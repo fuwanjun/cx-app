@@ -10,13 +10,15 @@
 
 .mui-table-view-cell:after{
 	display: none;
+	background-color:#fff;
 }
-.mui-table-view:after{
-	background-color:#f4f8ff;
-}
-.mui-table-view:before{
-	background-color:#f4f8ff;
-}
+/*.mui-table-view:after{*/
+	/*background-color:#f4f8ff;*/
+	/*background-color:#f4f8ff;*/
+/*}*/
+/*.mui-table-view:before{*/
+	/*background-color:#f4f8ff;*/
+/*}*/
 .itemIndex{
 	width: .15rem;
 	height: .15rem;
@@ -30,7 +32,6 @@
 .mui-flex .mui-control-item:nth-of-type(2){
 	width: 50%;
 }
-*{ touch-action: none; }
 .uniform{
 	width: 100%;
 }
@@ -47,6 +48,9 @@
 	width: 100%;
 	flex-wrap: wrap;
 }
+
+
+
 .shop-car{
 	width: 0.4rem;
 }
@@ -83,4 +87,22 @@
 	height: auto;
 	margin-bottom: 0;
 	text-align: center;
+}
+.goodsBox{
+	position: relative;
+	display:block;
+}
+.mui-table-view-cell>.mui-badge{
+	top:12px;
+	left:6px;
+	right:auto;
+}
+.goodsNum{
+	display: none;
+}
+.mui-table-view-cell:after{
+	background-color:#fff;
+}
+.mui-slider{
+	overflow: scroll;
 }

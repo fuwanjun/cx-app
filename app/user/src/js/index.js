@@ -25,7 +25,6 @@ if (!token && !code) {
     var url = globalUrl + '/wechat/wxLogin';
     var data = {code: code};
     enAjax(url, 'get', true, data, getInfo, null, true);
-
 }
 
 getBooks();

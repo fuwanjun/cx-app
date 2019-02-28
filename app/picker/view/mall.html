@@ -1,107 +1,105 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../../public/css/mui.min.css" rel="stylesheet" />
-		<!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
-		<link rel="stylesheet" href="../../public/css/message.css" />
-		<link rel="stylesheet" type="text/css" href="../src/css/mall.css"/>
-		<script type="text/javascript" src="../../public/js/page.flexible.js"></script>
-		<script src="../../public/js/mui.min.js"></script>
-		<script src="../../public/js/jquery-1.11.3.min.js"></script>
-		<script src="../../public/js/jquery.cookie.js"></script>
-		<style>
-			#menu1{
-				display: flex;
-				flex-wrap: wrap;
-			}
-			.menuList{
-				width:25%;
-			}
-		</style>
-	</head>
-	<body class="bg-tiny-blue">
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-icon mui-icon-back" href="index.html"></a>
-			<p class="mui-title">代下单商城</p>
-		</header>
-		<nav class="mui-bar mui-bar-tab mui-flex mui-flex-halign-center mui-flex-between padding-rl-r10">
-			<!--<a href="clothes-box.html">-->
-				<div class="mui-flex mui-flex-halign-center">
-					<a href="clothes-box.html">
-						<img class="shop-car" src="../../public/img/picker/shop-car.png"/>
-						<span class="number font-size-12">0</span>
-					</a>
-					<div class="color-orange margin-l-r10">
-						<span>￥</span><span id="initPrice">0.00</span>
-					</div>
-				</div>
-			<!--</a>-->	
-			<div id="submit" class="orderPay bg-color-blue color-white padding-r5 padding-rl-r10 border-radius-r5 font-size-14">下单取件</div>
-		</nav>
-		<div class="mui-content" id="mallCon">
-			<div class="bg-white">
-				<div class="mui-flex padding-r10 mui-flex-halign-center">
-					<div class="bg-color-blue itemIndex"></div>
-					<div class="font-size-16 margin-l-r10 color-333">专业日常清洗</div>
-				</div>
-				<div class="bg-white" style="padding:0 10px">
-					<div class="mui-segmented-control font-size-14 color-666 mui-segmented-control-inverted mui-segmented-control-primary" id="menu1">
-						<!--<div class="menuList">-->
-							<!--<a class="mui-control-item mui-active" href="#item1">-->
-								<!--日常洗涤-->
-							<!--</a>-->
-						<!--</div>-->
-					</div>
-				</div>
-				<div class="mui-flex padding-r10 mui-flex-halign-center">
-					<div class="bg-color-blue itemIndex"></div>
-					<div class="font-size-16 margin-l-r10 color-333">奢侈品洗衣</div>
-				</div>
-				<div class="bg-white" style="padding:0 10px">
-					<div class="mui-flex mui-flex-between font-size-14 color-666 mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" id="menu2">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../../public/css/mui.min.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" type="text/css" href="../../public/css/index.css"/>-->
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" type="text/css" href="../src/css/mall.css"/>
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <style>
+        #menu1 {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .menuList {
+            width: 25%;
+        }
+    </style>
+</head>
+<body class="bg-tiny-blue">
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="index.html"></a>
+    <p class="mui-title">代下单商城</p>
+</header>
+<nav class="mui-bar mui-bar-tab mui-flex mui-flex-halign-center mui-flex-between padding-rl-r10">
+    <div class="mui-flex mui-flex-halign-center">
+        <a href="clothes-box.html">
+            <img class="shop-car" src="../../public/img/picker/shop-car.png"/>
+            <span class="number font-size-12">0</span>
+        </a>
+        <div class="color-orange margin-l-r10">
+            <span>￥</span><span id="initPrice">0.00</span>
+        </div>
+    </div>
+    <div id="submit" class="orderPay bg-color-blue color-white padding-r5 padding-rl-r10 border-radius-r5 font-size-14">
+        下单取件
+    </div>
+</nav>
+<div>
 
-					</div>
-				</div>
-			</div>
-			
-			<div class="mui-slider" style="margin-top: .08rem;padding:0 .075rem;">
+</div>
+<div class="mui-content" id="mallCon">
+    <div class="bg-white">
+        <div class="mui-flex padding-r10 mui-flex-halign-center">
+            <div class="bg-color-blue itemIndex"></div>
+            <div class="font-size-16 margin-l-r10 color-333">专业日常清洗</div>
+        </div>
+        <div class="bg-white" style="padding:0 10px">
+            <div class="mui-segmented-control font-size-14 color-666 mui-segmented-control-inverted mui-segmented-control-primary" id="menu1"></div>
+        </div>
+        <div class="mui-flex padding-r10 mui-flex-halign-center">
+            <div class="bg-color-blue itemIndex"></div>
+            <div class="font-size-16 margin-l-r10 color-333">奢侈品洗衣</div>
+        </div>
+        <div class="bg-white" style="padding:0 10px">
+            <div class="mui-flex mui-flex-between font-size-14 color-666 mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary"
+                 id="menu2">
 
-			</div>
-		</div>
-		<div id="sheet" class="mui-popover mui-popover-action mui-popover-bottom">
-			<!--选择菜单-->
-			<ul class="mui-table-view overflow_none padding-b-r5">
-				<li class="mui-flex">
-					<img id="goodsImg" class="margin-top-negative box-shadow" src="../../public/img/picker/coat.png" alt="" />
-				    <div class="margin-top-r40 mui-text-left padding-rl-r10 font-size-14">
-				      	<div class="color-orange font-size-16"><span>￥</span><span class="totalPrice" id="goodsPrice">0.00</span></div>
-				        <div class="color-333">已选 <span id="goodsName"></span></div>
-				    </div>
-				</li>
-				<li class="typeLabel mui-table-view" id="parts"></li>
-			    <!--<li class="mui-flex font-size-14 margin-rl-r10 margin-bottom-r10 mui-flex-between mui-flex-halign-center border-tb">
-			    	<div class="color-666">洗衣数量</div>
-			    	<div class="font-size-14 mui-flex border-default border-c999 margin-tb-r5 color-666 border-radius-r5 bg-white">
-			    		<span class="font-size-16 padding-rl-r10 minus">-</span>
-			    		<input type="text" readonly="readonly" name="singleNum" id="singleNum" value="0" />
-			    		<span class="font-size-16 padding-rl-r10 plus">+</span>
-			    	</div>
-			    </li>-->
-		   </ul>
-		    <!-- 取消菜单 -->
-		    <ul class="mui-table-view">
-		      <li class="mui-table-view-cell" data-id="">
-		        <a href="#" id="incar"><b>加入购物车</b></a>
-		      </li>
-		    </ul>
-		</div>
-	</body><div id="nowCity" style="display:none;"></div>
-	<script src="../../public/js/public.js"></script>
-	<script src="../src/js/mall2.js"></script>
-	<script>
+            </div>
+        </div>
+    </div>
 
-	</script>
+    <div class="mui-slider" id="goodsCon" style="margin-top: .08rem;padding:0 .075rem;">
+
+    </div>
+</div>
+<div id="sheet" class="mui-popover mui-popover-action mui-popover-bottom">
+    <!--选择菜单-->
+    <ul class="mui-table-view overflow_none padding-b-r5">
+        <li class="mui-flex">
+            <img id="goodsImg" class="margin-top-negative box-shadow" src="../../public/img/picker/coat.png" alt=""/>
+            <div class="margin-top-r40 mui-text-left padding-rl-r10 font-size-14">
+                <div class="color-orange font-size-16"><span>￥</span><span class="totalPrice"
+                                                                           id="goodsPrice">0.00</span></div>
+                <div class="color-333">已选 <span id="goodsName"></span></div>
+            </div>
+        </li>
+        <li class="typeLabel mui-table-view" id="parts"></li>
+        <!--<li class="mui-flex font-size-14 margin-rl-r10 margin-bottom-r10 mui-flex-between mui-flex-halign-center border-tb">
+            <div class="color-666">洗衣数量</div>
+            <div class="font-size-14 mui-flex border-default border-c999 margin-tb-r5 color-666 border-radius-r5 bg-white">
+                <span class="font-size-16 padding-rl-r10 minus">-</span>
+                <input type="text" readonly="readonly" name="singleNum" id="singleNum" value="0" />
+                <span class="font-size-16 padding-rl-r10 plus">+</span>
+            </div>
+        </li>-->
+    </ul>
+    <!-- 取消菜单 -->
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell" data-id="">
+            <a href="#" id="incar"><b>加入购物车</b></a>
+        </li>
+    </ul>
+</div>
+</body>
+<div id="nowCity" style="display:none;"></div>
+<script src="../../public/js/public.js"></script>
+<script src="../src/js/mall2.js"></script>
 </html>

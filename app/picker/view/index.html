@@ -108,15 +108,22 @@
 <script src="../../public/js/public.js"></script>
 <script type="text/javascript">
     mui.init();
-    var packNum = "";
-    var code = getQueryString("code");
+
+        var code = getQueryString("code");
+//    var code = $.cookie("code");
     var userCode = $.cookie("userCode");
+
     if (!userCode || userCode == "null") {
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fpicker%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
         var loginUrl = globalUrl + "/takeUser/WechatBaseLogin";
         enAjax2(loginUrl, 'post', false, {code: code}, function (data) {
             console.log(data);
+            if(data.code==0){
+                $.cookie("userCode",data.message);
+            }
         });
     }
+
     if ($.cookie("levelType") == 11) {
         $("#iconBox li").eq(0).hide();
         $("#iconBox li").eq(1).hide();
@@ -137,10 +144,27 @@
     mui("#iconBox").on("tap", ".index-icon", function () {
         var i = $(this).index();
         if (i == 4) {
-            mui.prompt('', '输入需要的取件带', '剩余总数：' + $.cookie("surplusNum") + '', ['取消', '确认'], function (e) {
-                if (e.index == 1) {
-                    var val = $(".mui-popup-input input").val();
-                    checkStock(val);
+            $.ajax({
+                type: "get",
+                url: globalUrl + "/taker/getTakerSurplusNum",
+                data: {},
+                async:'false',
+                beforeSend: function (request) {
+                    request.setRequestHeader("token", token)
+                },
+                success: function (data) {
+                    if(data.status==200){
+                        mui.prompt('', '输入需要的取件带', '剩余总数：' + data.data + '', ['取消', '确认'], function (e) {
+                            if (e.index == 1) {
+                                var val = $(".mui-popup-input input").val();
+                                if (val <= 0) {
+                                    mui.toast('领取装衣袋的数量不能小于等于0');
+                                } else {
+                                    checkStock(val);
+                                }
+                            }
+                        })
+                    }
                 }
             })
         } else {
@@ -148,13 +172,14 @@
         }
 
     });
+
     mui(".mui-bar-nav").on("tap", ".mui-btn", function () {
         window.top.location.href = jQuery(this).attr("data-href");
     });
     var token = $.cookie("token");
-    if ($.cookie("toker")) {
-        var toker = JSON.parse($.cookie("toker"));
-        var account = toker.account;
+    if ($.cookie("taker")) {
+        var taker = JSON.parse($.cookie("taker"));
+        var account = taker.account;
     }
 
     $(function () {
@@ -199,6 +224,7 @@
         });
     }
 
+//    提交审核
     function checkStock(num) {
         $.ajax({
             type: "post",
@@ -210,7 +236,7 @@
             success: function (data) {
                 if (data.status == 200) {
                     var packNum = $.cookie("surplusNum");
-                    $.cookie("surplusNum", parseInt(packNum)+parseInt(num));
+                    $.cookie("surplusNum", parseInt(packNum) + parseInt(num));
                     mui.toast('申请成功，等待审核...');
                 } else {
                     mui.toast(data.msg);
