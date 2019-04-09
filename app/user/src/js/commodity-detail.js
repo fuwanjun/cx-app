@@ -3,6 +3,7 @@ var _on;
 var tipPrice;
 var dataType;
 $(function(){
+	$("header a").attr("href","wash-chose.html?id="+$.cookie("menu"));
 	_id=getQueryString('id');
 	_on=getQueryString("on");
 

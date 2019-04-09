@@ -2,6 +2,7 @@
 	height: 0.75rem;
 	background: #fff;
 	margin-bottom: 0.08rem;
+    display: flex;
 }
 .mes{
 	display: flex;
@@ -43,4 +44,7 @@
 .wash-item a{
     display: block;
     width:100%;
+}
+.wash-item .mui-checkbox{
+    display: none;
 }

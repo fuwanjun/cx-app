@@ -41,7 +41,7 @@
 						<p>取衣地址：<span id="get">去哪里收取您的待洗衣物</span></p>
 					</li>
 				</a>
-				<a>
+				<a href="back-wash.html">
 					<li class="mui-table-view-cell" style="display: flex;">
 						<img style="width: 0.25rem;height: 0.25rem;" src="../../../public/img/dz.png" alt="">
 						<p>寄回地址：<span id="back">如与取衣地址一致可不填</span></p>
@@ -52,26 +52,16 @@
 			<div class="orders" id="orders">
 
 			</div>
-			<!--优惠券-->
 			<ul class="mui-table-view mui-table-view-chevron pre">
-				<li class=" item" id="preferential">
-						优惠券<p id="check-yhq"></p>
-				</li>
-				<li class=" item" id="logistics" style="display: none;">
-					取件方式<p id="check-wl">请选择物流方式</p>
-				</li>
-				<li class=" item" id="zipei" style="display: none;">
-					取件方式<p wlType="2">自配物流</p>
-				</li>
-				<li class="item" id="payStyle">
-					支付方式<p id="pay-type"></p>
-				</li>
+				<li class=" item" id="preferential">优惠券<p id="check-yhq"></p></li>
+				<li class=" item" id="logistics" style="display: none;">取件方式<p id="check-wl">请选择物流方式</p></li>
+				<li class=" item" id="zipei" style="display: none;">取件方式<p wlType="2">自配物流</p></li>
+				<li class="item" id="payStyle">支付方式<p id="pay-type"></p></li>
 				<li class="item" id="yy-time" style="justify-content: space-between">
 					<div id="appoint"style="display: flex;">
 						<img style="width:0.25rem;height: 0.25rem;" src="../../../public/img/mine/ti.png" alt="">
 						<div style="line-height: 0.25rem;margin-left: 0.05rem;color:#999;">预约上门时间</div>
 					</div>
-
 					<p style="text-align: right" id="get-time"></p>
 				</li>
 			</ul>	
@@ -90,21 +80,13 @@
 							<p>+￥</p>
 							<p id="yf">0.00</p>
 						</div>
-						<!--<div class="price1">-->
-							<!--<p>满减</p>-->
-							<!--<p>-￥</p>-->
-							<!--<p id="mj">0.00</p>-->
-						<!--</div>-->
+
 						<div class="price1">
 							<p>优惠券</p>
 							<p>-￥</p>
 							<p id="yhq">0.00</p>
 						</div>
-						<!--<div class="price1">-->
-							<!--<p>淡季促销</p>-->
-							<!--<p>-￥</p>-->
-							<!--<p id="djcx">0.00</p>-->
-						<!--</div>-->
+
 					</div>
 				</div>
 			</div>
@@ -157,12 +139,12 @@
 			<!-- 可选择菜单 -->
 			<ul class="mui-table-view" style="margin-bottom: -2px;">
 				<li class="mui-table-view-cell" payType="2">余额支付</li>
-				<li class="mui-table-view-cell" payType="3">微信支付</li>
+				<li id="wx-pay" class="mui-table-view-cell" payType="3">微信支付</li>
 				<li class="mui-table-view-cell" payType="1">折扣卡支付</li>
 			</ul>
 		</div>
 	</body>
 	<div id="nowCity" style="display:none;"></div>
-	<!--<script src="../../src/js/order-pay.js"></script>-->
-	<script src="../../src/js/order-pay2.js"></script>
+	<script src="../../src/js/order-pay.js"></script>
+	<!--<script src="../../src/js/order-pay2.js"></script>-->
 </html>

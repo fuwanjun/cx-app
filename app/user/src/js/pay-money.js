@@ -1,12 +1,12 @@
 var orderId=getQueryString("id");
 $(function(){
     $("#nowCity").html($.cookie("now"));
-    $("title").html("常洗-"+$("#nowCity").html()+"站");
+    $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
 	$("#date").html(getNowFormatDate());
 	var mj=parseFloat($("#mj").html());
 	var yhq=parseFloat($("#yhq").html());
 	var djcx=parseFloat($("#djcx").html());
-	console.log(orderId);
+	// console.log(orderId);
 	
 	//获取订单信息
 	createOrder();

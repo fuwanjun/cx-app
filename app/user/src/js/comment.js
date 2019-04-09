@@ -1,6 +1,5 @@
 var orderId = getQueryString("id");
 $(function () {
-
     mui.init();
     //打分
     $('#stars2 li').on("tap", function () {
@@ -32,6 +31,7 @@ $(function () {
                 $(".mui-content").attr("takerId", data.data.orderShipping.takerId);
             }
             $(".mui-content").attr("user-id", data.data.userId);
+            $(".mui-content").attr("takerId", data.data.orderShipping.takerId);
             for (var i = 0; i < data.data.orderItems.length; i++) {
                 var item = '<li data-id="' + data.data.orderItems[i].productId + '">' +
                     '<div class="pic-box">' +
@@ -104,6 +104,7 @@ function getEvaluate(formData) {
         cache:false,
         url: globalUrl + '/goods/putGoodsEvaluate',
         type: 'post',
+        async:false,
         data: formData,
 
         beforeSend: function (xhr) {
@@ -111,6 +112,7 @@ function getEvaluate(formData) {
         },
         crossDomain: true,
         success: function (data) {
+            // alert(data.code);
             console.log(data);
         }
     })
@@ -122,6 +124,7 @@ function getStar(score, takerId, orderId) {
         contentType: "application/json;charset=UTF-8",
         url: globalUrl + '/takeUser/putTakerEvaluate',
         type: 'post',
+        async:false,
         data: JSON.stringify({
             orderId: orderId,
             score: score,
@@ -132,6 +135,7 @@ function getStar(score, takerId, orderId) {
         },
         crossDomain: true,
         success: function (data) {
+            // alert(data.score);
             console.log(data);
         }
     })
@@ -143,6 +147,7 @@ function complaint(orderId, content, takerId) {
         contentType: "application/json;charset=UTF-8",
         url: globalUrl + '/takeUser/putTakerReport',
         type: 'post',
+        async:false,
         data: JSON.stringify({
             orderNo: orderId,
             content: content,

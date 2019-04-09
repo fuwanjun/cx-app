@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../public/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../../public/css/mui.picker.min.css" />
+    <link rel="stylesheet" href="../../public/css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../src/css/shop-login.css">
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/mui.picker.min.js"></script>
+    <script src="../../public/js/mui.poppicker.js"></script>
+    <script src="../../public/js/city.data-3.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/public.js"></script>
+</head>
+<style>
+    *{
+        font-size: .14rem;
+    }
+    ::-webkit-input-placeholder {
+        font-size: .14rem;
+    }
+    .loginData{
+        margin-top: 0;
+    }
+    .mui-input-row{
+        margin-bottom: 0.2rem;
+        background: #f4f8ff;
+    }
+    .mui-input-row label{
+        width: 30%;
+        padding: 0.12rem 0.12rem 0.12rem 0;
+        text-align: right;
+    }
+    .mui-input-row label~input{
+        width: 70%;
+    }
+    .mui-input-row:last-child{
+        background: #f4f8ff;
+        height: auto;
+    }
+    textarea{
+        padding: 0 .15rem;
+    }
+    #region{
+        line-height: 0.4rem;
+    }
+</style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title">注册</p>
+</header>
+<div class="mui-content bg-color-blue">
+    <div class="mui-content-body bg-white border-radius-r5">
+        <div class="loginData">
+            <form class="mui-input-group">
+                <div class="mui-input-row">
+                    <label>推广员：</label>
+                    <input id="spreadNum" type="text" class="mui-input-clear" placeholder="请输入推广员编号">
+                </div>
+                <div class="mui-input-row">
+                    <label>联系人：</label>
+                    <input id="userName" type="text" class="mui-input-clear" placeholder="请输入联系人">
+                </div>
+                <div class="mui-input-row">
+                    <label>密&nbsp;&nbsp;&nbsp;码：</label>
+                    <input id="password" type="password" class="mui-input-password" placeholder="请输入密码">
+                </div>
+                <div class="mui-input-row">
+                    <label>手机号：</label>
+                    <input id="phone" type="text" class="mui-input-clear" placeholder="请输入手机号">
+                </div>
+                <div class="mui-input-row city">
+                    <label>区&nbsp;&nbsp;&nbsp;域：</label>
+                    <div id="region"></div>
+                </div>
+                <div class="mui-input-row">
+                    <div style="padding: 0.12rem 0.12rem 0 0.12rem;">详细地址</div>
+                    <textarea id="addressDetail" name="" id="" cols="30" rows="5"></textarea>
+                </div>
+            </form>
+            <div class="registerBtn">
+                <div class="mui-btn mui-btn-block mui-btn-darkblue color-white">注册</div>
+            </div>
+            <div class="bot">
+                <!--<div class="mui-text-center font-size-14"><a href="">忘记密码？</a></div>-->
+                <!--<div class="mui-text-center font-size-14"><a href="shop-register.html">注册账号</a></div>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="../src/js/shop-register.js"></script>
+</html>

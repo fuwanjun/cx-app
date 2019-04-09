@@ -17,49 +17,108 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="my-order1.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user/view/order/my-order1.html">
+      <file leaf-file-name="public.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/public.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-228">
-              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            <state relative-caret-position="285">
+              <caret line="22" column="87" lean-forward="false" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="87" />
               <folding>
-                <marker date="1551331138565" expanded="true" signature="4512:4533" ph="..." />
-                <marker date="1551331138565" expanded="true" signature="6180:6201" ph="..." />
+                <marker date="1554116050479" expanded="true" signature="4324:4421" ph="..." />
+                <marker date="1554116050479" expanded="true" signature="4443:4489" ph="..." />
+                <marker date="1554116050479" expanded="true" signature="7691:7807" ph="..." />
+                <marker date="1554116050479" expanded="true" signature="7829:7869" ph="..." />
+                <marker date="1554116050479" expanded="true" signature="7884:7907" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order-detail.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user/view/order/order-detail.html">
+      <file leaf-file-name="mine.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/view/mine.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="54" column="42" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="42" />
+            <state relative-caret-position="386">
+              <caret line="131" column="257" lean-forward="false" selection-start-line="131" selection-start-column="257" selection-end-line="131" selection-end-column="257" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order-detail.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/user/src/js/order-detail.js">
+      <file leaf-file-name="books.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/view/books.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
-              <folding>
-                <marker date="1551345357920" expanded="true" signature="4226:4244" ph="..." />
-              </folding>
+            <state relative-caret-position="380">
+              <caret line="20" column="78" lean-forward="true" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="message.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/picker/view/message.html">
+      <file leaf-file-name="pay-money.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/view/order/pay-money.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="69" column="76" lean-forward="true" selection-start-line="69" selection-start-column="76" selection-end-line="69" selection-end-column="76" />
-              <folding>
-                <marker date="1551331328767" expanded="false" signature="1936:1966" ph="..." />
-              </folding>
+            <state relative-caret-position="-2488">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pay-money.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/src/js/pay-money.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="61" column="14" lean-forward="true" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wenxin-pay.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/wenxin-pay.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="saving-card.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/user/view/user-center/saving-card.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="212">
+              <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="top_up2.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/src/js/top_up2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="133" column="16" lean-forward="false" selection-start-line="133" selection-start-column="16" selection-end-line="133" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="top_up.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/src/js/top_up.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="135" column="67" lean-forward="true" selection-start-line="135" selection-start-column="67" selection-end-line="135" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="diff-box.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/src/js/diff-box.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,44 +128,44 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>carPrice</find>
-      <find>.goodsNum</find>
-      <find>if(count!=0)</find>
-      <find>goodsNum</find>
-      <find>goods/getGoodsByType</find>
-      <find>getQuerys</find>
-      <find>takeNotice/getNoticeByScopeType</find>
-      <find>recharge</find>
-      <find>balance/wxpayOver</find>
-      <find>balance-wxpayOver</find>
-      <find>#recharge</find>
-      <find>singleNum</find>
-      <find>height</find>
-      <find>preventDefault</find>
-      <find>hidden</find>
-      <find>html{</find>
-      <find>touch-action</find>
-      <find>goodsBox</find>
-      <find>html</find>
-      <find>appendTo</find>
-      <find>cookie</find>
-      <find>mui-table-view-cell</find>
-      <find>封签号</find>
+      <find>SupplWxpayOver</find>
+      <find>balancePayment</find>
+      <find>/balance/balancePayment</find>
+      <find>diff-price</find>
+      <find>order/orderView</find>
+      <find>washItem/getItemId</find>
+      <find>change</find>
+      <find>msg-num</find>
+      <find>submit2</find>
+      <find>latitude</find>
+      <find>wx.openLocation</find>
+      <find>order</find>
+      <find>sureBtn_add</find>
+      <find>checkExceedTodayCount</find>
+      <find>扫码获取封签号</find>
+      <find>getTakerPage</find>
+      <find>getOrderConfigByKey</find>
+      <find>navigation</find>
+      <find>to_addr</find>
+      <find>noCity</find>
+      <find>city/checkCityOpen</find>
+      <find>getCityByName</find>
+      <find>allmap</find>
       <find>submit</find>
-      <find>putTakeNotice</find>
-      <find>wechat/unifiedOrder</find>
-      <find>NoticeBoard</find>
-      <find>pay-money</find>
-      <find>wechat</find>
-      <find>.mui-pull-bottom-pocket</find>
+      <find>#submit</find>
+      <find>&quot;常洗-</find>
+      <find>伊尔萨洗衣-</find>
+      <find>wxUrl</find>
+      <find>appid</find>
+      <find>appId&quot;:</find>
     </findStrings>
     <replaceStrings>
       <replace>../../public</replace>
@@ -118,6 +177,8 @@
       <replace>&lt;/body&gt;&lt;div id=&quot;nowCity&quot; style=&quot;display:none;&quot;&gt;&lt;/div&gt;</replace>
       <replace>折扣卡</replace>
       <replace>http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html</replace>
+      <replace>伊尔萨洗衣-</replace>
+      <replace>&quot;伊尔萨洗衣-</replace>
     </replaceStrings>
     <dirStrings>
       <dir>F:\nginx-1.15.1\html\app\user\src\js</dir>
@@ -129,57 +190,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/user/view/mine.html" />
-        <option value="$PROJECT_DIR$/user/view/user-center/complaints2.html" />
-        <option value="$PROJECT_DIR$/user/view/order/get-address.html" />
-        <option value="$PROJECT_DIR$/user/view/user-center/complaints.html" />
-        <option value="$PROJECT_DIR$/picker/view/sendPackage1.html" />
-        <option value="$PROJECT_DIR$/picker/view/sendPackage2.html" />
-        <option value="$PROJECT_DIR$/picker/view/sendPackage3.html" />
-        <option value="$PROJECT_DIR$/user/view/user-center/top_up.html" />
-        <option value="$PROJECT_DIR$/user/src/js/wash-chose.js" />
-        <option value="$PROJECT_DIR$/wash/public/js/public.js" />
-        <option value="$PROJECT_DIR$/picker/view/test.html" />
-        <option value="$PROJECT_DIR$/picker/view/mall.html" />
-        <option value="$PROJECT_DIR$/wash/public/js/wenxin-pay.js" />
-        <option value="$PROJECT_DIR$/user/view/order/wash-chose.html" />
+        <option value="$PROJECT_DIR$/picker/src/js/address.js" />
+        <option value="$PROJECT_DIR$/picker/view/send-wash.html" />
+        <option value="$PROJECT_DIR$/picker/view/back-address.html" />
+        <option value="$PROJECT_DIR$/user/src/css/chose-address.css" />
+        <option value="$PROJECT_DIR$/user/view/order/chose-address.html" />
+        <option value="$PROJECT_DIR$/user/view/order/back-address.html" />
+        <option value="$PROJECT_DIR$/user/view/order/send-wash.html" />
+        <option value="$PROJECT_DIR$/user/view/order/back-wash.html" />
+        <option value="$PROJECT_DIR$/picker/view/get-address.html" />
+        <option value="$PROJECT_DIR$/picker/view/back-wash.html" />
+        <option value="$PROJECT_DIR$/user/src/css/commodity-detail.css" />
         <option value="$PROJECT_DIR$/user/src/js/order-pay2.js" />
-        <option value="$PROJECT_DIR$/user/src/js/order-pay3.js" />
-        <option value="$PROJECT_DIR$/wash/picker/view/index.html" />
-        <option value="$PROJECT_DIR$/user/src/js/index.js" />
-        <option value="$PROJECT_DIR$/picker/view/login.html" />
-        <option value="$PROJECT_DIR$/picker/view/back-card-detail.html" />
-        <option value="$PROJECT_DIR$/public/js/mui.min.js" />
-        <option value="$PROJECT_DIR$/picker/view/back-card-detail2.html" />
-        <option value="$PROJECT_DIR$/picker/view/back-card1.html" />
-        <option value="$PROJECT_DIR$/picker/view/back-card2.html" />
-        <option value="$PROJECT_DIR$/user/view/order/order-pay.html" />
-        <option value="$PROJECT_DIR$/picker/view/back-card3.html" />
-        <option value="$PROJECT_DIR$/picker/view/back-card4.html" />
-        <option value="$PROJECT_DIR$/user/view/index.html" />
-        <option value="$PROJECT_DIR$/picker/view/fetchPackage1.html" />
-        <option value="$PROJECT_DIR$/picker/view/index.html" />
-        <option value="$PROJECT_DIR$/user/src/js/another-pay.js" />
-        <option value="$PROJECT_DIR$/public/js/public.js" />
-        <option value="$PROJECT_DIR$/user/src/css/another-pay.css" />
-        <option value="$PROJECT_DIR$/user/view/user-center/recharge-center.html" />
-        <option value="$PROJECT_DIR$/picker/view/cancelCard.html" />
-        <option value="$PROJECT_DIR$/user/view/order/another-pay.html" />
-        <option value="$USER_HOME$/Documents/WeChat Files/wxid_kbzmrcumq8rl22/Files/frame0.html" />
-        <option value="$PROJECT_DIR$/picker/view/fetchPackageMessage.html" />
-        <option value="$PROJECT_DIR$/picker/view/deliverPackageMessage.html" />
-        <option value="$PROJECT_DIR$/public/css/index.css" />
-        <option value="$PROJECT_DIR$/user/src/js/top_up.js" />
-        <option value="$PROJECT_DIR$/user/view/user-center/saving-card.html" />
+        <option value="$PROJECT_DIR$/picker/view/mall.html" />
+        <option value="$PROJECT_DIR$/user/view/order/commodity-detail.html" />
+        <option value="$PROJECT_DIR$/user/src/js/commodity-detail.js" />
         <option value="$PROJECT_DIR$/picker/src/js/mall2.js" />
-        <option value="$PROJECT_DIR$/picker/src/css/mall.css" />
-        <option value="$PROJECT_DIR$/picker/view/fetchPackage0.html" />
-        <option value="$PROJECT_DIR$/user/src/js/pay-money.js" />
-        <option value="$PROJECT_DIR$/public/js/wenxin-pay.js" />
-        <option value="$PROJECT_DIR$/user/view/order/my-order1.html" />
-        <option value="$PROJECT_DIR$/picker/view/message.html" />
+        <option value="$PROJECT_DIR$/user/view/active/active.html" />
         <option value="$PROJECT_DIR$/user/view/order/order-detail.html" />
         <option value="$PROJECT_DIR$/user/src/js/order-detail.js" />
+        <option value="$PROJECT_DIR$/user/src/js/comment.js" />
+        <option value="$PROJECT_DIR$/user/view/user-center/month-earnings.html" />
+        <option value="$PROJECT_DIR$/user/view/order/order-pay.html" />
+        <option value="$PROJECT_DIR$/picker/src/js/map.js" />
+        <option value="$PROJECT_DIR$/user/src/js/order-pay.js" />
+        <option value="$PROJECT_DIR$/user/view/user-center/poster-share.html" />
+        <option value="$PROJECT_DIR$/user/view/user-center/poster.html" />
+        <option value="$PROJECT_DIR$/user/view/order/wash-chose.html" />
+        <option value="$PROJECT_DIR$/picker/view/testMap.html" />
+        <option value="$PROJECT_DIR$/user/view/user-center/chose-area.html" />
+        <option value="$PROJECT_DIR$/picker/src/js/browser.js" />
+        <option value="$PROJECT_DIR$/picker/view/packageDetail.html" />
+        <option value="$PROJECT_DIR$/picker/view/login.html" />
+        <option value="$PROJECT_DIR$/picker/view/sendPackage2.html" />
+        <option value="$PROJECT_DIR$/user/src/js/integral-mall.js" />
+        <option value="$PROJECT_DIR$/user/view/order/my-order4.html" />
+        <option value="$PROJECT_DIR$/picker/view/sendPackage1.html" />
+        <option value="$PROJECT_DIR$/picker/src/js/order-pay.js" />
+        <option value="$PROJECT_DIR$/picker/view/fetchPackage1.html" />
+        <option value="$PROJECT_DIR$/user/view/order/visit-door.html" />
+        <option value="$PROJECT_DIR$/user/view/user-center/complaints.html" />
+        <option value="$PROJECT_DIR$/user/view/index.html" />
+        <option value="$PROJECT_DIR$/user/src/js/index.js" />
+        <option value="$PROJECT_DIR$/public/js/public.js" />
+        <option value="$PROJECT_DIR$/user/view/mine.html" />
+        <option value="$PROJECT_DIR$/user/view/books.html" />
+        <option value="$PROJECT_DIR$/user/src/js/diff-box.js" />
+        <option value="$PROJECT_DIR$/user/src/js/pay-money.js" />
+        <option value="$PROJECT_DIR$/public/js/wenxin-pay.js" />
+        <option value="$PROJECT_DIR$/user/view/user-center/saving-card.html" />
+        <option value="$PROJECT_DIR$/user/src/js/top_up2.js" />
+        <option value="$PROJECT_DIR$/user/src/js/top_up.js" />
       </list>
     </option>
   </component>
@@ -196,7 +257,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="957" />
     <option name="y" value="1" />
     <option name="width" value="957" />
@@ -233,6 +294,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -276,14 +338,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/php" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="SearchEverywhereHistoryKey" value="index.js&#9;FILE&#9;file://F:/nginx-1.15.1/html/app/user/src/js/index.js&#10;chose-a&#9;FILE&#9;file://F:/nginx-1.15.1/html/app/user/view/user-center/chose-area.html&#10;public&#9;FILE&#9;file://F:/nginx-1.15.1/html/app/public/js/public.js" />
     <property name="JavaScriptPreferStrict" value="false" />
@@ -291,16 +352,16 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\nginx-1.15.1\html\app\user\src\js" />
-      <recent name="F:\nginx-1.15.1\html\app\user\view\order" />
-      <recent name="F:\nginx-1.15.1\html\app\picker\view" />
-      <recent name="F:\nginx-1.15.1\html\app\user\view\user-center" />
-      <recent name="F:\nginx-1.15.1\html\app\public\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\nginx-1.15.1\html\app\user\view" />
       <recent name="F:\nginx-1.15.1\html\app\user\view\order" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\nginx-1.15.1\html\app\user\view\user-center" />
+      <recent name="F:\nginx-1.15.1\html\app\public\img\index" />
+      <recent name="F:\nginx-1.15.1\html\app\user\src\js" />
+      <recent name="F:\nginx-1.15.1\html\app\user\view\order" />
+      <recent name="F:\nginx-1.15.1\html\app\picker\view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -479,18 +540,48 @@
       <workItem from="1551057494525" duration="15665000" />
       <workItem from="1551144235916" duration="27000" />
       <workItem from="1551262315831" duration="717000" />
-      <workItem from="1551325022429" duration="8849000" />
+      <workItem from="1551325022429" duration="10009000" />
+      <workItem from="1551405150917" duration="4472000" />
+      <workItem from="1551410827857" duration="21494000" />
+      <workItem from="1551662308121" duration="7370000" />
+      <workItem from="1551749493548" duration="127000" />
+      <workItem from="1551752942770" duration="3261000" />
+      <workItem from="1551766484095" duration="2959000" />
+      <workItem from="1551836238341" duration="6933000" />
+      <workItem from="1551926755033" duration="17665000" />
+      <workItem from="1552007567585" duration="4407000" />
+      <workItem from="1552028985802" duration="2895000" />
+      <workItem from="1552038465436" duration="3104000" />
+      <workItem from="1552041844528" duration="1088000" />
+      <workItem from="1552288715588" duration="1452000" />
+      <workItem from="1552297258772" duration="455000" />
+      <workItem from="1552440974350" duration="184000" />
+      <workItem from="1552540081263" duration="14230000" />
+      <workItem from="1552630739657" duration="1874000" />
+      <workItem from="1552639784447" duration="4931000" />
+      <workItem from="1552873936211" duration="24651000" />
+      <workItem from="1552960409528" duration="9185000" />
+      <workItem from="1553046453783" duration="6027000" />
+      <workItem from="1553132639019" duration="630000" />
+      <workItem from="1553156405684" duration="1596000" />
+      <workItem from="1553568973325" duration="4034000" />
+      <workItem from="1553662319747" duration="2127000" />
+      <workItem from="1553677754398" duration="2399000" />
+      <workItem from="1553736275238" duration="2045000" />
+      <workItem from="1553752763136" duration="94000" />
+      <workItem from="1553849463242" duration="1467000" />
+      <workItem from="1554114696433" duration="3643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1501129000" />
+    <option name="totallyTimeSpent" value="1659088000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1640625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -522,392 +613,390 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card-detail.html">
+    <entry file="file://$PROJECT_DIR$/user/src/js/commodity-detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="70" lean-forward="false" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/order/commodity-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/src/js/wash-chose.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/mall.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/src/js/mall2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/index/active.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/active/active.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/order/order-detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card1.html">
+    <entry file="file://$PROJECT_DIR$/user/src/js/order-detail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="101" column="46" lean-forward="true" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+        <state relative-caret-position="209">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card2.html">
+    <entry file="file://$PROJECT_DIR$/user/view/order/comment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="102" column="46" lean-forward="true" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
+        <state relative-caret-position="1311">
+          <caret line="69" column="89" lean-forward="false" selection-start-line="69" selection-start-column="89" selection-end-line="69" selection-end-column="89" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/wash-chose2.html" />
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card3.html">
+    <entry file="file://$PROJECT_DIR$/user/src/js/comment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
-          <caret line="58" column="9" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="58" selection-end-column="9" />
+        <state relative-caret-position="1444">
+          <caret line="76" column="38" lean-forward="true" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card4.html">
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/month-earnings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="81" column="35" lean-forward="true" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+        <state relative-caret-position="502">
+          <caret line="50" column="55" lean-forward="false" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/back-card-detail2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="79" column="24" lean-forward="true" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/login.html">
+    <entry file="file://$PROJECT_DIR$/user/view/order/order-pay.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="148" column="14" lean-forward="true" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
+          <caret line="138" column="26" lean-forward="false" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/fetchPackage2.html">
+    <entry file="file://$PROJECT_DIR$/user/view/order/diff-box.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="74" column="24" lean-forward="true" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
+        <state relative-caret-position="-550">
+          <caret line="34" column="17" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/fetchPackage1.html">
+    <entry file="file://$PROJECT_DIR$/public/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="326" column="24" lean-forward="true" selection-start-line="326" selection-start-column="24" selection-end-line="326" selection-end-column="24" />
+        <state relative-caret-position="190">
+          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/js/another-pay.js">
+    <entry file="file://$PROJECT_DIR$/picker/view/deliveryPackage1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="63" column="10" lean-forward="true" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/deliveryPackage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/index.html">
+    <entry file="file://$PROJECT_DIR$/shop/view/shop-order.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="165" column="26" lean-forward="true" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
+        <state relative-caret-position="-778">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/page.flexible.js">
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/poster-share.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="1786">
+          <caret line="94" column="27" lean-forward="false" selection-start-line="94" selection-start-column="27" selection-end-line="94" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/poster.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="108" column="43" lean-forward="true" selection-start-line="108" selection-start-column="43" selection-end-line="108" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/testMap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="78" lean-forward="true" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/view/user-center/chose-area.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2527">
-          <caret line="133" column="17" lean-forward="false" selection-start-line="133" selection-start-column="17" selection-end-line="133" selection-end-column="17" />
+        <state relative-caret-position="456">
+          <caret line="132" column="29" lean-forward="false" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/css/another-pay.css">
+    <entry file="file://$PROJECT_DIR$/user/view/order/wash-chose.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+        <state relative-caret-position="353">
+          <caret line="486" column="9" lean-forward="false" selection-start-line="486" selection-start-column="9" selection-end-line="486" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/user-center/recharge-center.html">
+    <entry file="file://$PROJECT_DIR$/picker/src/js/browser.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        <state relative-caret-position="285">
+          <caret line="15" column="40" lean-forward="true" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/cancelCard.html">
+    <entry file="file://$PROJECT_DIR$/picker/view/packageDetail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="396" column="28" lean-forward="true" selection-start-line="396" selection-start-column="28" selection-end-line="396" selection-end-column="28" />
+        <state relative-caret-position="2489">
+          <caret line="131" column="55" lean-forward="false" selection-start-line="131" selection-start-column="55" selection-end-line="131" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1824">
+          <caret line="96" column="18" lean-forward="true" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/sendPackage2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2356">
+          <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/integral-mall.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303">
+          <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/src/js/integral-mall.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="135" column="42" lean-forward="false" selection-start-line="135" selection-start-column="42" selection-end-line="135" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/order/my-order3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/order/my-order4.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="61" column="33" lean-forward="true" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/order-pay.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="82" column="94" lean-forward="false" selection-start-line="82" selection-start-column="88" selection-end-line="82" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/pay-money.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2261">
+          <caret line="119" column="26" lean-forward="false" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/src/js/order-pay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3458">
+          <caret line="182" column="36" lean-forward="true" selection-start-line="182" selection-start-column="16" selection-end-line="182" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/src/js/order-pay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="177" column="32" lean-forward="true" selection-start-line="177" selection-start-column="32" selection-end-line="177" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/fetchPackage1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5909">
+          <caret line="311" column="68" lean-forward="false" selection-start-line="311" selection-start-column="68" selection-end-line="311" selection-end-column="68" />
+          <folding>
+            <marker date="1553681619252" expanded="true" signature="5452:5507" ph="..." />
+            <marker date="1553681619252" expanded="true" signature="7181:7224" ph="..." />
+            <marker date="1553681619252" expanded="true" signature="7733:7763" ph="..." />
+            <marker date="1553681619252" expanded="true" signature="10080:10125" ph="..." />
+            <marker date="1553681619252" expanded="true" signature="10456:10499" ph="..." />
+            <marker date="1553681619252" expanded="true" signature="11059:11089" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/picker/view/sendPackage1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4199">
+          <caret line="221" column="78" lean-forward="false" selection-start-line="221" selection-start-column="78" selection-end-line="221" selection-end-column="78" />
+          <folding>
+            <marker date="1553589367891" expanded="true" signature="4821:4876" ph="..." />
+            <marker date="1553589367891" expanded="true" signature="6569:6599" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/order/visit-door.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="84" column="11" lean-forward="false" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/complaints.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="87" column="25" lean-forward="false" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/view/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="213" column="28" lean-forward="true" selection-start-line="213" selection-start-column="28" selection-end-line="213" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/order-pay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/WeChat Files/wxid_kbzmrcumq8rl22/Files/frame0.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/another-pay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/books.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="20" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/fetchPackageMessage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2128">
-          <caret line="112" column="81" lean-forward="false" selection-start-line="112" selection-start-column="81" selection-end-line="112" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/wash-chose.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8512">
-          <caret line="448" column="21" lean-forward="false" selection-start-line="448" selection-start-column="21" selection-end-line="448" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/css/vip.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3401">
-          <caret line="179" column="23" lean-forward="false" selection-start-line="179" selection-start-column="23" selection-end-line="179" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/deliverPackageMessage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="155" column="42" lean-forward="true" selection-start-line="155" selection-start-column="42" selection-end-line="155" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/user-center/user-mes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/user-center/top_up.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/public.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="231" column="9" lean-forward="false" selection-start-line="231" selection-start-column="9" selection-end-line="231" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/js/top_up2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="113" column="42" lean-forward="true" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/mui.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="4" column="115" lean-forward="false" selection-start-line="4" selection-start-column="91" selection-end-line="4" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/user-center/saving-card.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="158" column="43" lean-forward="true" selection-start-line="158" selection-start-column="43" selection-end-line="158" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/js/top_up.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="113" column="51" lean-forward="true" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Xftp/Temporary/mall.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/mall.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1520">
-          <caret line="80" column="76" lean-forward="false" selection-start-line="80" selection-start-column="76" selection-end-line="80" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/src/js/mall2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding>
-            <marker date="1551075214863" expanded="true" signature="508:524" ph="..." />
-            <marker date="1551075214863" expanded="true" signature="2506:2654" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/src/css/mall.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+        <state relative-caret-position="652">
+          <caret line="276" column="67" lean-forward="true" selection-start-line="276" selection-start-column="67" selection-end-line="276" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/src/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="171">
+          <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/jquery.cookie.js">
+    <entry file="file://$PROJECT_DIR$/user/view/mine.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="54" column="5" lean-forward="false" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+        <state relative-caret-position="386">
+          <caret line="131" column="257" lean-forward="false" selection-start-line="131" selection-start-column="257" selection-end-line="131" selection-end-column="257" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/fetchPackage0.html">
+    <entry file="file://$PROJECT_DIR$/user/view/books.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="319" column="45" lean-forward="true" selection-start-line="319" selection-start-column="45" selection-end-line="319" selection-end-column="45" />
-          <folding>
-            <marker date="1551262432291" expanded="true" signature="5409:5464" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="5822:5843" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="6242:6287" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="6824:6869" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="6954:6979" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="7115:7133" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="7274:7334" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="7364:7385" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="9483:9528" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="9859:9902" ph="..." />
-            <marker date="1551262432291" expanded="true" signature="10462:10492" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/js/pay-money.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/wenxin-pay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/NoticeBoard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="22" column="35" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+        <state relative-caret-position="380">
+          <caret line="20" column="78" lean-forward="true" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/user/view/order/pay-money.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        <state relative-caret-position="-2488">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/picker/view/message.html">
+    <entry file="file://$PROJECT_DIR$/public/js/public.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="69" column="76" lean-forward="true" selection-start-line="69" selection-start-column="76" selection-end-line="69" selection-end-column="76" />
+        <state relative-caret-position="285">
+          <caret line="22" column="87" lean-forward="false" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="87" />
           <folding>
-            <marker date="1551331328767" expanded="false" signature="1936:1966" ph="..." />
+            <marker date="1554116050479" expanded="true" signature="4324:4421" ph="..." />
+            <marker date="1554116050479" expanded="true" signature="4443:4489" ph="..." />
+            <marker date="1554116050479" expanded="true" signature="7691:7807" ph="..." />
+            <marker date="1554116050479" expanded="true" signature="7829:7869" ph="..." />
+            <marker date="1554116050479" expanded="true" signature="7884:7907" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/mui.min.js">
+    <entry file="file://$PROJECT_DIR$/user/src/js/pay-money.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="700" column="23" lean-forward="false" selection-start-line="700" selection-start-column="23" selection-end-line="700" selection-end-column="23" />
+        <state relative-caret-position="532">
+          <caret line="61" column="14" lean-forward="true" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/my-order1.html">
+    <entry file="file://$PROJECT_DIR$/user/src/js/diff-box.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228">
-          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding>
-            <marker date="1551331138565" expanded="true" signature="4512:4533" ph="..." />
-            <marker date="1551331138565" expanded="true" signature="6180:6201" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user/view/order/order-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="54" column="42" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="42" />
+        <state relative-caret-position="76">
+          <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user/src/js/order-detail.js">
+    <entry file="file://$PROJECT_DIR$/public/js/wenxin-pay.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
-          <folding>
-            <marker date="1551345357920" expanded="true" signature="4226:4244" ph="..." />
-          </folding>
+        <state relative-caret-position="95">
+          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/src/js/top_up2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="133" column="16" lean-forward="false" selection-start-line="133" selection-start-column="16" selection-end-line="133" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/src/js/top_up.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="135" column="67" lean-forward="true" selection-start-line="135" selection-start-column="67" selection-end-line="135" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/view/user-center/saving-card.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="141" column="0" lean-forward="true" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -48,29 +48,29 @@ $(function(){
         $("#get-time").html("");
     }
 
-     /**
-      * 支付方式
-      */
-     if($.cookie("payType")){
-         enAjax(globalUrl+'/order/payment','get',true,{paymentType:$.cookie("payType"),orderNo:orderId},function(data){
-             if(data.status==200){
-                 enAjax(globalUrl + "/order/freight", 'get', false, {
-                     payment: parseFloat(totalPrice),
-                     shippingType: $.cookie("wlType")
-                 }, function (data2) {
-                     totalPrice=(data.data+data2.data).toFixed(2);
-                     $("#total").html(totalPrice);
-                 })
-             }
-         });
-         if($.cookie("payType")==1){
-             $("#pay-type").html("折扣卡支付");
-         }else if($.cookie("payType")==2){
-             $("#pay-type").html("余额支付");
-         }else if($.cookie("payType")==3){
-             $("#pay-type").html("微信支付");
-         }
-     }
+    /**
+     * 支付方式
+     */
+    if($.cookie("payType")){
+        enAjax(globalUrl+'/order/payment','get',true,{paymentType:$.cookie("payType"),orderNo:orderId},function(data){
+            if(data.status==200){
+                enAjax(globalUrl + "/order/freight", 'get', false, {
+                    payment: parseFloat(totalPrice),
+                    shippingType: $.cookie("wlType")
+                }, function (data2) {
+                    totalPrice=(data.data+data2.data).toFixed(2);
+                    $("#total").html(totalPrice);
+                })
+            }
+        });
+        if($.cookie("payType")==1){
+            $("#pay-type").html("折扣卡支付");
+        }else if($.cookie("payType")==2){
+            $("#pay-type").html("余额支付");
+        }else if($.cookie("payType")==3){
+            $("#pay-type").html("微信支付");
+        }
+    }
 
 });
 
@@ -90,6 +90,7 @@ $("#back").parent().parent().on("tap",function(){
  * 点击选择物流方式
  */
 $("#logistics").on("tap",function(){
+    getWlType();
     mui("#wlType").popover('toggle');
 });
 
@@ -236,19 +237,19 @@ $("#submit").on("tap",function(){
             crossDomain: true,
             success:function(data){
                 console.log(data);
-                 $.cookie("getArea", "", {expires: -1});
-                 $.cookie("backArea", "", {expires: -1});
-                 $.cookie("express", "", {expires: -1});
-                 $.cookie("year", "", {expires: -1});
-                 $.cookie("time", "", {expires: -1});
-                 $.cookie("detail", "", {expires: -1});
-                 $.cookie("couponName", "", {expires: -1});
-                 $.cookie("couponId", "", {expires: -1});
-                 $.cookie("couponReduce", "", {expires: -1});
-                 $.cookie("wlType", "", {expires: -1});
-                 $.cookie("payType", "", {expires: -1});
-                 $("#submit").parent().attr("href","pay-money.html?id="+orderId);
-                 window.location.href="pay-money.html?id="+orderId;
+                $.cookie("getArea", "", {expires: -1});
+                $.cookie("backArea", "", {expires: -1});
+                $.cookie("express", "", {expires: -1});
+                $.cookie("year", "", {expires: -1});
+                $.cookie("time", "", {expires: -1});
+                $.cookie("detail", "", {expires: -1});
+                $.cookie("couponName", "", {expires: -1});
+                $.cookie("couponId", "", {expires: -1});
+                $.cookie("couponReduce", "", {expires: -1});
+                $.cookie("wlType", "", {expires: -1});
+                $.cookie("payType", "", {expires: -1});
+                $("#submit").parent().attr("href","pay-money.html?id="+orderId);
+                window.location.href="pay-money.html?id="+orderId;
             }
         })
 
@@ -325,7 +326,7 @@ function getCouponNomal(userId){
  */
 function area(getAddressId){
     enAjax2(globalUrl+'/order/checkExpress_','get',false,{addressId:getAddressId},function(data){
-        if(data.data){
+        if(data.data.express){
             $.cookie("wlType",2);
             $("#yf").html("0.00");
             $("#zipei").show();
@@ -343,10 +344,20 @@ function area(getAddressId){
             }else{
                 $("#check-wl").html("请选择物流方式");
             }
-
         }
-
     },null)
+}
+
+function getWlType(){
+    enAjax(globalUrl+"/expressConfig/getExpressConfigList","get",false,{},function(res){
+        if(res.code==0){
+            $("#wlType ul").html("");
+            for(var i=0;i<res.data.length;i++){
+                var item='<li class="mui-table-view-cell" wlType="'+res.data[i].type+'">'+res.data[i].expressName+'</li>';
+                $(item).appendTo($("#wlType ul"))
+            }
+        }
+    })
 }
 
 /**
@@ -356,27 +367,27 @@ function area(getAddressId){
  * @param coupon
  * @param payType
  */
-    function getPayment(orderNo,wlType,coupon,payType){
-        var url=globalUrl+"/order/payment";
-        var data={orderNo:orderNo};
-        if(wlType){
-            data.shippingType=wlType;
-        }
-        if(coupon){
-            data.couponId=coupon;
-        }
-        if(payType){
-            data.paymentType=payType;
-        }
-        enAjax(url,'get',false,data,function(data){
-            console.log(data);
-            if(data.status==200){
-                $("#total").html(data.data.payment.toFixed(2));
-                $("#yf").html(data.data.freight.toFixed(2));
-                $("#yhq").html(data.data.coupon.toFixed(2));
-            }
-        })
+function getPayment(orderNo,wlType,coupon,payType){
+    var url=globalUrl+"/order/payment";
+    var data={orderNo:orderNo};
+    if(wlType){
+        data.shippingType=wlType;
     }
+    if(coupon){
+        data.couponId=coupon;
+    }
+    if(payType){
+        data.paymentType=payType;
+    }
+    enAjax(url,'get',false,data,function(data){
+        console.log(data);
+        if(data.status==200){
+            $("#total").html(data.data.payment.toFixed(2));
+            $("#yf").html(data.data.freight.toFixed(2));
+            $("#yhq").html(data.data.coupon.toFixed(2));
+        }
+    })
+}
 
 //回退清订单缓存
 $("#goback").on("tap",function(){

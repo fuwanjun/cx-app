@@ -20,11 +20,10 @@ $(function(){
                     map={id:chargeId};
 				}
 				// 任意金额 10+ 整数
-				if($("#custom input[type=radio]").is(":checked")){
-					map={price:freeNum};
-				}
+				// if($("#custom input[type=radio]").is(":checked")){
+				// 	map={price:freeNum};
+				// }
                 wxData.detailId=chargeId;
-				// alert(wxData.detailId);
 				var data=JSON.stringify(map);
 				contentAjax(url,'post',false,data,goCharge,null,false);
 			}
@@ -132,7 +131,8 @@ function goCharge(data){
 function onBridgeReady(){
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            "appId":"wx31fd1e1bad23db37",     //公众号名称，由商户传入
+            // "appId":"wx31fd1e1bad23db37",     //公众号名称，由商户传入
+            "appId":"wx5fa77022c03fce4a",     //公众号名称，由商户传入
             "timeStamp":wxData.timeStamp,         //时间戳，自1970年以来的秒数
             "nonceStr":wxData.nonceStr, //随机串
             "package":wxData.packageValue,
@@ -149,11 +149,9 @@ function onBridgeReady(){
 				// 	wxData.detailId="";
 				// }
 				var data={orderId:wxData.orderNo,detailId:wxData.detailId};
-                enAjax(url,'post',false,data,wxpayOver,null);
+                enAjax(url,'post',false,data,function(){
+                	window.location.reload();
+				},null);
             }else{}
         });
-}
-
-function wxpayOver(data){
-    window.location.reload();
 }

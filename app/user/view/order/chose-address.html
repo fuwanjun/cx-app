@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>选择地址</title>
+    <link rel="stylesheet" href="../../../public/css/mui.min.css"/>
+    <link rel="stylesheet" href="../../src/css/chose-address.css">
+    <script src="../../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../../public/js/mui.min.js"></script>
+    <script src="../../../public/js/jquery.cookie.js"></script>
+    <script src="../../../public/js/common.js"></script>
+    <script src="../../../public/js/public.js"></script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title blue">送回地址</p>
+    <a class="mui-pull-right ok" edit="0" style="line-height: 0.44rem">编辑</a>
+</header>
+<nav class="mui-bar mui-bar-tab" id="addPlace" style="text-align: center;">
+    <span class="mui-tab-label">
+        <a>
+            <span class="mui-icon mui-icon-plusempty"></span> 添加地址
+        </a>
+    </span>
+</nav>
+<div class="mui-content"></div>
+</body>
+<script>
+    var orderId=getQueryString("id");
+    $(function(){
+
+    });
+
+    function getAllAddress(){
+        $.ajax({
+            url:globalUrl+'/address/getAddressByUserInfoId',
+            type:'get',
+            data:{userInfoId:$.cookie('userId')},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:function(data){
+
+            }
+        })
+    }
+</script>
+</html>

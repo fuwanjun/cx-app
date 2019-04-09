@@ -104,10 +104,10 @@
                     window.location.reload();
                 }
 			    if(e.index==1){
-			        if(e.value !=""){
+			        if(orderNum.length==11){
                         sealNum(orderId,orderNum);
 					}else{
-			            mui.alert("运单号不能为空");
+			            mui.alert("封签码必须是11位");
 					}
 
 				}
@@ -221,6 +221,10 @@
 						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
 						//window.location.href = result;//因为我这边是扫描后有个链接，然后跳转到该页面
 //                        alert(result);
+                        if(result.length != 11){
+                            mui.toast('封签码必须是11位');
+                            return;
+                        }
 						mui.confirm(result,"封签号",["取消","确定"],function(e){
                             if(e.index==0){
                                 window.location.reload();

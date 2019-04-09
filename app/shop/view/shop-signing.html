@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../public/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../../public/css/mui.picker.min.css" />
+    <link rel="stylesheet" href="../../public/css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../src/css/shop-index.css">
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/mui.picker.min.js"></script>
+    <script src="../../public/js/mui.poppicker.js"></script>
+    <script src="../../public/js/city.data-3.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/public.js"></script>
+</head>
+<style>
+    .mui-input-group{
+        background: rgb(244,248,255);
+    }
+    .mui-input-group .mui-input-row{
+        margin-bottom: 0.1rem;
+        background: #fff;
+    }
+    .voucher-img{
+        width: 100%;
+        padding: 0.15rem;
+        position: relative;
+    }
+    #photo{
+        position: absolute;
+        top: 0.15rem;
+        left: 0.15rem;
+        width: 100%;
+        height: 3rem;
+        opacity: 0;
+    }
+</style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title">门店签约</p>
+</header>
+<div class="mui-content">
+    <form class="mui-input-group">
+        <div class="mui-input-row">
+            <label>金额:</label>
+            <input id="num" type="number" class="mui-input-clear" placeholder="请输入转账金额">
+        </div>
+        <div class="mui-input-row" style="height: auto;">
+            <div style="padding:0.15rem 0.15rem 0 0.15rem; ">转账凭证:</div>
+            <div class="voucher-img">
+                <input id="photo" type="file">
+                <img src="../../public/img/order/pic.png" alt="">
+            </div>
+        </div>
+    </form>
+    <div class="saveBtn">
+        <div class="mui-btn mui-btn-block mui-btn-darkblue color-white btn">提&nbsp;交&nbsp;审&nbsp;核</div>
+    </div>
+</div>
+</body>
+<script>
+    $(function(){
+
+    });
+
+    $(".saveBtn .btn").on("tap",function(){
+        var dataImg=new FormData();
+        var photo=$("#photo")[0].files[0];
+        var num=$("#num").val();
+        if(!num){
+            mui.toast('请填写金额');
+            return
+        }
+        dataImg.append("picture",photo);
+        upImg(dataImg,function(res){
+            if(res.status==200){
+                check(res.data,num);
+            }
+
+        })
+
+    });
+
+    $("input[type='file']").change(function(e){
+        $(this).next($("img")).attr("src",URL.createObjectURL($(this)[0].files[0]));
+    });
+
+    function upImg(data,success){
+        $.ajax({
+            type:"post",
+            async:true,
+            contentType:false,
+            processData:false,
+            cache:false,
+            url:shopUrl+"storePoint/uploadPicture",
+            data:data,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:success
+        })
+    }
+
+    function check(pic,money){
+        shopAjax(shopUrl+"storePoint/operation","post",false,{userPic:pic,money:money,type:1},function(res){
+            if(res.status==200){
+                mui.toast(res.msg);
+                setTimeout(function(){
+                    window.location.href="shop-message.html";
+                },1000)
+
+            }
+        })
+    }
+</script>
+</html>

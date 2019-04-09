@@ -113,7 +113,13 @@
             enAjax(url,'get',true,{},function(data){
                 console.log(data);
                 for(var i=0;i<data.data.length;i++){
-                    var item='<div class="city">'+data.data[i].cityName+'</div>';
+                    var cityName=data.data[i].cityName;
+                    if(cityName.charAt(cityName.length-1)=="市"){
+                        cityName=data.data[i].cityName;
+					}else{
+                        cityName=data.data[i].cityName+"市";
+					}
+                    var item='<div class="city">'+cityName+'</div>';
 					$(item).appendTo($(".open-citys .citys"));
 				}
 			},null,false);

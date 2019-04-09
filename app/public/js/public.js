@@ -14,12 +14,13 @@ mui("body").on("tap","a",function(){
 	window.location.href=this.href;
 });
 // var globalUrl="http://www.changwash.com:8088";
-var globalUrl="http://192.168.3.211:8081";
+var globalUrl="http://user.changwash.com:8088";
+// var globalUrl="http://192.168.3.211:8081";
 // var globalUrl='http://192.168.3.191:8081';
 
 var headUrl="http://10.0.0.228:8080/image/";
-var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-// var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
+// var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5fa77022c03fce4a&redirect_uri=http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 //tab切换
 function tabChange(tab,tabActive,con,conActive,id){
 	tab.eq(id).addClass(tabActive).siblings().removeClass(tabActive);

@@ -133,11 +133,10 @@
         $("#no-pay").on("tap",function(){
             mui.confirm('是否打印订单','打印订单',['否','是'],function(e){
                 if(e.index==1){
-                    enAjax(globalUrl+'/api/print/printOrder','get',false,{orderNo:orderId,shopId:$.cookie("shopId")},function(data){
+                    enAjax(globalUrl+'/api/print/printOrder','get',false,{orderNo:orderId,shopId:$.cookie("shopId")},function(data){},null,false);
 
-                    },null,false);
-                    window.location.href="fetchPackage0.html";
-                }
+                } 
+                window.location.href="fetchPackage0.html";
             });
         });
 

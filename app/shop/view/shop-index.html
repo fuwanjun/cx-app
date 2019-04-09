@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../public/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../src/css/shop-index.css">
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/city.data-3.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/public.js"></script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <!--<a class="mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <p class="mui-title">首页</p>
+</header>
+<div class="mui-content">
+    <div class="shop-msg">
+        <div class="shop-img"><img src="../../public/img/picker/head.png" alt=""></div>
+        <div class="shop-name">门店名称</div>
+        <a href="shop-message.html"><div class="shop-menu"><img src="../../public/img/menu-icon.png" alt=""></div></a>
+    </div>
+    <div class="shop-chose">
+        <div class="chose-item">
+            <a href="shop-order.html">
+                <div class="item-img"><img src="../../public/img/dd.png" alt=""></div>
+                <div class="item-text">订单</div>
+            </a>
+        </div>
+        <div class="chose-item">
+            <a href="shop-recharge.html">
+                <div class="item-img"><img src="../../public/img/cz.png" alt=""></div>
+                <div class="item-text">充值</div>
+            </a>
+        </div>
+
+        <div class="chose-item">
+            <a href="shop-profit.html">
+                <div class="item-img"><img src="../../public/img/sy.png" alt=""></div>
+                <div class="item-text">收益</div>
+            </a>
+        </div>
+        <div id="sweep" class="chose-item">
+            <div class="item-img"><img src="../../public/img/sm.png" alt=""></div>
+            <div class="item-text">扫码</div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../src/js/shop-register.js"></script>
+<script>
+    $("#sweep").on("tap",function(){
+        $.ajax({
+            type : "get",
+            url : shopUrl+"/wechatScanne/scannerQrcode",
+            data : {},
+            dataType : "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", $.cookie("token"));
+            },
+            crossDomain: true,
+            success:function (res) {
+                data=res.data;
+            }
+        });
+    })
+</script>
+</html>

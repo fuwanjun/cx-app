@@ -1,12 +1,12 @@
 $(function(){
-	mui("#mallCon").scroll();
+    weixinReload();
 	var menuUrl=globalUrl+"/headTitle/getHeadTitleAll";
 	enAjax(menuUrl,'get',false,{},function(data){
 		console.log(data);
 		for(var i=0;i<data.data.length;i++){
 			var menuItem='<div class="menuList"><a class="mui-control-item" href="#item'+data.data[i].id+'">'+data.data[i].titleName+'</a></div>';
-			var conItem='<div id="item'+data.data[i].id+'" class="mui-control-content mui-active bg-white border-radius-r5">'+
-							'<ul class="mui-table-view mui-flex" style="overflow: scroll"></ul>'+
+			var conItem='<div id="item'+data.data[i].id+'" class="mui-control-content mui-active bg-white border-radius-r5" style="width: 100%;">'+
+							'<ul class="mui-table-view mui-flex"></ul>'+
 						'</div>';
 			if(data.data[i].id==9||data.data[i].id==10){}
 			if(data.data[i].id==1||data.data[i].id==3||data.data[i].id==4||data.data[i].id==5){

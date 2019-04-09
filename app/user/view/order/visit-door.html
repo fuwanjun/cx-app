@@ -29,19 +29,13 @@
 			<p class="mui-title blue">上门时间</p>
 		</header>
 		<div class="mui-content">
-			<!--<div class="chose">-->
-				<!--<div class="chose-type type-active" express-type="1">顺丰取件</div>-->
-			<!--</div>-->
 			<div class="tit">
 				<p>选择上门取件时间</p>
 			</div>
 			<div class="chose-item con-active">
 				<div class="week-box">
-					<ul class="chose-times">
-
-					</ul>
+					<ul class="chose-times"></ul>
 				</div>
-
 				<ul class="time-detail">
 					<li data-time="09">9:00-11:00</li>
 					<li data-time="10">10:00-12:00</li>
@@ -81,7 +75,7 @@
 
 		var curTime=new Date().getHours();
 		$.each($(".time-detail li"),function(index,value){
-		    if($(value).attr("data-time")<curTime){
+		    if(parseInt($(value).attr("data-time"))+1<=curTime){
 		       $(value).addClass("detail_disabled");
 		       $(value).removeClass("detail_active");
 			}else{
@@ -129,7 +123,7 @@
                         }
                     }else if(curDate=curDate_d){
                         var curTime=new Date().getHours();
-                        if($(value).attr("data-time")<=curTime){
+                        if(parseInt($(value).attr("data-time"))+1<=curTime){
                             $(value).addClass("detail_disabled");
                             $(value).removeClass("detail_active");
                         }else{
@@ -170,6 +164,10 @@
 			}
 			//获取选中时间段
 			for(var i=0;i<$(".time-detail li").length;i++){
+			    if($(".time-detail li").eq(i).hasClass("detail-active")&&$(".time-detail li").eq(i).hasClass("detail_disabled")){
+			        mui.toast('请选择预约时间');
+			        return
+				}
 			    if($(".time-detail li").eq(i).hasClass("detail-active")){
 			        detail=$(".time-detail li").eq(i).attr("data-time");
 				}
@@ -195,6 +193,10 @@
             m = "0" + m;
         }
         var d = dd.getDate();
+        if(d>=1 && d<=9){
+            d="0"+d;
+		}
+        console.log(y+"-"+m+"-"+d);
         return y+"-"+m+"-"+d;
     }
 

@@ -35,7 +35,7 @@
 				<div class="sex">
 					<div class="mui-input-row mui-radio">
 						<label>女士</label>
-						<input name="radio1" type="radio" value="女士">
+						<input name="radio1" type="radio" value="女士" checked>
 					</div>
 					<div class="mui-input-row mui-radio">
 						<label>先生</label>
@@ -46,11 +46,11 @@
 			</form>	
 			<a id="prese"><button id="add" type="submit" class="mui-btn mui-btn-primary mui-btn-block">保存</button></a>
 		</div>
-	</body><div id="nowCity" style="display:none;"></div>
-	
+	</body>
+	<script src="../../public/js/common.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		mui.init();
+        var orderId=getQueryString("id");
 		
 		$(".city").on("tap",function(){
 			var picker = new mui.PopPicker({
@@ -68,7 +68,7 @@
 		var region=$("#region").html();
 		var phone=$("#phone").val();
 		var sex=$("input[type=radio1]:checked").val();
-		var pickerId=$.cookie("id")
+		var pickerId=$.cookie("id");
 		if(user!=""&&address1!=""&&sex!=""&&region!=""){
 				if(isPhoneNo(phone)){
 					var address={userName:user,detailAddress:address1,region:region,phone:phone,sex:sex,userId:pickerId};
@@ -83,7 +83,7 @@
                         crossDomain: true,
 						success:function(data){
 							console.log(data);
-							window.location.href="send-wash.html";
+							window.location.href="send-wash.html?id="+orderId;
 						}
 					})
 				}else{

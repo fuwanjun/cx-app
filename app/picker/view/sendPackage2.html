@@ -132,7 +132,12 @@
 				if(e.index==1){
                     enAjax2(url,'post',true,data,function(data){
                         console.log(data);
-                        window.location.reload();
+                        if(data.status==200){
+                            window.location.reload();
+						}else{
+                            mui.toast(data.msg);
+						}
+
                     })
 				}
 			});

@@ -1,112 +1,118 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>常洗</title>
-		<meta charset="UTF-8">
-		<title>常洗</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="../../../public/css/mui.min.css" />
-		<link rel="stylesheet" href="../../../public/css/index.css" />
-		<link rel="stylesheet" href="../../../public/css/public.css" />
-		<link rel="stylesheet" href="../../../public/css/mui.picker.min.css" />
-		<link rel="stylesheet" href="../../../public/css/mui.poppicker.css" />
-		<link rel="stylesheet" href="../../src/css/back-address.css" />
-		<script src="../../../public/js/page.flexible.js"></script>
-		<script src="../../../public/js/jquery-1.11.3.min.js"></script>
-		<script src="../../../public/js/mui.min.js"></script>
-		<script src="../../../public/js/jquery.cookie.js"></script>
-		<script src="../../../public/js/common.js"></script>
-		<script src="../../../public/js/public.js"></script>
-		<script src="../../../public/js/mui.picker.min.js"></script>
-		<script src="../../../public/js/mui.poppicker.js"></script>
-		<script src="../../../public/js/city.data-3.js"></script>
-		<script src="../../../public/js/public.js"></script>
-		<script src="../../src/js/address.js"></script>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>常洗</title>
+    <meta charset="UTF-8">
+    <title>常洗</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../../public/css/mui.min.css"/>
+    <link rel="stylesheet" href="../../../public/css/index.css"/>
+    <link rel="stylesheet" href="../../../public/css/public.css"/>
+    <link rel="stylesheet" href="../../../public/css/mui.picker.min.css"/>
+    <link rel="stylesheet" href="../../../public/css/mui.poppicker.css"/>
+    <link rel="stylesheet" href="../../src/css/back-address.css"/>
+    <script src="../../../public/js/page.flexible.js"></script>
+    <script src="../../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../../public/js/mui.min.js"></script>
+    <script src="../../../public/js/jquery.cookie.js"></script>
+    <script src="../../../public/js/common.js"></script>
+    <script src="../../../public/js/public.js"></script>
+    <script src="../../../public/js/mui.picker.min.js"></script>
+    <script src="../../../public/js/mui.poppicker.js"></script>
+    <script src="../../../public/js/city.data-3.js"></script>
+    <script src="../../../public/js/public.js"></script>
+    <script src="../../src/js/address.js"></script>
+</head>
 
-	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<p class="mui-title blue">送回地址</p>
-		</header>
-		<div class="mui-content">
-			<form class="mui-input-group">
-				<div class="city">
-					<p>选择城市和区域</p>
-					<p><span id="region">常州</span><span class="mui-icon mui-icon-arrowdown"></span></p>
-				</div>
-				<input id="detailAddress" type="text" placeholder="请输入详细地址" />
-				<input id="userName" type="text" placeholder="您的姓名"/>
-				<div class="sex">
-					<div class="mui-input-row mui-radio">
-						<label>女士</label>
-						<input name="radio1" type="radio" checked>
-					</div>
-					<div class="mui-input-row mui-radio">
-						<label>先生</label>
-						<input name="radio1" type="radio">
-					</div>
-				</div>
-				<input id="phone" type="text" name="mobile" placeholder="您的手机"/>
-			</form>	
-			<a id="prese"><button id="add" type="submit" class="mui-btn mui-btn-primary mui-btn-block">保存</button></a>
-		</div>
-	</body><div id="nowCity" style="display:none;"></div>
-	<div id="nowCity" style="display:none;"></div>
-	<script type="text/javascript">
-	$(function(){
-        var orderId=getQueryString("id");
-        var _goodsId=getQueryString("goodsId");
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title blue">送回地址</p>
+</header>
+<div class="mui-content">
+    <form class="mui-input-group">
+        <div class="city">
+            <p>选择城市和区域</p>
+            <p><span id="region">常州</span><span class="mui-icon mui-icon-arrowdown"></span></p>
+        </div>
+        <input id="detailAddress" type="text" placeholder="请输入详细地址"/>
+        <input id="userName" type="text" placeholder="您的姓名"/>
+        <div class="sex">
+            <div class="mui-input-row mui-radio">
+                <label>女士</label>
+                <input name="radio1" type="radio" checked>
+            </div>
+            <div class="mui-input-row mui-radio">
+                <label>先生</label>
+                <input name="radio1" type="radio">
+            </div>
+        </div>
+        <input id="phone" type="text" name="mobile" placeholder="您的手机"/>
+    </form>
+    <a id="prese">
+        <button id="add" type="submit" class="mui-btn mui-btn-primary mui-btn-block">保存</button>
+    </a>
+</div>
+</body>
+<script type="text/javascript">
+    var orderId = getQueryString("id");
+    $(function () {
+
         $("#nowCity").html($.cookie("now"));
-        $("title").html("常洗-"+$("#nowCity").html()+"站");
-		mui.init();
-		$(".city").on("tap",function(){
-			var picker = new mui.PopPicker({
-				layer:3
-			});
-			picker.setData(cityData3);
-			picker.show(function(item){
-				var itemArea=item[0].text+"-"+item[1].text+"-"+item[2].text;
-				$("#region").html(itemArea);
-			})
-		});
-		$("#add").on("tap",function(){
-		var user=$("#userName").val();
-		var address1=$("#detailAddress").val();
-		var region=$("#region").html();
-		var phone=$("#phone").val();
-		var sex=$("input[type=radio]:checked").val();
-		if(user!=""&&address1!=""&&sex!=""&&region!=""){
-			if(isPhoneNo(phone)){
-					var address={userName:user,detailAddress:address1,region:region,phone:phone,sex:sex,userId:$.cookie("userId")};
-					$.ajax({
-						contentType:"application/json;charset=UTF-8",
-						url:globalUrl+'/address/putAddress',
-						data:JSON.stringify(address),
-						type:'post',
+        $("title").html("伊尔萨洗衣-" + $("#nowCity").html() + "站");
+        mui.init();
+        $(".city").on("tap", function () {
+            var picker = new mui.PopPicker({
+                layer: 3
+            });
+            picker.setData(cityData3);
+            picker.show(function (item) {
+                var itemArea = item[0].text + "-" + item[1].text + "-" + item[2].text;
+                $("#region").html(itemArea);
+            })
+        });
+
+        $("#add").on("tap", function () {
+            var user = $("#userName").val();
+            var address1 = $("#detailAddress").val();
+            var region = $("#region").html();
+            var phone = $("#phone").val();
+            var sex = $("input[type=radio]:checked").val();
+            if (user != "" && address1 != "" && sex != "" && region != "") {
+                if (isPhoneNo(phone)) {
+                    var address = {
+                        userName: user,
+                        detailAddress: address1,
+                        region: region,
+                        phone: phone,
+                        sex: sex,
+                        userId: $.cookie("userId")
+                    };
+                    $.ajax({
+                        contentType: "application/json;charset=UTF-8",
+                        url: globalUrl + '/address/putAddress',
+                        data: JSON.stringify(address),
+                        type: 'post',
                         beforeSend: function (xhr) {
                             xhr.setRequestHeader("token", $.cookie("token"));
                         },
                         crossDomain: true,
-						success:function(data){
-                            if(orderId==null){
-                                window.location.href="back-wash.html?goodsId="+_goodsId;
-                            }else{
-                                window.location.href="back-wash.html?id="+orderId;
-                            }
-						}
-					})
-				}else{
-					mui.toast("请填写正确格式的手机号");
-				}
+                        success: function (data) {
+                            window.location.href = "back-wash.html?id=" + orderId;
+                        }
+                    })
+                } else {
+                    mui.toast("请填写正确格式的手机号");
+                }
 
-			}else{
-				mui.toast("请填写完整信息");
-			}
+            } else {
+                mui.toast("请填写完整信息");
+            }
 
-		})
-	})
-		
-	</script>
+        })
+    })
+
+</script>
 </html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../public/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../src/css/shop-index.css">
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/city.data-3.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/common.js"></script>
+    <script src="../../public/js/public.js"></script>
+</head>
+<style>
+    #signing,#release{
+        display: none;
+    }
+</style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title">首页</p>
+</header>
+<div class="mui-content">
+    <div class="shop-msg">
+        <div class="shop-img"><img src="../../public/img/picker/head.png" alt=""></div>
+        <div class="shop-name">门店名称</div>
+        <!--<div class="shop-menu"><img src="../../public/img/menu-icon.png" alt=""></div>-->
+    </div>
+    <ul class="mui-table-view bg-white">
+        <li class="mui-table-view-cell">
+            <a href="shop-basic-message.html" class="mui-navigate-right flex border-bottom-tiny-blue">
+                <span class="icon-txt">基本信息</span>
+            </a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a href="" class="mui-navigate-right flex border-bottom-tiny-blue">
+                <span class="icon-txt">修改密码</span>
+            </a>
+        </li>
+        <li class="mui-table-view-cell" id="signing">
+            <a  class="mui-navigate-right flex border-bottom-tiny-blue">
+                <span class="icon-txt">门店签约</span>
+            </a>
+        </li>
+        <li class="mui-table-view-cell" id="release">
+            <a href="" class="mui-navigate-right flex border-bottom-tiny-blue">
+                <span class="icon-txt">门店解约</span>
+            </a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a href="" class="mui-navigate-right flex">
+                <span class="icon-txt">平台注册协议</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="loginOut">
+        <button class="confirmBtn mui-btn mui-btn-danger mui-btn-block">退出登录</button>
+    </div>
+</div>
+</body>
+<script>
+    var tip=getQueryString(tip);
+
+    $(function(){
+        if(tip){
+            mui.toast(tip);
+        }
+        getShopInfo();
+    });
+    $(".loginOut").on("tap",function(){
+        mui.confirm('确定退出登录？','提示',['取消','确定'],function(res){
+            if(res.index==1){
+                loginOut();
+            }
+        })
+    });
+
+    $("#signing").on("tap",function(){
+        checkSigning();
+    });
+
+
+//    退出登录
+    function loginOut(){
+        shopAjax(shopUrl+"storePoint/logout",'post',true,{},function(res){
+            if(res.status==200){
+                window.location.href='shop-login.html';
+            }
+        })
+    }
+
+    function getShopInfo(){
+        shopAjax(shopUrl+"storePoint/getUserInfo",'get',true,{},function(res){
+            if(res.status==200){
+                $('.shop-name').html(res.data.userName);
+                if(res.data.status==0){
+                    $("#signing").show();
+                }else if(res.data.status==1){
+                    $("#release").show();
+                }
+            }
+        })
+    }
+
+    function checkSigning(){
+        shopAjax(shopUrl+"storePoint/checkOperation",'get',true,{type:1},function(res){
+            if(res.status==200){
+                window.location.href="shop-signing.html";
+            }else{
+                mui.toast(res.msg);
+            }
+        })
+    }
+</script>
+</html>

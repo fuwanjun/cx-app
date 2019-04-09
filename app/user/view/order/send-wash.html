@@ -25,60 +25,23 @@
 			<a class="mui-pull-right ok" edit="0" style="line-height: 0.44rem">编辑</a>
 		</header>
 		<nav class="mui-bar mui-bar-tab" style="text-align: center;">
-			<a class="mui-tab-item" href="get-address.html?">
-				<span class="mui-tab-label">
-					<a id="addPlace">
-						<span class="mui-icon mui-icon-plusempty"></span> 添加地址
-					</a>
-					
-				</span>
-			</a>
+			<span class="mui-tab-label">
+				<a id="addPlace">
+					<span class="mui-icon mui-icon-plusempty"></span> 添加地址
+				</a>
+			</span>
 		</nav>
-		<div class="mui-content">
-			<!--<ul id="addresses" class="mui-table-view wash-item">
-				<li class="mui-table-view-cell">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red"><span class="mui-icon mui-icon-trash"></span></a>
-					</div>
-					<div class="mui-slider-handle">
-						<div class="mes">
-							<p>爱洗衣</p>
-							<p class="wash-num">15050577801</p>
-						</div>
-						<div class="address">江苏省常州市新北区</div>
-					</div>
-				</li>
-			</ul>
-			<ul class="mui-table-view wash-item">
-				<li class="mui-table-view-cell">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red"><span class="mui-icon mui-icon-trash"></span></a>
-					</div>
-					<div class="mui-slider-handle">
-						<div class="mes">
-							<p>爱洗衣</p>
-							<p class="wash-num">15050577801</p>
-						</div>
-						<div class="address">江苏省常州市新北区</div>
-					</div>
-				</li>
-			</ul>-->
-		</div>
-		
+		<div class="mui-content"></div>
+
 		<script type="text/javascript">
 		var orderId=getQueryString('id');
-        var _goodsId=getQueryString('goodsId');
 			$(function(){
 			    removeMask();
                 $("#nowCity").html($.cookie("now"));
-                $("title").html("常洗-"+$("#nowCity").html()+"站");
+                $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
 				mui.init();
-
-//				if(orderId==null){
-//					getAddressGoods(_goodsId,'order-pay.html',false);
-//				}else{
 					getAddressOrder(orderId,'order-pay.html',false);
-//				}
+
                 //删除选中地址
                 $(".ok").on("tap",function(){
                     if($(this).attr("edit")==1){
@@ -111,9 +74,7 @@
                 $.cookie("getArea",area);
                 $.cookie("getId",addressId);
             });
-            $("nav").on("tap",function(){
 
-            });
 
             //判断是否能添加地址
             //				addressCount('get-address.html',false,orderId,_goodsId);
@@ -135,11 +96,7 @@
                         if(data>=5){
                             mui.alert('最多同时存在5条地址');
                         }else{
-                            if(orderId==null){
-                                window.location.href="get-address.html?goodsId="+_goodsId;
-                            }else{
-                                window.location.href="get-address.html?id="+orderId;
-                            }
+							window.location.href="get-address.html?id="+orderId;
                         }
                         removeMask();
                     },

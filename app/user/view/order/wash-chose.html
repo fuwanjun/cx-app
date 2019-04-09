@@ -134,10 +134,18 @@
 	<script>
 		var id=getQueryString("id");
 		var city=$.cookie("now");
+		var turnTime='';
+		$.cookie("menu",id);
 		weixinReload();
 		$(function(){
             $("#nowCity").html($.cookie("now"));
-            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
+
+            enAjax2(globalUrl+'/orderConfig/getOrderConfigByKey',"get",false,{key:'Rotation_Time'},function(res){
+                if(res.code==0){
+                    turnTime=res.data*1000
+                }
+            });
 		    //VIP轮播图
 			$.ajax({
 				url:globalUrl+"/rotationMap/getRotaionMapAll",
@@ -157,7 +165,7 @@
 			});
             var gallery = mui('.mui-slider');
             gallery.slider({
-                interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+                interval:turnTime//自动轮播周期，若为0则不自动播放，默认为0；
             });
 
             enAjax2(globalUrl+'/orderConfig/getOrderConfigByKey',"get",true,{key:'paymentNum'},function(res){
@@ -165,6 +173,7 @@
                     $("#fullNum").html(res.data);
 				}
             });
+
 
             var listWidth=$(".menu-box").width();
             var url=globalUrl+"/headTitle/getHeadTitleNomal";
@@ -249,6 +258,7 @@
         $(".menu-list").on("tap","a",function(){
 			var state=$(this).attr("state");
             var type=$(this).attr("data-type");
+            $.cookie("menu",type);
             var i=$(this).index();
             if(type==9){
                 $("#vip-banner").show();

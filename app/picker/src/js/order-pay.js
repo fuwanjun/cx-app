@@ -179,6 +179,7 @@ $("#submit").on("tap",function(){
                 addressId:getAddressId,
                 sendAddressId:backAddressId,
                 message:tipText,
+                // paymentType:"3",
                 // couponId:yhqId,
                 // subTime:time,
                 // shippingType:express

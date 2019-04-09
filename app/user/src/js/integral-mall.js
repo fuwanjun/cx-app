@@ -80,8 +80,9 @@ function getCoupon(id){
 			console.log(data);
 			for(var i=0;i<data.data.length;i++){
 				var item='<li coupon-id="'+data.data[i].id+'">'+
-						'<div class="card-mes">'+
-							'<p class="card"><span>'+data.data[i].discountNum+'</span>元洗衣券 <span>(消费满<span>'+data.data[i].contentNum+'</span>元使用</span>)</p>'+
+						'<div class="card-mes">' +
+							'<p class="card">'+data.data[i].remark+'</p>'+
+							'<p><span>'+data.data[i].discountNum+'</span>元洗衣券 <span>(消费满<span>'+data.data[i].contentNum+'</span>元使用</span>)</p>'+
 							'<p class="integral-num">消耗积分 <span>'+data.data[i].storeConvert+'</span></p>'+
 						'</div>'+
 						'<div class="get-card">立即兑换</div>'+
@@ -131,9 +132,9 @@ function myCoupon(userId){
                 	if(couponType==1){
                         couponName="全品类优惠券";
 					}else if(couponType==3){
-                		couponName="顺丰专享";
+                		couponName="活动专享";
 					}else{
-                        couponName=" ";
+                        couponName="全品类优惠券";
 					}
 					var item='<li>' +
 								'<div class="card-txt">' +

@@ -16,10 +16,11 @@
 		<style>
 			.mui-pull-bottom-pocket{
 				position: absolute!important;
+				bottom: -40px;
 			}
-			#mess1{
-				padding-bottom: 35px;
-			}
+			/*#mess1{*/
+				/*padding-bottom: 35px;*/
+			/*}*/
 		</style>
 	</head>
 	
@@ -44,7 +45,7 @@
 	<script>
 		$(function(){
             $("#nowCity").html($.cookie("now"));
-            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
 			mui.init({
 				pullRefresh:{
 					container:'#chose-con1',

@@ -48,12 +48,11 @@
 						<p><span id="consumption"></span>元</p>
 
 				</li>
-				<li class="mui-table-view-cell">
+				<!--<li class="mui-table-view-cell">-->
+						<!--粉丝充值分润-->
+						<!--<p><span id="recharge"></span>元</p>-->
 
-						粉丝充值分润
-						<p><span id="recharge"></span>元</p>
-
-				</li>
+				<!--</li>-->
 				<!--<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="#">
 						加粉佣金
@@ -67,7 +66,7 @@
 	<script>
 		$(function(){
             $("#nowCity").html($.cookie("now"));
-            $("title").html("常洗-"+$("#nowCity").html()+"站");
+            $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
            var today=getNowFormatDate();
            $(".date").html(today);
            var url=globalUrl+"/rewardFunds/getMonthMoney";
@@ -75,7 +74,7 @@
 
            var url2=globalUrl+"/rewardFunds/getMonthMoneyByType";
            enAjax(url2,'get',true,{type:0},function(data){$("#consumption").html(data.data)});
-            enAjax(url2,'get',true,{type:1},function(data){ $("#recharge").html(data.data)});
+//            enAjax(url2,'get',true,{type:1},function(data){ $("#recharge").html(data.data)});
 		});
 	</script>
 </html>

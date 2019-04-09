@@ -72,15 +72,17 @@
 	<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 	<!--<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>-->
 	<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=GXZBZ-L6UAX-X7G4G-ZQWAF-X6RG7-2QBAH"></script>
+	<script src="../src/js/browser.js"></script>
 	<script type="text/javascript">
         var data={};
         var orderId=getQueryString("orderId");
         var status=getQueryString("status");
         var latitude="";
 		var longitude="";
+		var myLatitude="";
+		var myLongitude="";
 		$(function(){
             mui.init();
-
             if(status==40||status==45||status==50){
 				$(".encaNum").html("物流单编号 : ");
                 $("#numNum").html("扫码获取物流单编号");
@@ -92,10 +94,10 @@
 			var initUrl=globalUrl+"/order/orderView";
 			var initData={orderNo:orderId};
 			enAjax(initUrl,'post',true,initData,getInit,null);
-
             $.ajax({
                 type : "get",
                 url : globalUrl+"/wechatScanne/scannerQrcode",
+				async:false,
                 data : {},
                 dataType : "json",
                 beforeSend: function (xhr) {
@@ -104,9 +106,37 @@
                 crossDomain: true,
                 success:function (res) {
                     data=res.data;
+                    console.log(data);
                 }
             });
 		});
+
+		$("#navigation").on("tap",function(){
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: data.appId, // 必填，公众号的唯一标识
+                timestamp: data.timestamp, // 必填，生成签名的时间戳
+                nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                signature: data.signature,// 必填，签名，见附录1
+                jsApiList: [
+					'openLocation', 'getLocation',
+                    'scanQRCode', 'checkJsApi',
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+            wx.getLocation({
+                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    myLatitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    myLongitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    var speed = res.speed; // 速度，以米/每秒计
+                    var accuracy = res.accuracy; // 位置精度
+					var addressName=$("#userAddress").html();
+					console.log('纬度：'+myLatitude+'\n经度：'+myLongitude);
+                    window.location.href='https://apis.map.qq.com/tools/routeplan/eword='+addressName+'&epointx='+myLongitude+'&epointy='+myLongitude+'?referer=myapp&key=GXZBZ-L6UAX-X7G4G-ZQWAF-X6RG7-2QBAH';
+                }
+            });
+        });
 
 		function getInit(data){
 		    console.log(data);
@@ -120,7 +150,7 @@
                 signNumber=data.data.orderShipping.signNumber?data.data.orderShipping.signNumber:"扫码获取物流单号";
 			}
 			if(status==10||status==20||status==30||status==35){
-                signNumber=data.data.orderShipping.signNumber?data.data.orderShipping.signNumber:"扫码获取封签号";
+                signNumber=data.data.orderShipping.signNumber?data.data.orderShipping.signNumber:"待封签";
 			}
 			var location=data.data.address.coordinate;
 			var locArr=location.split(",");
@@ -152,15 +182,14 @@
 			$("#take-part div span").html(timestampToTime(data.data.orderShipping.takeTime));
 
             //		点击导航
-            $("#navigation").on("tap",function(){
-//		    alert("1");
-                window.location.href="qqmap://map/marker?marker=coord:"+latitude+","+longitude+";title:"+data.data.address.region+";addr:"+data.data.address.detailAddress+"&referer=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77";
-            });
+//            $("#navigation").on("tap",function(){
+//                window.location.href="qqmap://map/marker?marker=coord:"+latitude+","+longitude+";title:"+data.data.address.region+";addr:"+data.data.address.detailAddress+"&referer=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77";
+//            });
 		}
 
 
 
-//		地圖
+//		地图
         function mapInit(latitude,longitude) {
             var center = new qq.maps.LatLng(latitude,longitude);
             var map = new qq.maps.Map(document.getElementById("allmap"), {

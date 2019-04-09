@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收益明细</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../../public/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/css/index.css"/>
+    <link rel="stylesheet" href="../../public/css/message.css"/>
+    <link rel="stylesheet" href="../../public/css/mui.picker.min.css" />
+    <link rel="stylesheet" href="../../public/css/mui.poppicker.css" />
+    <!--<link rel="stylesheet" href="../src/css/shop-index.css">-->
+    <script type="text/javascript" src="../../public/js/page.flexible.js"></script>
+    <script src="../../public/js/jquery-1.11.3.min.js"></script>
+    <script src="../../public/js/mui.min.js"></script>
+    <script src="../../public/js/mui.picker.min.js"></script>
+    <script src="../../public/js/mui.poppicker.js"></script>
+    <script src="../../public/js/city.data-3.js"></script>
+    <script src="../../public/js/jquery.cookie.js"></script>
+    <script src="../../public/js/public.js"></script>
+</head>
+<style>
+    .shose-tab{
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        background: #fff;
+        z-index: 999;
+    }
+    .shose-tab a{
+        display: block;
+        margin: 0;
+        width: 50%;
+        text-align: center;
+
+    }
+    .shose-tab a p{
+        margin: 0;
+        padding: 0.1rem 0;
+    }
+    .tab-active{
+        border-bottom: 0.02rem solid #6f9fe1;
+    }
+    .shose-item{
+        display: none;
+    }
+    .item-active{
+        display: block;
+    }
+    .table-head{
+        display: flex;
+        justify-content: space-around;
+        background: #d7d7d7;
+    }
+    .table-head p{
+        margin: 0;
+        padding: 0.1rem 0;
+    }
+    .pro-item{
+        display: flex;
+        justify-content: space-between;
+        background: #fff;
+        padding: 0.1rem;
+        border-bottom: 2px solid rgb(244,248,255);
+    }
+    .pro-item p{
+        margin: 0;
+    }
+    #item1{
+        top: 0.9rem;
+    }
+</style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a href="shop-index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <p class="mui-title">收益明细</p>
+</header>
+<div class="mui-content">
+    <div class="shose-tab">
+        <a href="shop-profit.html"><p class="tab-item tab-active">上月</p></a>
+        <a href="shop-profit2.html"><p class="tab-item">本月</p></a>
+    </div>
+    <div id="item1" class="mui-content mui-scroll-wrapper shose-item item-active">
+        <div class="mui-scroll">
+            <ul class="mui-table-view mui-table-view-chevron">
+                <div class="table-head">
+                    <p>订单号</p>
+                    <p>收益</p>
+                    <p>时间</p>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // getProfit(0)
+    mui.init({
+        pullRefresh : {
+            container:"#item1",
+            // down:{
+            //     style:'circle',
+            //     callback :pulldownRefresh
+            // },
+            up:{
+                auto:true,
+                contentrefresh: '正在加载...',
+                callback:pullupRefresh
+            }
+        }
+    });
+
+    var count = 1;
+    function pullupRefresh() {
+        setTimeout(function() {
+            shopAjax(shopUrl+'storePoint/getBenefitList','get',true,{amount:-1,page:count},function(res){
+                if(res.status==200){
+                    mui('#item1').pullRefresh().endPullupToRefresh((++count >res.data.pages));
+                    for(var i=0;i<res.data.list.length;i++){
+                        var item='<div class="pro-item">' +
+                            '<p>'+res.data.list[i].storeNo+'</p>' +
+                            '<p>'+res.data.list[i].storeMoney+'</p>' +
+                            '<p>'+timestampToTime(res.data.list[i].createTime)+'</p>' +
+                            '</div>';
+                        $(item).appendTo($("#item1 .mui-scroll ul"));
+                    }
+                }
+            })
+        }, 500);
+    }
+
+    // //下拉刷新
+    // function pulldownRefresh() {
+    //     setTimeout(function() {
+    //         $("#item1 .mui-scroll ul").html("");
+    //         addData(-1,count);
+    //         mui('#item1').pullRefresh().endPulldownToRefresh();
+    //         mui.toast("刷新成功");
+    //     }, 500);
+    // }
+    //
+    // function addData(amount,count){
+    //     shopAjax(shopUrl+'storePoint/getBenefitList','get',true,{amount:amount,page:count},function(res){
+    //         if(res.status==200){
+    //             // mui('#item1').pullRefresh().endPullupToRefresh((++count>res.data.pages));
+    //             for(var i=0;i<res.data.list.length;i++){
+    //                 var item='<div class="pro-item">' +
+    //                     '<p>'+res.data.list[i].storeNo+'</p>' +
+    //                     '<p>'+res.data.list[i].storeMoney+'</p>' +
+    //                     '<p>'+timestampToTime(res.data.list[i].createTime)+'</p>' +
+    //                     '</div>';
+    //                 $(item).appendTo($("#item1 .mui-scroll ul"));
+    //             }
+    //         }
+    //     })
+    // }
+</script>
+</html>

@@ -348,3 +348,9 @@ ul {
   padding: 0;
   border:none;border-radius:0;
 }
+.bot-tips p{
+  width:100%;
+}
+.bot-tips p img{
+  width:100%;
+}

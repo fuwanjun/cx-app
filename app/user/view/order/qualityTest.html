@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset='utf-8'>
+	<meta name='renderer' content='webkit'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+	<meta name='apple-mobile-web-app-status-bar-style' content='black'>
+	<meta name='apple-mobile-web-app-capable' content='yes'>
+	<meta name='format-detection' content='telephone=no'>
+	<link rel="stylesheet" href="../resource/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href='css/pageIndex.css'/>
+	<link rel="stylesheet" type="text/css" href='css/orderManagement.css'/>
+	<style>
+		.pics {
+			display: none;
+		}
+		#photos .photoImg {
+			width: 290px;
+			height: 280px;
+		}
+		#photos .photoImg img {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+
+</head>
+<body style="background: #fff;">
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+	<ul class="layui-tab-title">
+		<li class="layui-this">整理及质检</li>
+	</ul>
+	<div class="layui-tab-content">
+		<div class="layui-tab-item layui-show">
+			<form class="layui-form layui-row" style="float: left; " id="search1">
+				<div class="layui-row">
+					<div class="layui-inline  orderManage" style="margin-top:10px">
+						<span class="headlabel"></span>整理及质检
+					</div>
+				</div>
+			</form>
+			<form class="layui-form">
+				<!--<div class="layui-form-item layui-inline" style="width: 20%;margin-bottom: 0;margin-top: 10px;">-->
+					<!--<div class="layui-input-inline" style="margin:0; width: 70%;">-->
+						<!--<input type="text" id="searchDate1" placeholder="选择日期" autocomplete="off" class="layui-input">-->
+					<!--</div>-->
+					<!--<button class="layui-btn layui-btn-normal" type="button" id="searchBtn1">查询</button>-->
+				<!--</div>-->
+				<div class="layui-form-item layui-inline" style="margin-bottom: 0;margin-top: 10px;">
+					<div class="layui-input-inline" style="margin:0; width: 80%;display: flex;">
+						<input type="text" id="searchDate1" placeholder="选择日期" autocomplete="off" class="layui-input">
+						<p class="to" style="margin: 10px 10px;">~</p>
+						<input type="text" id="searchDate1-1" placeholder="选择日期" autocomplete="off" class="layui-input">
+					</div>
+					<button class="layui-btn layui-btn-normal" type="button" id="searchBtn1">查询</button>
+				</div>
+				<div class="layui-form-item layui-inline" style="width: 20%;margin-bottom: 0;margin-top: 10px;">
+					<div class="layui-input-inline" style="margin:0; width: 70%;">
+						<input type="text" placeholder="扫条形码" autocomplete="off" class="layui-input" id="codeIn1">
+					</div>
+
+				</div>
+			</form>
+			<table class="layui-table" lay-skin="line" align="center" id="table1">
+				<thead>
+				<tr align="center">
+					<th>条码号</th>
+					<th>衣物名称</th>
+					<th>颜色</th>
+					<th>瑕疵</th>
+					<th>照片</th>
+					<!--<th>返烫返单</th>-->
+					<!--<th>事故返单</th>-->
+					<!--<th>污渍终止</th>-->
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div id="page1"></div>
+		</div>
+	</div>
+</div>
+</body>
+<div id="photos" style="display:none;overflow: hidden;"></div>
+<script src='./js/jquery.min.js'></script>
+<script src="../resource/js/common.js"></script>
+<script src="../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../resource/layui/layui.js"></script>
+<script>
+    var tablePage1=1;
+    var tablePage2=1;
+    var tablePage3=1;
+    var animate="";
+    var pageSize=8;
+    var status=80;
+    layui.use(['element', 'form', 'layer','table', 'laydate', 'laypage','colorpicker'], function () {
+        var element = layui.element;
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var laypage = layui.laypage
+            , table = layui.table
+            , colorpicker = layui.colorpicker
+            , layer = layui.layer;
+
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+//        animate=layer.load();
+
+        laydate.render({
+            elem:"#searchDate1"
+        });
+        laydate.render({
+            elem:"#searchDate1-1"
+        });
+        table1Show(tablePage1,pageSize,status);
+
+    });
+
+    $("#searchBtn1").click(function(){
+        var time=$("#searchDate1").val();
+        table1Show(tablePage1,pageSize,status,time);
+    });
+
+    //  扫码
+    var excute = true;
+    $("#codeIn1").bind("input propertychange", function () {
+        var codeNum = $("#codeIn1").val();
+        console.log(codeNum);
+        if (codeNum.length == 16 && excute) {
+            console.log(codeNum);
+            excute = codeWrite(codeNum);
+        } else {
+            excute = true;
+        }
+        return true
+    });
+
+    //	漏检返单按钮
+    $(".leak").live("click", function () {
+        animate=layer.load();
+        var itemId = $(this).parent().parent().attr("itemId");
+        var barCode = $(this).parent().parent().find($(".barCode")).html();
+        $.ajax({
+            url: globalUrl + "api/wash/backConfirm;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {itemId: itemId, status: 80},
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        var leak = layer.open({
+                            type: 1,
+                            content: '<p style="text-align: center;font-size: 16px; margin-top: 10px;">' + data.data.workName + '</p>' +
+                            '<p style="text-align: center;font-size: 16px; margin-top: 10px;">条码号：<span>' + barCode + '</span></p>' +
+                            '<p style="text-align: center;font-size: 16px; margin-top: 10px; margin-bottom: 10px;">' + data.data.workName + '人：<span>' + data.data.backUser.username + ' </span> ' + data.data.backUser.usercode + '</p>',
+                            area: ['360px'],
+                            btn: ['确定','取消'],
+                            yes:  function () {
+                                backCheck(itemId, status);
+                            },
+                            btn2:layer.closeAll()
+                        })
+                    })
+                } else {
+                    alert(data.msg);
+                }
+                layer.close(animate);
+            },error:function(){
+                layer.close(animate);
+            }
+        });
+    });
+
+    //	分类错误返单按钮
+    $(".wrong").live("click", function () {
+        var itemId = $(this).parent().parent().attr("itemId");
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            var leak = layer.open({
+                type: 1,
+                content: '<p style="margin: 10px;">确定把该商品加入分类错误返单？</p>',
+                btn: ['确定','取消'],
+                yes:  function () {
+                    typeError(itemId, status);
+                },
+                btn2:layer.closeAll()
+            })
+        })
+    });
+
+//    污渍终止
+	$(".stop").live("click",function(){
+        var itemId = $(this).parent().parent().attr("itemId");
+	   	layui.use('layer',function(){
+	   	    var layer=layui.layer;
+	   	    layer.open({
+				type:1,
+				content:'<p style="padding: 10px;">确定污渍终止吗？</p>',
+				btn:['确定','取消'],
+				yes:function(){
+				    $.ajax({
+                        url: globalUrl + "api/wash/washStop;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId: itemId,
+                            status:status,
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+						success:function(data){
+                            if(data.status==200){
+                                table1Show(tablePage1,pageSize,status);
+                                layer.closeAll();
+                                layer.msg('污渍终止成功！');
+							}else{
+                                layer.msg(data.msg);
+							}
+						}
+					})
+				},
+				btn2:function(){
+				    layer.closeAll();
+				}
+			})
+		})
+	});
+
+    //    返洗完成
+    $(".okBtn1").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'返洗完成',
+                type:1,
+                content:'<p style="padding: 20px;">该商品确定已经完成整理及质检？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/backFinish;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId: id,
+                            status:status,
+                            style: 3
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table2Show(tablePage2,pageSize,status);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+//    事故处理完成
+    $(".okBtn2").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'事故处理完成',
+                type:1,
+                content:'<p style="padding: 20px;">该商品确定已经完成整理及质检？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/backFinish;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId: id,
+                            status:status,
+                            style: 5
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table3Show(tablePage3,8,80,3);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+    //    返洗外包
+    $(".outsource1").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'返洗外包完成',
+                type:1,
+                content:'<p style="padding: 20px;">确定将该商品外包？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/back2WashOut;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId:id,
+                            status: status,
+                            style:3
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table2Show(tablePage2,pageSize,status);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+    //    事故外包
+    $(".outsource2").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'事故外包完成',
+                type:1,
+                content:'<p style="padding: 20px;">确定将该商品外包？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/back2WashOut;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId:id,
+                            status: 80,
+                            style:5
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table3Show(tablePage3,8,80,5);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+    //   返单退件
+    $(".backPiece1").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'返洗退件完成',
+                type:1,
+                content:'<p style="padding: 20px;">确定将该商品退件？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/back2BackPiece;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId:id,
+                            status: 80,
+                            style:3
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table2Show(tablePage2,pageSize,status);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+    //   事故退件
+    $(".backPiece2").live("click",function(){
+        var id=$(this).parent().parent().attr("itemId");
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                title:'事故退件完成',
+                type:1,
+                content:'<p style="padding: 20px;">确定将该商品退件？</p>',
+                btn:['确定','取消'],
+                yes:function(){
+                    $.ajax({
+                        url: globalUrl + "api/wash/back2BackPiece;jsessionid=" + $.cookie("token"),
+                        type: 'post',
+                        data: {
+                            itemId:id,
+                            status: 80,
+                            style:5
+                        },
+                        crossDomain: true,
+                        beforeSend: function (request) {
+                            request.setRequestHeader("JSESSIONID", $.cookie("token"));
+                        },
+                        success:function(data){
+                            if(data.status==200){
+                                table3Show(tablePage3,8,80,5);
+                                layer.closeAll();
+                                layer.msg('已完成');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    })
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
+            })
+        })
+    });
+
+    /**
+     * table1内容加载
+     * @param page 页数
+     * @param pageSize 每页数量
+     * @param status 类型
+     * @param time 时间
+     */
+    function table1Show(page,pageSize,status,time){
+        animate=layer.load();
+        $.ajax({
+            url: globalUrl + "api/wash/list;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                page: page,
+                pageSize:pageSize,
+                status: status,
+                time: time
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success:function(data){
+                if(data.status==200){
+                    $("#table1 thead tr").html('');
+                    var nThead='<th>条码号</th>' +
+                        '<th>衣物名称</th>' +
+                        '<th>颜色</th>' +
+                        '<th>瑕疵</th>' +
+                        '<th>照片</th>';
+                    $(nThead).appendTo($("#table1 thead tr"));
+                    $("#table1 tbody").html("");
+                    for (var i = 0; i < data.data.list.length; i++) {
+                        var colour = data.data.list[i].colour ? data.data.list[i].colour : "";
+                        var flaw = data.data.list[i].flaw ? data.data.list[i].flaw : "";
+                        var pics = data.data.list[i].picture ? data.data.list[i].picture : "";
+                        var item = '<tr itemId="' + data.data.list[i].id + '">' +
+                            //                        '<td><input type="checkbox"></td>' +
+                            '<td class="barCode">' + data.data.list[i].barCode + '</td>' +
+                            '<td>' + data.data.list[i].beforeName + '</td>' +
+                            '<td class="color">' + colour + '</td>' +
+                            '<td class="spot">' + flaw + '</td>' +
+                            '<td>' +
+                            '<button class="layui-btn layui-btn-primary lookPhoto">查看照片</button>' +
+                            '<p class="pics" style="display: none;">' + pics + '</p>' +
+                            '</td>' +
+//                            '<td><button class="layui-btn layui-btn-danger layui-btn-sm leak">是</button></td>' +
+//                            '<td><button class="layui-btn layui-btn-danger layui-btn-sm wrong">是</button></td>' +
+//                            '<td><button class="layui-btn layui-btn-danger layui-btn-sm stop">是</button></td>' +
+                            '</tr>';
+                        $(item).appendTo($("#table1 tbody"));
+                    }
+                    layui.use('laypage', function () {
+                        var laypage = layui.laypage;
+                        laypage.render({
+                            elem: "page1",
+                            count: data.data.total,
+                            limit: pageSize,
+                            curr: page,
+                            jump: function (obj, first) {
+                                tablePage1=obj.curr;
+                                if (!first) {
+                                    animate = layer.load();
+                                    table1Show(obj.curr,pageSize,status, time);
+                                }
+                            }
+                        })
+                    })
+                }
+                layer.close(animate);
+            },error:function(){
+                layer.close(animate);
+            }
+        })
+    }
+
+    function table2Show(page,pageSize,status,time){
+        animate=layer.load();
+        $.ajax({
+            url: globalUrl + "api/wash/backList;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                page: page,
+                pageSize:pageSize,
+                status: status,
+                style:3,
+                time: time
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success:function(data){
+                if(data.status==200){
+                    $("#table2 tbody").html("");
+                    for(var i=0;i<data.data.list.length;i++){
+                        var pics = data.data.list[i].picture ? data.data.list[i].picture : "";
+                        var item='<tr itemId="' + data.data.list[i].id +'">' +
+                            '<td>'+data.data.list[i].barCode+'</td>' +
+                            '<td>'+data.data.list[i].beforeName+'</td>' +
+                            '<td>'+data.data.list[i].beforePrice+'</td>' +
+                            '<td>'+data.data.list[i].brand+'</td>' +
+                            '<td>'+data.data.list[i].colour+'</td>' +
+                            '<td>'+data.data.list[i].flaw+'</td>' +
+                            '<td>'+data.data.list[i].effect+'</td>' +
+                            '<td>' +
+                            '<button class="layui-btn layui-btn-primary lookPhoto">查看照片</button>' +
+                            '<p class="pics" style="display: none;">'+pics+'</p>' +
+                            '</td>'+
+                            '<td>' +
+                            '<button class="layui-btn layui-btn-normal okBtn1">完成</button>' +
+                            '<button class="layui-btn outsource1">外包</button>' +
+                            '<button class="layui-btn backPiece1">退件</button>' +
+                            '</td>'+
+                            '</tr>';
+                        $(item).appendTo($("#table2 tbody"));
+                    }
+                    layui.use('laypage', function () {
+                        var laypage = layui.laypage;
+                        laypage.render({
+                            elem: "page2",
+                            count: data.data.total,
+                            limit: pageSize,
+                            curr: page,
+                            jump: function (obj, first) {
+                                tablePage2=obj.curr;
+                                if (!first) {
+//                                    animate = layer.load();
+                                    table2Show(obj.curr,pageSize,status,time);
+                                }
+                            }
+                        })
+                    })
+                }
+                layer.close(animate);
+            },error:function(){
+                layer.close(animate);
+            }
+        })
+    }
+
+    function table3Show(page,pageSize,status,style,time){
+        animate=layer.load();
+        $.ajax({
+            url: globalUrl + "api/wash/backList;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                page: page,
+                pageSize:pageSize,
+                status: status,
+                style:style,
+                time: time
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success:function(data){
+                if(data.status==200){
+                    $("#table3 tbody").html("");
+                    for(var i=0;i<data.data.list.length;i++){
+                        var pics = data.data.list[i].picture ? data.data.list[i].picture : "";
+                        var item='<tr itemId="' + data.data.list[i].id +'">' +
+                            '<td>'+data.data.list[i].barCode+'</td>' +
+                            '<td>'+data.data.list[i].afterName+'</td>' +
+                            '<td>'+data.data.list[i].colour+'</td>' +
+                            '<td>'+data.data.list[i].flaw+'</td>' +
+                            '<td>'+
+                            '<button class="layui-btn layui-btn-primary lookPhoto">查看照片</button>' +
+                            '<p class="pics" style="display: none;">'+pics+'</p>' +
+                            '</td>'+
+                            '<td>'+data.data.list[i].userName+'</td>' +
+                            '<td>'+data.data.list[i].backTime+'</td>' +
+                            '<td>' +
+                            '<button class="layui-btn layui-btn-normal okBtn2">完成</button>' +
+                            '<button class="layui-btn outsource2">外包</button>' +
+                            '<button class="layui-btn backPiece2">退件</button>' +
+                            '</td>'+
+                            '</tr>';
+                        $(item).appendTo($("#table3 tbody"));
+                    }
+                }
+                layer.close(animate);
+            },error:function(){
+                layer.close(animate);
+            }
+        })
+    }
+
+    //table1漏检返单方法
+    function backCheck(itemId, status) {
+        $.ajax({
+            url: globalUrl + "api/wash/back;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                itemId: itemId,
+                status: status
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    table1Show(tablePage1,8,80);
+                    layer.closeAll();
+                    layer.msg('操作成功');
+                } else {
+                    if(data.msg){
+                        layer.msg(data.msg);
+					}else{
+                        layer.msg('返烫失败');
+					}
+                }
+            }
+        })
+    }
+
+    //table1分类错误返单方法
+    function typeError(itemId, status) {
+        $.ajax({
+            url: globalUrl + "api/wash/fault;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                itemId: itemId,
+                status: status
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    table1Show(tablePage1,8,80);
+                    layer.closeAll();
+                    layer.msg(data.msg);
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        })
+    }
+
+    $(".lookPhoto").live("click", function () {
+        var pics = $(this).next("p").html();
+        if (!pics) {
+            layer.msg("该商品无图片");
+            return
+        }
+        if (!pics.indexOf(",")) {
+            var item = '<div class="photoImg" style="float: left;">' +
+                '<img src="http://' + pics + '" alt="">' +
+                '</div>';
+            $(item).appendTo($("#photos"));
+        } else {
+            var picArr = [];
+            picArr = pics.split(',');
+            $("#photos").html("");
+            for (var i = 0; i < picArr.length; i++) {
+                var item = '<div class="photoImg" style="float: left;">' +
+                    '	<img src="http://' + picArr[i] + '" alt="">' +
+                    '</div>';
+                $(item).appendTo($("#photos"));
+            }
+        }
+
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: '商品图片',
+                type: 1,
+                content: $("#photos"),
+                area: ['900px', '620px'],
+                scrollbar: false
+            })
+        })
+    });
+
+    //	扫码录入整理及质检衣物信息
+    function codeWrite(code) {
+        $.ajax({
+            url: globalUrl + "api/wash/scan;jsessionid=" + $.cookie("token"),
+            type: 'get',
+            data: {
+                barCode: code,
+                status: 80
+            },
+            crossDomain: true,
+            beforeSend: function (request) {
+                request.setRequestHeader("JSESSIONID", $.cookie("token"));
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status == 200) {
+                    $("#table1 thead tr").html('');
+                    var nThead='<th>条码号</th>' +
+                        '<th>衣物名称</th>' +
+                        '<th>颜色</th>' +
+                        '<th>瑕疵</th>' +
+                        '<th>照片</th>';
+                    $(nThead).appendTo($("#table1 thead tr"));
+                    var tHead='<th>返烫返单</th>' +
+                        '<th>事故返单</th>' +
+                        '<th>污渍终止</th>';
+                    $(tHead).appendTo($("#table1 thead tr"));
+                    $("#table1 tbody").html("");
+                        var beforeName = data.data.beforeName ? data.data.beforeName : "";
+                        var colour = data.data.colour ? data.data.colour : "";
+                        var flaw = data.data.flaw ? data.data.flaw : "";
+                        var pics = data.data.picture ? data.data.picture : "";
+                        var state="";
+						if(data.data.status==101){
+							state='正常';
+						}else if(data.data.status==102){
+							state='补差价';
+						}else if(data.data.status==103){
+							state='退件';
+						}else if(data.data.status==104){
+							state='客服退件';
+						}else if(data.data.status==105){
+							state='污渍终止';
+						}else if(data.data.status==106){
+							state='外包洗涤';
+						}else if(data.data.status==108){
+							state='上架';
+						}else{
+							state='';
+						}
+                        var item = '<tr itemId="' + data.data.id + '">' +
+                            //                        '<td><input type="checkbox"></td>' +
+                            '<td class="barCode">' + data.data.barCode + '</td>' +
+                            '<td>' + beforeName + '</td>' +
+                            '<td class="color">' + colour + '</td>' +
+                            '<td class="spot">' + flaw + '</td>' +
+                            '<td>' +
+                            '<button class="layui-btn layui-btn-primary lookPhoto">查看照片</button>' +
+                            '<p class="pics" style="display: none;">' + pics + '</p>' +
+                            '</td>' +
+                            '<td><button class="layui-btn layui-btn-danger layui-btn-sm leak">是</button></td>' +
+                            '<td><button class="layui-btn layui-btn-danger layui-btn-sm wrong">是</button></td>' +
+                            '<td>'+state+'</td>' +
+                            '</tr>';
+                        $(item).appendTo($("#table1 tbody"));
+
+                    layer.msg(data.msg);
+//                    table1Show(tablePage1,8,80)
+                } else {
+                    layer.msg(data.msg);
+                }
+                $("#codeIn1").val("").focus();
+                return false;
+            }
+        })
+    }
+
+</script>
+</html>

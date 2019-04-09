@@ -1,0 +1,63 @@
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+    position: relative;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+    border-bottom-color: transparent;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active:after{
+    display: block;
+    content:"";
+    width:20%;
+    position: absolute;
+    left: 40%;
+    height: 2px;
+    background-color:#007aff;
+    bottom: 0;
+}
+body{
+    width: 100%;
+}
+.mui-content{
+    width: 100%;
+    height: 100%;
+    padding:.17rem 0.2rem .4rem .2rem;
+}
+.mui-content-body{
+    width: 100%;
+    height: 100%;
+}
+.mui-bar-nav~.mui-content{
+    padding-top: 60px;
+}
+.logo{
+    height: .64rem;
+    margin: .72rem 0 .23rem 0;
+}
+.color-darkblue{
+    color: #6f9fe1;
+}
+.loginData{
+    padding: .15rem;
+    margin-top: .6rem;
+}
+.loginBtn{
+    padding: .15rem;
+}
+input.border-none{
+    border: none;
+}
+input.bg-tiny-blue{
+    padding-left: 0.45rem;
+    background:#f4f8ff url(../../../public/img/picker/user_icon.png) 0.15rem center/0.22rem .22rem no-repeat;
+}
+.password>input.bg-tiny-blue{
+    background-image: url(../../../public/img/picker/lock.png);
+}
+.bot{
+    padding:  0 0.15rem 0.15rem 0.15rem;
+    display: flex;
+    justify-content: space-between;
+}
+.bot div a{
+    color: #666;
+}
