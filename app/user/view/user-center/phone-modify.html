@@ -60,7 +60,7 @@
 	<script type="text/javascript">
 		mui.init();
         $("#nowCity").html($.cookie("now"));
-        $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
         $("#submit").on("tap", function () {
             var userPhone = $("#phone").val();
             var url = globalUrl + "/userInfo/updateUserInfo";

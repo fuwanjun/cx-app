@@ -12,6 +12,14 @@
 	<script src="../../public/js/mui.min.js"></script>
 	<script src="../../public/js/jquery-1.11.3.min.js"></script>
 	<script src="../../public/js/jquery.cookie.js"></script>
+	<style>
+		.mui-scroll-wrapper{
+			display: none;
+		}
+		.con-active{
+			display: block;
+		}
+	</style>
 </head>
 <body class="bg-tiny-blue">
 	<header class="mui-bar mui-bar-nav">
@@ -34,13 +42,13 @@
 			</div>
 			<div class="bg-white" style="padding:0 10px">
 				<div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-					<a class="mui-control-item chose-btn mui-active" href="deliveryPackage1.html">
+					<a class="mui-control-item chose-btn mui-active" href="fetchPackage1.html">
 						待送
 					</a>
-					<a class="mui-control-item chose-btn" href="deliveryPackage2.html">
+					<a class="mui-control-item chose-btn" href="fetchPackage2.html">
 						在送
 					</a>
-					<a class="mui-control-item chose-btn" href="deliveryPackage3.html">
+					<a class="mui-control-item chose-btn" href="fetchPackage3.html">
 						已送
 					</a>
 				</div>
@@ -62,26 +70,22 @@
 		<!--<ul class="mui-table-view mui-scroll"></ul>-->
 		<!--</div>-->
 	</div>
-</body><div id="nowCity" style="display:none;"></div>
+</body>
 <script src="../../public/js/public.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
-
-    mui.init({
-        pullRefresh:{
-            container:'#item1',
-            up:{
-                height:50,
-                auto:true,
-                contentrefresh:'正在加载...',
-                contentnomore:'没有更多数据',
-                callback:backOrder1
+        mui.init({
+            pullRefresh:{
+                container:'#item1',
+                up:{
+                    height:50,
+                    auto:true,
+                    contentrefresh:'正在加载...',
+                    contentnomore:'没有更多数据',
+                    callback:backOrder1
+                }
             }
-        }
-    });
-
-    var page=1;
-    var data={};
+        });
 
     $("#item1 ul").on("tap",".detail-mes",function(){
         var orderId=$(this).attr("orderId");
@@ -99,7 +103,8 @@
 		window.location.href="packageDetail.html?status=40&orderId="+goId;
 	});
 
-
+	var page=1;
+	var data={};
     function backOrder1(){
         $.ajax({
             url:globalUrl+'/sender/listByStatus',
@@ -110,7 +115,6 @@
             },
             crossDomain: true,
             success:function(data){
-                mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
                 console.log(data);
                 $("#mesNum").html(data.data.total);
                 $("#item1 ul").html("");

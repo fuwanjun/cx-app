@@ -35,10 +35,11 @@
 
 		<script type="text/javascript">
 		var orderId=getQueryString('id');
+        var _goodsId=getQueryString('goodsId');
 			$(function(){
 			    removeMask();
                 $("#nowCity").html($.cookie("now"));
-                $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
+                $("title").html("常洗-"+$("#nowCity").html()+"站");
 				mui.init();
 					getAddressOrder(orderId,'order-pay.html',false);
 
@@ -74,7 +75,9 @@
                 $.cookie("getArea",area);
                 $.cookie("getId",addressId);
             });
+            $("nav").on("tap",function(){
 
+            });
 
             //判断是否能添加地址
             //				addressCount('get-address.html',false,orderId,_goodsId);

@@ -25,7 +25,7 @@ if (!$.cookie('nowPlace')) {
 }
 if ($.cookie("now")) {
     $("#nowCity").html($.cookie("now"));
-    $("title").html("伊尔萨洗衣-" + $("#nowCity").html() + "站");
+    $("title").html("常洗-" + $("#nowCity").html() + "站");
 }
 
 enAjax2(globalUrl+'/orderConfig/getOrderConfigByKey',"get",false,{key:'Rotation_Time'},function(res){

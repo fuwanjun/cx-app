@@ -1,26 +1,14 @@
-! function(t) {
-    var e = 10,
-        i = t.document,
-        n = i.documentElement,
-        o = "orientationchange" in t ? "orientationchange" : "resize",
-        a = function t() {
-            var i = n.getBoundingClientRect().width;
-            return n.style.fontSize = 5 * Math.max(Math.min(20 * (i / e), 20), 8.55) + "px", t
-        }();
-    n.setAttribute("data-dpr", t.navigator.appVersion.match(/iphone/gi) ? t.devicePixelRatio : 1), /iP(hone|od|ad)/.test(t.navigator.userAgent) && (i.documentElement.classList.add("ios"), parseInt(t.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8 && i.documentElement.classList.add("hairline")), i.addEventListener && (t.addEventListener(o, a, !1), i.addEventListener("DOMContentLoaded", a, !1))
-}(window);
-
-mui("body").on("tap","a",function(){
+﻿mui("body").on("tap","a",function(){
 	window.location.href=this.href;
 });
-// var globalUrl="http://www.changwash.com:8088";
-var globalUrl="http://user.changwash.com:8088";
-// var globalUrl="http://192.168.3.211:8081";
+var globalUrl="http://www.changwash.com:8088";
+//var globalUrl="http://192.168.3.29:8081";
 // var globalUrl='http://192.168.3.191:8081';
 
+var shopUrl="http://192.168.1.82:8081/";
 var headUrl="http://10.0.0.228:8080/image/";
-// var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
-var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5fa77022c03fce4a&redirect_uri=http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3a%2f%2fwww.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+// var wxUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect";
 //tab切换
 function tabChange(tab,tabActive,con,conActive,id){
 	tab.eq(id).addClass(tabActive).siblings().removeClass(tabActive);
@@ -171,7 +159,7 @@ function enAjax(url,type,async,data,success,error,handle){
 		},
 		error:function(data){
 			removeMask();
-			error(data)
+//			error(data)
 		}
 	})
 	}catch(e){
@@ -230,7 +218,7 @@ function enAjaxPicker(url,type,async,data,success,error){
     }
 }
 
-function contentAjax(url,type,async,data,success){
+function contentAjax(url,type,async,data,success,error,handle){
 	pageLoad();
 	try{
 		$.ajax({

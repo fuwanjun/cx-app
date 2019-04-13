@@ -45,7 +45,37 @@
 	<div id="nowCity" style="display:none;"></div>
 	<script src="../../../public/js/mui.min.js"></script>
 	<script type="text/javascript">
-        $("#ok").on("tap",function({}))
+        $("#ok").on("tap",function(){
+//            var date=getNowFormatDate();
+            var name=$("#name").val();
+            var phone=$("#phone").val();
+            var content=$("#textCon").val();
+            var proposal={userName:name, phone:phone, content:content};
+            if(content !=""){
+                $.ajax({
+                    contentType:"application/json;charset=UTF-8",
+                    url:globalUrl+'/proposal/putProposal',
+                    type:'post',
+					async:false,
+                    data:proposal,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", $.cookie("token"));
+                    },
+                    crossDomain: true,
+                    success:function(data){
+                        if(data){
+                            mui.alert("意见反馈成功",function(){
+                                window.location.href="../mine.html";
+                            });
+						}else{
+                            mui.toast(data.message);
+						}
+                    }
+                })
+            }else{
+                mui.alert("请填写您的意见");
+            }
 
+        })
 	</script>
 </html>

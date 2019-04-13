@@ -80,8 +80,8 @@ function getCoupon(id){
 			console.log(data);
 			for(var i=0;i<data.data.length;i++){
 				var item='<li coupon-id="'+data.data[i].id+'">'+
-						'<div class="card-mes">' +
-							'<p class="card">'+data.data[i].remark+'</p>'+
+						'<div class="card-mes">'+
+                    		'<p class="card">'+data.data[i].remark+'</p>'+
 							'<p><span>'+data.data[i].discountNum+'</span>元洗衣券 <span>(消费满<span>'+data.data[i].contentNum+'</span>元使用</span>)</p>'+
 							'<p class="integral-num">消耗积分 <span>'+data.data[i].storeConvert+'</span></p>'+
 						'</div>'+
@@ -139,24 +139,17 @@ function myCoupon(userId){
 					var item='<li>' +
 								'<div class="card-txt">' +
 									'<div class="card-line" style="margin-bottom: 0.15rem;">' +
-										'<p class="card-tit">'+data.data[i].coupon.discountNum+'元洗衣券</p>'+
-										'<p>（消费满'+data.data[i].coupon.contentNum+'元使用）</p>'+
+										'<p class="card-tit">'+data.data[i].coupon.remark+'</p>'+
+										'<p>（满'+data.data[i].coupon.contentNum+'元减'+data.data[i].coupon.discountNum+'）</p>'+
 									'</div>'+
 									'<div class="card-line">' +
 										'<p class="card-size">面额： <span>'+data.data[i].coupon.discountNum+'</span>元</p>'+
                         				'<p class="card-area">适用范围：<span>'+couponName+'</span></p>'+
-									'</div>'+
+									'</div>' +
+									'<p style="text-align: right">X'+data.data[i].couponCount+'</p>'+
  								'</div>' +
 								'<div class="card-icon"></div>'+
 							'</li>';
-                    // var item='<li>'+
-                    //     '<div class="card-txt">'+
-                    //     '<p class="txt-tit"><span>'+data.data[i].coupon.discountNum+'</span>元洗衣券 <span>(消费满<span>'+data.data[i].coupon.contentNum+'</span>元使用)</span><span style="display:inline-block;margin-left:0.2rem;">X '+data.data[i].couponCount+'</span></p>'+
-                    //     '<p class="txt-con">面额： <span>'+data.data[i].coupon.discountNum+'</span>元</p>'+
-                    //     '<p class="txt-con">适用范围：<span>'+couponName+'</span></p>'+
-                    //     '</div>'+
-                    //     '<div class="card-icon"></div>'+
-                    //     '</li>';
                     $(item).appendTo($(".cards"));
                 }
 			}

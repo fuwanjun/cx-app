@@ -19,7 +19,7 @@ ul{margin: 0;}
 	border-bottom: 0.03rem solid #39A4F2;
 }
 .mui-card-content{
-	width: 100%;
+	/*width: 100%;*/
 }
 .chose-con{
 	display: none;

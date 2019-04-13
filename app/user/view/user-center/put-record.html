@@ -55,7 +55,7 @@
         var page=1;
 		$(function(){
             $("#nowCity").html($.cookie("now"));
-            $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
+            $("title").html("常洗-"+$("#nowCity").html()+"站");
             var url=globalUrl+"/bonusItem/getBonusListByUserId";
             var data={page:page};
             mui.init({

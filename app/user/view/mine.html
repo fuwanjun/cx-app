@@ -105,7 +105,7 @@
 	<script src="../../public/js/public.js"></script>
 	<script type="text/javascript">
         $("#nowCity").html($.cookie("now"));
-        $("title").html("伊尔萨洗衣-"+$("#nowCity").html()+"站");
+        $("title").html("常洗-"+$("#nowCity").html()+"站");
         mui.init();
 		var token=$.cookie("token");
         var code=getQueryString('code');
@@ -129,7 +129,7 @@
                 });
 		});
         $("#login").on("tap",function(){
-            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5fa77022c03fce4a&redirect_uri=http%3a%2f%2fuser.changwash.com%2fapp%2fuser%2fview%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx31fd1e1bad23db37&redirect_uri=http%3A%2F%2Fwww.changwash.com%2Fapp%2Fuser%2Fview%2Fmine.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		});
 
 //		$("#exit").on("tap",function(){

@@ -178,7 +178,7 @@ $("#submit").on("tap",function(){
                 orderNo:orderId,
                 addressId:getAddressId,
                 sendAddressId:backAddressId,
-                message:tipText,
+                message:tipText
                 // paymentType:"3",
                 // couponId:yhqId,
                 // subTime:time,

@@ -8,12 +8,10 @@
 	margin-top: 0;
 }
 
-.mui-table-view-cell:after{
-	display: none;
-	background-color:#fff;
-}
+/*.mui-table-view-cell:after{*/
+	/*display: none;*/
+/*}*/
 /*.mui-table-view:after{*/
-	/*background-color:#f4f8ff;*/
 	/*background-color:#f4f8ff;*/
 /*}*/
 /*.mui-table-view:before{*/
@@ -100,9 +98,9 @@
 .goodsNum{
 	display: none;
 }
-.mui-table-view-cell:after{
-	background-color:#fff;
-}
+/*.mui-table-view-cell:after{*/
+	/*background-color:#fff;*/
+/*}*/
 .mui-slider{
 	overflow: scroll;
 }

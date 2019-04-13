@@ -12,6 +12,14 @@
 	<script src="../../public/js/mui.min.js"></script>
 	<script src="../../public/js/jquery-1.11.3.min.js"></script>
 	<script src="../../public/js/jquery.cookie.js"></script>
+	<style>
+		.mui-scroll-wrapper{
+			display: none;
+		}
+		.con-active{
+			display: block;
+		}
+	</style>
 </head>
 <body class="bg-tiny-blue">
 <header class="mui-bar mui-bar-nav">
@@ -46,7 +54,7 @@
 		</div>
 	</div>
 
-	<div id="item1" class="mui-content mui-scroll-wrapper mui-active" style="margin-top: 1.8rem;">
+	<div id="item1" class="mui-content mui-scroll-wrapper con-active" style="margin-top: 1.8rem;">
 		<ul class="mui-table-view mui-scroll"></ul>
 	</div>
 	<!--<div id="item2" class="mui-content mui-scroll-wrapper">-->
@@ -56,7 +64,7 @@
 		<!--<ul class="mui-table-view mui-scroll">3</ul>-->
 	<!--</div>-->
 </div>
-</body><div id="nowCity" style="display:none;"></div>
+</body>
 <script src="../../public/js/public.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
@@ -83,7 +91,6 @@
             crossDomain: true,
             success:function(data){
                 console.log(data);
-                mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
                 $("#mesNum").html(data.data.total);
                 $("#item1 ul").html("");
                 if(data.data.list==0){

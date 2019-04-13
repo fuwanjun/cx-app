@@ -92,7 +92,7 @@
 
     var data = {};
     $("#nowCity").html($.cookie("now"));
-    $("title").html("伊尔萨洗衣-" + $("#nowCity").html() + "站");
+    $("title").html("常洗-" + $("#nowCity").html() + "站");
 
     //		点击分享
     //		$(".ok").on("tap",function(){
@@ -113,23 +113,13 @@
         wx.onMenuShareAppMessage({
             title: '常洗', // 分享标题
             desc: '您身边的洗衣专家', // 分享描述
-            link: 'http://www.changwash.com/app/user/view/user-center/poster-share.html?userId=' + $.cookie("userId"), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'http://room.changwash.com/1552881358489133', // 分享图标
-            success: function () {
-
-            }
-        });
-        wx.updateTimelineShareData({
-            title: '常洗', // 分享标题
-            desc: '您身边的洗衣专家', // 分享描述
-            link: 'http://www.changwash.com/app/user/view/user-center/poster-share.html?userId=' + $.cookie("userId"), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: 'http://www.changwash.com/app/user/view/user-center/poster-share.html?userId='+$.cookie("userId"), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             imgUrl: 'http://room.changwash.com/1552881358489133', // 分享图标
             success: function () {
 
             }
         })
     });
-
     //		});
 
     if ($.cookie("qrCode")) {

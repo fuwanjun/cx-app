@@ -64,7 +64,7 @@
 		<!--<ul class="mui-table-view mui-scroll">3</ul>-->
 	<!--</div>-->
 </div>
-</body><div id="nowCity" style="display:none;"></div>
+</body>
 <script src="../../public/js/public.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
@@ -91,7 +91,6 @@
             crossDomain: true,
             success:function(data){
                 console.log(data);
-                mui('#item1').pullRefresh().endPullupToRefresh((++page>data.data.navigatepageNums.length));
                 $("#mesNum").html(data.data.total);
                 $("#item1 ul").html("");
                 if(data.data.list==0){

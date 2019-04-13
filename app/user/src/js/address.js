@@ -3,6 +3,7 @@ function addressCount(address,handle){
     handle=handle?handle:false;
 	//点击添加地址按钮判断地址个数
 	$("#addPlace").on("tap",function(){
+
 		$.ajax({
 			url:globalUrl+'/address/getAddressCountByUserId',
 			type:'get',

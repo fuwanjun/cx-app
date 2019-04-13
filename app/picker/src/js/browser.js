@@ -67,6 +67,7 @@ function openMapApp(lat, lng, addr) {
         uri[1] = "androidamap://navi?sourceApplication=xlwx&poiname=" + addr + "&lat=" + lat + "&lon=" + lng + "&dev=1&style=2";
         // 腾讯地图uri api
         uri[2] = "qqmap://map/marker?marker=coord:" + lat + "," + lng + ";title:" + addr + "&referer=xlwx";
+        alert(uri[0]+"\n"+uri[1]+"\n"+uri[2]);
     } else if (ua.iOS) {
         alert('IOS');
         // 百度地图uri api

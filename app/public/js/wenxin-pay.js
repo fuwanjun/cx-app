@@ -2,8 +2,7 @@
 function onBridgeReady(){
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            // "appId":"wx31fd1e1bad23db37",       //公众号名称，由商户传入
-            "appId":"wx5fa77022c03fce4a",     //公众号名称，由商户传入
+            "appId":"wx31fd1e1bad23db37",     //公众号名称，由商户传入
             "timeStamp":wxData.timeStamp,         //时间戳，自1970年以来的秒数
             "nonceStr":wxData.nonceStr, //随机串
             "package":wxData.packageValue,
@@ -67,8 +66,7 @@ function pay(orderId){
 function onBridgeReady2(){
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            // "appId":"wx31fd1e1bad23db37",       //公众号名称，由商户传入
-            "appId":"wx5fa77022c03fce4a",       //公众号名称，由商户传入
+            "appId":"wx31fd1e1bad23db37",       //公众号名称，由商户传入
             "timeStamp":wxData2.timeStamp,       //时间戳，自1970年以来的秒数
             "nonceStr":wxData2.nonceStr,         //随机串
             "package":wxData2.packageValue,
@@ -105,7 +103,7 @@ function pay2(orderId){
         url:globalUrl+"/wechat/unifiedOrder",
         type:'get',
         async:false,
-        data:{orderNo:orderId,},
+        data:{orderNo:orderId},
         beforeSend: function (xhr) {
             xhr.setRequestHeader("token", $.cookie("token"));
         },
